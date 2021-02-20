@@ -137,9 +137,9 @@
 <nav class="site-nav">
   <ul class="main-menu menu">
         <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li>
-        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">2</span></a></li>
-        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a></li>
-        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">1</span></a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">4</span></a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">2</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">2</span></a></li>
         <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
@@ -212,20 +212,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -291,10 +291,10 @@
       
       <div class="post-body"><div class="tag-cloud">
   <div class="tag-cloud-title">
-    目前共计 1 个标签
+    目前共计 2 个标签
   </div>
   <div class="tag-cloud-tags">
-    <a href="/tags/%E5%93%B2%E5%AD%A6/" style="font-size: 12px;" class="tag-cloud-0">哲学</a>
+    <a href="/tags/%E5%93%B2%E5%AD%A6/" style="font-size: 12px;" class="tag-cloud-0">哲学</a> <a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 12px;" class="tag-cloud-0">编程</a>
   </div>
 </div>
 
@@ -308,7 +308,6 @@
     
 
 
-    <div class="comments gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -368,26 +367,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.css">
-
-<script>
-NexT.utils.loadComments('.gitalk-container', () => {
-  NexT.utils.getScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', () => {
-    var gitalk = new Gitalk({
-      clientID    : '7ab9bfd625d764e6f839',
-      clientSecret: '50456ef4045b36eb51b27fcee13ea274d19c73ae',
-      repo        : 'blogChatStore',
-      owner       : 'shejialuo',
-      admin       : ['shejialuo'],
-      id          : '2752a4ad0822c5acbda0ff9fd26a5c26',
-      proxy       : 'https://netnr-proxy.cloudno.de/https://github.com/login/oauth/access_token',
-        language: '',
-      distractionFreeMode: true
-    });
-    gitalk.render(document.querySelector('.gitalk-container'));
-  }, window.Gitalk);
-});
-</script>
 
 </body>
 </html>
