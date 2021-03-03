@@ -509,4 +509,323 @@
         <tag>夏目漱石</tag>
       </tags>
   </entry>
+  <entry>
+    <title>C++ STL Iterator Note</title>
+    <url>/428b5912cce9/</url>
+    <content><![CDATA[<h2 id="1-Iterators">1. Iterators</h2>
+<p>We need a concept of an object that represents positions of elements in a container. Objects that fulfill this concept are called <strong>iterators</strong>.</p>
+<p>An iterator is an object that can iterate over elements. These elements may be all or a subset of the elements of an STL container.</p>
+<h3 id="1-1-Header-File">1.1 Header File</h3>
+<p>All containers define their own iterator types, so you don’t need a special header file for using iterators of containers.</p>
+<p>However, several definitions for special iterators and some auxiliary iterator functions are introduced by the <code>&lt;iterator&gt;</code> header file.</p>
+<h3 id="1-2-The-Basic-Knowledge-of-Iterators">1.2 The Basic Knowledge of Iterators</h3>
+<p>The following fundamental operations define the behavior of an iterator:</p>
+<ul>
+<li><code>Operator *</code> returns the element of the current position.</li>
+<li><code>Operator ++</code> lets the iterator step forward to the next element. Most iterators allow stepping backward by using <code>operator --</code>.</li>
+<li><code>Operators ==</code> and <code>!=</code> return whether two iterators represent the same position.</li>
+<li><code>Operator =</code> assigns an iterator.</li>
+</ul>
+<p>All container classes provide the same basic member functions that enable them to use iterators to navigate over their elements:</p>
+<ul>
+<li><code>begin()</code> returns an iterator that represents the beginning of the elements in the container.</li>
+<li><code>end()</code> returns an iterator that represents the end of the elements in the container.</li>
+<li><code>cbegin()</code> is <code>const + begin()</code></li>
+<li><code>cend()</code> is <code>const + end()</code></li>
+</ul>
+<p>Every container defines two iterator types:</p>
+<ul>
+<li><code>container::iterator</code> is provided to iterate over elements in read/write mode.</li>
+<li><code>container::const_iterator</code> is provided to iterate over elements in read-only mode.</li>
+</ul>
+<h4 id="Range-Based-for-Loops-versus-Iterators">Range-Based <code>for</code> Loops versus Iterators</h4>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (type elem: coll) &#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The code is interpreted as</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> pos = coll.begin(), end = coll.end(); pos != end; ++pos) &#123;</span><br><span class="line">    type elem = *pos;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>So you’d better use reference when using range-based <code>for</code> loop.</p>
+<hr>
+<h2 id="2-Iterator-Categories">2. Iterator Categories</h2>
+<p>Iterators are subdivided into categories based on their general abilities:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Iterator Category</th>
+<th style="text-align:left">Ability</th>
+<th style="text-align:left">Providers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Output iterator</td>
+<td style="text-align:left">Writes forward</td>
+<td style="text-align:left">Ostream, inserter</td>
+</tr>
+<tr>
+<td style="text-align:left">Input iterator</td>
+<td style="text-align:left">Reads forward once</td>
+<td style="text-align:left">Istream</td>
+</tr>
+<tr>
+<td style="text-align:left">Forward iterator</td>
+<td style="text-align:left">Reads forward</td>
+<td style="text-align:left">Forward list, unordered containers</td>
+</tr>
+<tr>
+<td style="text-align:left">Bidirectional iterator</td>
+<td style="text-align:left">Reads forward and backward</td>
+<td style="text-align:left">List, set, multiset, map, multimap</td>
+</tr>
+<tr>
+<td style="text-align:left">Random-access iterator</td>
+<td style="text-align:left">Reads with random access</td>
+<td style="text-align:left">Array, vector, deque, string, C-style array</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-1-Output-Iterators">2.1 Output Iterators</h3>
+<p>Output iterators can only step forward with write access. Thus, you can assign new values only element-by-element.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Expression</th>
+<th style="text-align:left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>*iter = val</code></td>
+<td style="text-align:left">Writes <code>val</code> to where the iterator refers</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>++iter</code></td>
+<td style="text-align:left">Steps forward (returns new position)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>iter++</code></td>
+<td style="text-align:left">Steps forward (returns old position)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>TYPE(iter)</code></td>
+<td style="text-align:left">Copies iterator (copy constructor)</td>
+</tr>
+</tbody>
+</table>
+<p>A typical example of a pure output iterator is one that writes to the standard output. If you use two output iterators to write to the screen, the second word follows the first rather overwriting it.</p>
+<h3 id="2-2-Input-Iterators">2.2 Input Iterators</h3>
+<p>Input iterators can only step forward element-by-element with read access.Thus, they return values element-wise.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Expression</th>
+<th style="text-align:left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>iter</code></td>
+<td style="text-align:left">Provides read access to the actual element</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>iter -&gt; member</code></td>
+<td style="text-align:left">Provides read access to a member of the actual element</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>++iter</code></td>
+<td style="text-align:left">Steps forward (returns new position )</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>iter++</code></td>
+<td style="text-align:left">Steps forward</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>iter1 == iter2</code></td>
+<td style="text-align:left">Returns whether two iterators are equal</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>iter1 != iter2</code></td>
+<td style="text-align:left">Returns whether two iterators are not equal</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>TYPE(iter)</code></td>
+<td style="text-align:left">Copies iterator (copy constructor)</td>
+</tr>
+</tbody>
+</table>
+<p>All iterators that refer to values to process have the abilities of input iterators. A typical example of a pure input iterator is one that reads from the standard input.</p>
+<h3 id="2-3-Forward-Iterators">2.3 Forward Iterators</h3>
+<p>Forward iterators are input iterators that provide additional guarantees while reading forward.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Expression</th>
+<th style="text-align:left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>iter</code></td>
+<td style="text-align:left">Provides read access to the actual element</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>iter -&gt; member</code></td>
+<td style="text-align:left">Provides read access to a member of the actual element</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>++iter</code></td>
+<td style="text-align:left">Steps forward (returns new position )</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>iter++</code></td>
+<td style="text-align:left">Steps forward (returns old position)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>iter1 == iter2</code></td>
+<td style="text-align:left">Returns whether two iterators are equal</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>iter1 != iter2</code></td>
+<td style="text-align:left">Returns whether two iterators are not equal</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>TYPE(iter)</code></td>
+<td style="text-align:left">Copies iterator (copy constructor)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>TYPE() </code></td>
+<td style="text-align:left">Copies iterator (default constructor)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>iter1 = iter2</code></td>
+<td style="text-align:left">Assigns an iterator</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-4-Bidirectional-Iterators">2.4 Bidirectional Iterators</h3>
+<p>Bidirectional iterators are forward iterators that provide the additional ability to iterate backward over the elements.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Expression</th>
+<th style="text-align:left">Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>--iter</code></td>
+<td style="text-align:left">Steps backward (returns new position)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>iter--</code></td>
+<td style="text-align:left">Steps backward (returns old position)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-5-Random-Access-Iterators">2.5 Random-Access Iterators</h3>
+<p>Random-access iterators provide all the abilities of bidirectional iterators plus random access. Thus, they provide operators for <strong>iterator arithmetic</strong>. That is, they can add and subtract offsets, process differences, and compare iterators with relational operators.</p>
+<hr>
+<h2 id="3-Auxiliary-Iterator-Functions">3. Auxiliary Iterator Functions.</h2>
+<p>The C++ standard library provides some auxiliary functions for dealing with iterators:</p>
+<ul>
+<li><code>advance()</code></li>
+<li><code>next()</code></li>
+<li><code>prev()</code></li>
+<li><code>distance()</code></li>
+<li><code>iter_swap()</code></li>
+</ul>
+<h3 id="3-1-advance">3.1 <code>advance()</code></h3>
+<p>The function <code>advance()</code> increments the position of an iterator passed as the argument.</p>
+<p>Due to the use of iterator traits, the function always uses the best implementation, depending on iterator category:</p>
+<ul>
+<li>For random-access iterators, it simply calls <code>pos+=n</code>.</li>
+<li>For all other iterators, it calls <code>++pos</code> n times.</li>
+</ul>
+<p>To be able to change container and iterator types, you should use <code>advance()</code> rather than operator <code>+=</code>.</p>
+<h3 id="3-2-next-and-prev">3.2 <code>next()</code> and <code>prev()</code></h3>
+<h3 id="3-3-distance">3.3 <code>distance()</code></h3>
+<h3 id="3-4-iter-swap">3.4 <code>iter_swap()</code></h3>
+<hr>
+<h2 id="4-Iterator-Adapters">4. Iterator Adapters</h2>
+<p>Iterators are <strong>pure abstractions</strong>: Anything that <strong>behaves</strong> like an iterator is an iterator. For this reason, you can write classes that have the interface of iterators but do something completely different.</p>
+<p>The C++ standard library provides several predefined special iterators: <strong>iterator adapters</strong>:</p>
+<ul>
+<li>Insert iterators</li>
+<li>Stream iterators</li>
+<li>Reverse iterators</li>
+<li>Move iterators (since C++11)</li>
+</ul>
+<h3 id="4-1-Insert-Iterators">4.1 Insert Iterators</h3>
+<p>Insert iterators, also called <strong>inserters</strong>, are iterator adapters that transform an assignment of a new value into an insertion of that new value. By using insert iterators, algorithms can insert rather than overwrite. All insert iterators are in the output-iterator category.</p>
+<h4 id="Functionality-of-Insert-Iterators">Functionality of Insert Iterators</h4>
+<p>Usually, an algorithm assigns value to a destination iterator. For example, consider the <code>copy()</code> algorithm:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> &#123;</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> InputIterator, <span class="keyword">typename</span> OutputIterator&gt;</span><br><span class="line">    <span class="function">OutoutIterator <span class="title">copy</span><span class="params">(InputIterator from_pos,</span></span></span><br><span class="line"><span class="function"><span class="params">                        InputIterator from_end,</span></span></span><br><span class="line"><span class="function"><span class="params">                        OutputIterator to_pos)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (from_pos != from_end) &#123;</span><br><span class="line">            *to_pos = *from_pos;</span><br><span class="line">            ++from_pos;</span><br><span class="line">            ++to_pos;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> to_pos;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>An insert iterator transforms such an assignment into an insertion. However, two operations are involved:</p>
+<ul>
+<li><code>Operator *</code> is implemented as a no-op that simply returns <code>*this</code>.</li>
+<li>The assignment operator is implemented so that it gets transferred into an insertion. In fact, the insert iterator calls the <code>push_back()</code>, <code>push_front()</code>, or <code>insert()</code> member function of the container.</li>
+</ul>
+<h4 id="Kinds-of-Insert-Iterators">Kinds of Insert Iterators</h4>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Name</th>
+<th style="text-align:left">Class</th>
+<th style="text-align:left">Called Function</th>
+<th style="text-align:left">Creation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Back inserter</td>
+<td style="text-align:left"><code>back_insert_iterator</code></td>
+<td style="text-align:left"><code>push_back(value)</code></td>
+<td style="text-align:left"><code>back_inserter(cont)</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Front inserter</td>
+<td style="text-align:left"><code>front_insert_iterator</code></td>
+<td style="text-align:left"><code>push_front(value)</code></td>
+<td style="text-align:left"><code>front_inserter(cont)</code></td>
+</tr>
+<tr>
+<td style="text-align:left">General inserter</td>
+<td style="text-align:left"><code>insert_iterator</code></td>
+<td style="text-align:left"><code>insert(pos, value)</code></td>
+<td style="text-align:left"><code>inserter(cont,pos)</code></td>
+</tr>
+</tbody>
+</table>
+<p>Both back inserter and front inserter must be initialized with its container at creation time. However, the <code>back_inserter()</code> and <code>front_inserter()</code> function provide a convenient way to do this.</p>
+<h3 id="4-2-Stream-Iterators">4.2 Stream Iterators</h3>
+<p>A stream iterator is an iterator adapter that allows you to use a stream as a source of destination of algorithms.</p>
+<h4 id="Ostream-Iterators">Ostream Iterators</h4>
+<p>Ostream iterators write assigned values to an output stream. The implementation of an ostream iterator uses the same concept as the implementation of insert iterators. The only difference is that they transform the assignment of a new value into an output operation by using <code>operator &lt;&lt;</code>.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; coll = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>&#125;;</span><br><span class="line"></span><br><span class="line">    copy(coll.cbegin(), coll.cend(),</span><br><span class="line">         ostream_iterator&lt;<span class="keyword">int</span>&gt;(<span class="built_in">cout</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Istream-Iterators">Istream Iterators</h4>
+<p>Istream iterators are the counterparts of ostream iterators. An istream iterator reads elements from an input stream</p>
+<h3 id="4-3-Reverse-Iterators">4.3 Reverse Iterators</h3>
+<p>Reverse iterators redefine increment and decrement operator so that they behave in reverse:</p>
+<ul>
+<li><code>rbegin()</code> returns the position of the first element of a reverse iteration. Thus, it returns the position of the last element.</li>
+<li><code>rend()</code> returns the position after the last element of a reverse iteration. Thus, it returns the position before the first element.</li>
+</ul>
+<h3 id="4-4-Move-Iterators">4.4 Move Iterators</h3>
+<p>Since C++11, an iterator adapter is provided that converts any access to the underlying element into a move operation.</p>
+<hr>
+<h2 id="5-Iterator-Traits">5. Iterator Traits</h2>
+<p>The various iterator categories represent special iterator abilities. It might be useful to be able to overload behavior for different iterator categories.</p>
+<p>By using iterator tags and iterator traits (both provided in <code>&lt;iterator&gt;</code>), such an overloading can be performed.</p>
+<p>For each iterator category, the C++ standard library provides an iterator tag that can be used as a “label” for iterators:</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> &#123;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">output_iterator_tag</span> &#123;</span>&#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">input_iterator_tag</span> &#123;</span>&#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">forward_iterator_tag</span>:</span></span><br><span class="line">        <span class="keyword">public</span> input_iterator_tag &#123;&#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">bidirectional_iterator</span>:</span></span><br><span class="line">        <span class="keyword">public</span> forward_iterator_tag &#123;&#125;;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">random_access_iterator_tag</span>:</span></span><br><span class="line">        <span class="keyword">public</span> bidirectional_iterator_tag &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>If you write generic code, you may need the type of elements to which the iterator refers. Therefore, the C++ standard library provides a special template structure to define the iterator traits.</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="built_in">std</span> &#123;</span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">iterator_traits</span> &#123;</span></span><br><span class="line">        <span class="keyword">typedef</span> <span class="keyword">typename</span> T::iterator_category iterator_category;</span><br><span class="line">        <span class="keyword">typedef</span> <span class="keyword">typename</span> T::value_type        value_type;</span><br><span class="line">        <span class="keyword">typedef</span> <span class="keyword">typename</span> T::difference_type   difference_type;</span><br><span class="line">        <span class="keyword">typedef</span> <span class="keyword">typename</span> T::pointer           pointer;</span><br><span class="line">        <span class="keyword">typedef</span> <span class="keyword">typename</span> T::reference         reference;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>编程</category>
+        <category>C++</category>
+        <category>STL</category>
+      </categories>
+      <tags>
+        <tag>Iterator</tag>
+      </tags>
+  </entry>
 </search>
