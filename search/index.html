@@ -6,15 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="记得我在读毛姆的《人生的枷锁》的时候，有一句话特别让我有所感触。  他不知不觉地养成了世界上最快乐的习惯——读书的习惯。他还没有意识到这样一来就为生活上的一切痛苦提供了一个避难所；他也没有意识到他正在创造一个虚幻的世界，这个世界使现实的世界成为痛苦、失望的源泉。  我为什么把这个博客的名字取作藏书阁，或许还是希望自己能在这个属于自己的小小世界里面，寻得那么一丝丝的快乐；或是留下自己存在的印记；又或">
+    <meta name="description" content="秋意深，四下之人正何为？">
 <meta property="og:type" content="website">
-<meta property="og:title" content="about">
-<meta property="og:url" content="https://luolibrary.com/about/index.html">
+<meta property="og:title" content="search">
+<meta property="og:url" content="https://luolibrary.com/search/index.html">
 <meta property="og:site_name" content="洛的藏书阁">
-<meta property="og:description" content="记得我在读毛姆的《人生的枷锁》的时候，有一句话特别让我有所感触。  他不知不觉地养成了世界上最快乐的习惯——读书的习惯。他还没有意识到这样一来就为生活上的一切痛苦提供了一个避难所；他也没有意识到他正在创造一个虚幻的世界，这个世界使现实的世界成为痛苦、失望的源泉。  我为什么把这个博客的名字取作藏书阁，或许还是希望自己能在这个属于自己的小小世界里面，寻得那么一丝丝的快乐；或是留下自己存在的印记；又或">
+<meta property="og:description" content="秋意深，四下之人正何为？">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-07T09:32:33.000Z">
-<meta property="article:modified_time" content="2022-11-07T09:35:56.188Z">
+<meta property="article:published_time" content="2022-11-07T12:21:09.561Z">
+<meta property="article:modified_time" content="2022-11-07T12:21:09.561Z">
 <meta property="article:author" content="shejialuo">
 <meta name="twitter:card" content="summary">
     
@@ -36,7 +36,7 @@
       
     
     <!-- title -->
-    <title>about</title>
+    <title>search</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -106,15 +106,15 @@
 
   <div class="content" itemprop="articleBody">
       
-          <p>记得我在读毛姆的《人生的枷锁》的时候，有一句话特别让我有所感触。</p>
-<blockquote>
-<p>他不知不觉地养成了世界上最快乐的习惯——读书的习惯。他还没有意识到这样一来就为生活上的一切痛苦提供了一个避难所；他也没有意识到他正在创造一个虚幻的世界，这个世界使现实的世界成为痛苦、失望的源泉。</p>
-</blockquote>
-<p>我为什么把这个博客的名字取作藏书阁，或许还是希望自己能在这个属于自己的小小世界里面，寻得那么一丝丝的快乐；或是留下自己存在的印记；又或是希望自己的想法能够给别人带来些许启发。同时，我也希望我写的关于技术方面的文章能够让你感觉到知识的快乐。</p>
-<p>有时候，总会去思考人与人之间的关系。觉得人大多时候是孤独的，却又希望与他人交流，希望与别人的电波相互交错，希望接触更多的人，创造更多美好的回忆。</p>
-<p>亲爱的您，秋意深，您正何为？</p>
+        <section id="search">
+  <form>
+    <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+  </form>
+  <div id="search-result"></div>
+  <p class="search-no-result">抱歉，没有符合您搜索条件的结果。请换其它关键词再试。</p>
+</section>
 
-        
+      
   </div>
 </article>
 
@@ -171,6 +171,45 @@
 <script src="/js/main.js"></script>
 
 <!-- search -->
+
+  
+<script src="/js/search.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+
+    var $inputArea = $("input#search-input");
+    var $resultArea = document.querySelector("div#search-result");
+
+    $inputArea.focus(function() {
+      var search_path = "search.xml";
+      if (search_path.length == 0) {
+        search_path = "search.xml";
+      }
+      var path = "/" + search_path;
+      searchFunc(path, 'search-input', 'search-result');
+    });
+
+    $inputArea.keydown(function(e) {
+      if (e.which == 13) {
+        e.preventDefault();
+      }
+    });
+
+    var observer = new MutationObserver(function(mutationsList, observer) {
+      if (mutationsList.length == 1) {
+        if (mutationsList[0].addedNodes.length) {
+          $(".search-no-result").hide();
+        } else if (mutationsList[0].removedNodes.length) {
+          $(".search-no-result").show(200);
+        }
+      }
+    });
+
+    observer.observe($resultArea, { childList: true });
+
+  });
+  </script>
 
 <!-- Google Analytics -->
 
