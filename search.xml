@@ -29,6 +29,31 @@
     
     
     <entry>
+      <title>Telegram代收QQ和微信消息</title>
+      <link href="/2022/11/07/Telegram%E4%BB%A3%E6%94%B6QQ%E5%92%8C%E5%BE%AE%E4%BF%A1%E6%B6%88%E6%81%AF/"/>
+      <url>/2022/11/07/Telegram%E4%BB%A3%E6%94%B6QQ%E5%92%8C%E5%BE%AE%E4%BF%A1%E6%B6%88%E6%81%AF/</url>
+      
+        <content type="html"><![CDATA[<ol><li>前言<br>在ArchLinux i3上想用QQ和微信别人交流，是一件极其困难的事情，腾讯开发的linux for qq总是经常的出现段错误，而且界面过于丑陋。同时，腾讯为UOS开发的WeChat仅仅通过Electron封装了网页端，聊天记录都不能保存。故尝试采用Telegram代收QQ和微信消息。首先本文感谢以下的开源项目：</li></ol><p>efb-qq-slave<br>efb-wechat-slave<br>enForwarderBot<br>mirai<br>mirai-api-http<br>mirai-console-loader<br>其中，efb-qq-slave的作者发表了博客安装并使用EFB：在Telegram收发QQ消息，但由于coolQ在2020年8月2日的关闭（详见知乎）该博文在某些方面失去了时效性。efb-qq-slave的作者奶冰大佬最近重构了项目，本篇博客拟记录部署服务的过程，同时本博客采用了该博文的部分内容，本博客所用的博文均遵循CC BY-NC-SA 4.0 许可协议，符合该博文的采用的CC BY-NC-SA 4.0 许可协议。</p><ol start="2"><li>前提条件<br>在开始部署之前，需要完成以下的准备工作：</li></ol><p>墙外的一台VPS<br>一台电脑，Windows系统采用Windows Terminal和PowerShell7进行SSH连接<br>3. 环境搭建<br>由于我的服务器环境为Ubuntu 20.04 LTS，本文按照该操作系统进行描述。如果你采用的是其他发行版的Linux服务器，其过程并无本质区别。由于依赖或LTS版本的问题，你可能会遇到很多坑，如果你熟悉Docker，建议采取Docker部署服务，同时也为你的服务器中的其他服务提供了隔离。</p><p>3.1 安装Python与非Python依赖<br>对于非Python依赖，直接通过包管理器安装：</p><p>sudo apt-get install libopus0 ffmpeg libmagic1 git libssl-dev<br>显然，使用Docker你就能避免以上的烦恼。</p><p>3.2 从PyPI下载相关软件<br>pip3 install ehforwarderbot<br>pip3 install -U git+<a href="https://github.com/milkice233/efb-qq-slave">https://github.com/milkice233/efb-qq-slave</a><br>pip3 install efb-telegram-master<br>pip3 install efb-wechat-slave<br>4. 配置<br>EFB的工作机制是一个唯一的主端和多个从端进行通信，由于需要同时代收QQ和微信，先创建配置文件夹：</p><p>mkdir -p <del>&#x2F;.ehforwarderbot&#x2F;profiles&#x2F;qq&#x2F;<br>mkdir -p ~&#x2F;.ehforwarderbot&#x2F;profiles&#x2F;qq&#x2F;blueset.telegram<br>mkdir -p ~&#x2F;.ehforwarderbot&#x2F;profiles&#x2F;qq&#x2F;milkice.qq<br>mkdir -p ~&#x2F;.ehforwarderbot&#x2F;profiles&#x2F;wechat&#x2F;<br>mkdir -p ~&#x2F;.ehforwarderbot&#x2F;profiles&#x2F;wechat&#x2F;blueset.telegram<br>mkdir -p ~&#x2F;.ehforwarderbot&#x2F;profiles&#x2F;wechat&#x2F;blueset.wechat<br>在</del>&#x2F;.ehforwarderbot&#x2F;profiles&#x2F;qq&#x2F;创建文件config.yaml，内容如下：</p><p>master_channel: blueset.telegram<br>slave_channels:</p><ul><li>milkice.qq<br>在~&#x2F;.ehforwarderbot&#x2F;profiles&#x2F;wechat创建文件config.yaml, 内容如下：</li></ul><p>master_channel: blueset.telegram<br>slave_channels:</p><ul><li>blueset.wechat<br>4.1 配置主端<br>本部分请阅读安装并使用EFB：在Telegram收发QQ消息中的配置主端部分。</li></ul><p>其中，&#x2F;setcommands部分应采取如下：</p><p>help - Show commands list.<br>link - Link a remote chat to a group.<br>unlink_all - Unlink all remote chats from a group.<br>info - Display information of the current Telegram chat.<br>chat - Generate a chat head.<br>extra - Access additional features from Slave Channels.<br>update_info - Update info of linked Telegram group.<br>react - Send a reaction to a message, or show a list of reactors.<br>rm - Remove a message from its remote chat.<br>同理，对于微信主端再新建一个Telegram的Bot，操作同上。</p><p>4.2 创建ETM配置文件<br>本部分请阅读安装并使用EFB：在Telegram收发QQ消息中的创建ETM配置文件。微信同理。</p><p>4.3 配置从端<br>本部分涉及到efb-qq-slave采用的QQ客户端为Mirai模式，参考GitHub官方文档。</p><p>这里会涉及到了一个问题，滑块验证，Mirai的控制台会提供足够的信息使得你解决这个问题。</p><p>对于微信而言，efb-wechat-slave已经内置了微信客户端，不需要折腾。</p><ol start="5"><li>使用<br>5.1 QQ<br>启动mcl，输入login 123456789 yourpassword ANDROID_PAD<br>输入ehforwarderbot –profile qq启动<br>5.2 微信<br>输入ehforwarderbot –profile wechat启动</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> 工具 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 技术 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>大学四年——从化学到通信再到计算机</title>
       <link href="/2021/08/28/%E5%A4%A7%E5%AD%A6%E5%9B%9B%E5%B9%B4%E2%80%94%E2%80%94%E4%BB%8E%E5%8C%96%E5%AD%A6%E5%88%B0%E9%80%9A%E4%BF%A1%E5%86%8D%E5%88%B0%E8%AE%A1%E7%AE%97%E6%9C%BA/"/>
       <url>/2021/08/28/%E5%A4%A7%E5%AD%A6%E5%9B%9B%E5%B9%B4%E2%80%94%E2%80%94%E4%BB%8E%E5%8C%96%E5%AD%A6%E5%88%B0%E9%80%9A%E4%BF%A1%E5%86%8D%E5%88%B0%E8%AE%A1%E7%AE%97%E6%9C%BA/</url>
