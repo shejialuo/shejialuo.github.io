@@ -185,7 +185,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="摘抄"><a href="#摘抄" class="headerlink" title="摘抄"></a>摘抄</h2><blockquote>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="摘抄"><a href="#摘抄" class="headerlink" title="摘抄"></a>摘抄</h2><blockquote>
 <p>我才明白，先生从一开始就没有讨厌我，他偶尔对我表现出的看似冷淡恩典寒暄和举动，并不是想疏远我的不快表现，而是内心有着创伤的先生，对于想要接近自己的人发出的警告——自己不值得接近，不要过来。拒绝别人亲近的先生，似乎在轻视别人之前早已轻视了自己。</p>
 </blockquote>
 <blockquote>
@@ -240,7 +240,12 @@
 <p>死难道就可以一了百了吗？与先生如此相关联的太太，难道不会因此受到伤害吗？</p>
 <p>这些作者并没有给出答案，我的这些思考也不知道是否偏离了文章的主题。但是，我想告诫我自己，一定不要对重要的人、重要的事撒谎，一旦撒下谎言，只能用一个谎言去弥补另一个谎言，又或是一辈子活在愧疚之中，无法得到救赎。</p>
 <p>因为先生本可以光芒万丈。</p>
-
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
   </div>
 </article>
 
@@ -347,7 +352,16 @@
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 

@@ -185,7 +185,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h2><blockquote>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h2><blockquote>
 <p>可我们又为什么总是活得这样窝窝囊囊、可怜巴巴呢？那是因为我们的劳动成果几乎全部被人类从我们身边偷走了。</p>
 </blockquote>
 <blockquote>
@@ -232,7 +232,12 @@
 <p>可以说除了猪以外的动物，他们都被洗脑了，他们以为自己获得了自由，拥有了追求幸福生活的权利，但是他们又落入了一个新的不自由，最悲哀的是他们甚至以为自己是处于自由之中的。</p>
 <p>这让我想到了教育的重要性，我始终觉得人类社会的平等需要教育的平等，让每一个人都能够接受到平等的教育，让每一个人能学会独立思考，分辨真伪，只有这样权力的轮子才不会压在我们的身上，这样才能限制政府的权力。猪通过接受教育在动物中获得了压倒性的地位，篡改历史，麻痹群众，让动物认为他们生活在幸福之中。</p>
 <p>然而，从目前看来，任重道远。正如《美丽新世界》一样，我们所喜爱的东西正在摧毁我们。</p>
-
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
   </div>
 </article>
 
@@ -339,7 +344,16 @@
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 

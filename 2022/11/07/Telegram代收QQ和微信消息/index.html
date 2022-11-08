@@ -25,7 +25,7 @@
 <meta property="og:description" content="1. 前言在ArchLinux i3上想用QQ和微信别人交流，是一件极其困难的事情，腾讯开发的linux for qq总是经常的出现段错误，而且界面过于丑陋。同时，腾讯为UOS开发的WeChat仅仅通过Electron封装了网页端，聊天记录都不能保存。故尝试采用Telegram代收QQ和微信消息。首先本文感谢以下的开源项目：  efb-qq-slave efb-qq-plugin-go-cqhtt">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-07T15:32:54.000Z">
-<meta property="article:modified_time" content="2022-11-08T02:33:53.392Z">
+<meta property="article:modified_time" content="2022-11-08T04:47:10.502Z">
 <meta property="article:author" content="shejialuo">
 <meta property="article:tag" content="技术">
 <meta name="twitter:card" content="summary">
@@ -160,7 +160,7 @@
       
         <time datetime="2022-11-07T15:32:54.000Z" itemprop="datePublished">2022-11-07</time>
         
-        (Updated: <time datetime="2022-11-08T02:33:53.392Z" itemprop="dateModified">2022-11-08</time>)
+        (Updated: <time datetime="2022-11-08T04:47:10.502Z" itemprop="dateModified">2022-11-08</time>)
         
       
     </div>
@@ -185,7 +185,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>在ArchLinux i3上想用QQ和微信别人交流，是一件极其困难的事情，腾讯开发的linux for qq总是经常的出现段错误，而且界面过于丑陋。同时，腾讯为UOS开发的WeChat仅仅通过Electron封装了网页端，聊天记录都不能保存。故尝试采用Telegram代收QQ和微信消息。首先本文感谢以下的开源项目：</p>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>在ArchLinux i3上想用QQ和微信别人交流，是一件极其困难的事情，腾讯开发的linux for qq总是经常的出现段错误，而且界面过于丑陋。同时，腾讯为UOS开发的WeChat仅仅通过Electron封装了网页端，聊天记录都不能保存。故尝试采用Telegram代收QQ和微信消息。首先本文感谢以下的开源项目：</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/ehForwarderBot/efb-qq-slave">efb-qq-slave</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/ehForwarderBot/efb-qq-plugin-go-cqhttp">efb-qq-plugin-go-cqhttp</a></li>
@@ -259,7 +259,12 @@
 
 <h3 id="5-2-使用服务"><a href="#5-2-使用服务" class="headerlink" title="5.2 使用服务"></a>5.2 使用服务</h3><p>创建后台服务，对于QQ而言，你可以创建两个服务，一个启动机器人，一个启动<code>efb-qq-slave</code></p>
 <p>对于微信而言，你只需要创建一个服务直接启动<code>efb-wechat-slave</code>。至于怎么创建服务，请读者自行查阅相关资料。</p>
-
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
   </div>
 </article>
 
@@ -366,7 +371,16 @@
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 

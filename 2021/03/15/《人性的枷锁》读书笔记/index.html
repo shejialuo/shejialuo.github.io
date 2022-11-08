@@ -185,7 +185,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h2><blockquote>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="摘录"><a href="#摘录" class="headerlink" title="摘录"></a>摘录</h2><blockquote>
 <p>他不知不觉养成了一个世上最令人愉悦的习惯：阅读。他并没有意识到已经找到了一个可以逃避世上所有烦忧之事的庇护所，不过他也不知道自己所创造的这个虚无的世界让日常生活的现实世界成了痛苦失望的源头。</p>
 </blockquote>
 <blockquote>
@@ -248,7 +248,12 @@
 <blockquote>
 <p>人生，究竟是一场华丽的冒险，<br>还是用千篇一律的枷锁套上百无聊赖的皮囊？<br>我们终其一生都在寻找生命的意义，<br>可最后发现，人生本来就是一场没有意义的旅途<br>那些禁锢命运的一道道枷锁，<br>只不过是我们沉浸在过往与未来的幻想罢了。<br>无论我们做出怎么样的努力和选择，<br>经历怎么样的繁华或苍凉、荣耀或痛苦，<br>生活最终都会回归于平凡,<br>而平凡才是生活的真谛。</p>
 </blockquote>
-
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
   </div>
 </article>
 
@@ -355,7 +360,16 @@
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 

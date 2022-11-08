@@ -185,7 +185,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>只玩了游戏没有看过动漫，所以只对游戏本身进行评价。</p>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h2><p>只玩了游戏没有看过动漫，所以只对游戏本身进行评价。</p>
 <p>玩过游戏的人都知道，这部GalGame分为了上篇The First Tale和下篇The Latter Tale，其整体的结构是相互关联的，我觉这部GalGame对于剧情的处理相当优秀，许多地方都是伏笔。例如我在打上篇的时候很是奇怪明明景和京介的故事发生在夏天，到了下篇千寻和莲治故事却发生在冬天。当然原因在后面也得到了解释。</p>
 <p>然而，在通关这部GalGame后，我总觉得这部GalGame在某些部分缺少了张力，或者说我并不是很认同这部作品传递出来的某些价值观。</p>
 <p>在上篇的故事中，故事还是比较温馨的：</p>
@@ -221,7 +221,12 @@
 <hr>
 <p>正如同游戏名一样《悠久之翼》，最后借瑞希之口说出了这个游戏名的含义。坚强与脆弱、生存和死亡等都是一对翅膀，一只翅膀是无法飞翔的。一个人也是无法飞翔的，所以需要他人。</p>
 <p>说实在的，我接受不了这个观点。</p>
-
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
   </div>
 </article>
 
@@ -328,7 +333,16 @@
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 

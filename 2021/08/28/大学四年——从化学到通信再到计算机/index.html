@@ -179,7 +179,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h2><p>为何想写这个东西呢？或许仅仅只想做一个总结，又或是想給别人传达一些东西。仅此而已。</p>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="初衷"><a href="#初衷" class="headerlink" title="初衷"></a>初衷</h2><p>为何想写这个东西呢？或许仅仅只想做一个总结，又或是想給别人传达一些东西。仅此而已。</p>
 <h2 id="大一"><a href="#大一" class="headerlink" title="大一"></a>大一</h2><h3 id="不愿复读"><a href="#不愿复读" class="headerlink" title="不愿复读"></a>不愿复读</h3><p>在2017年，由于高考的失利，我仅仅只以1分的极大优势被重庆交通大学的应用化学专业录取。实在是不想复读了，并不是因为觉得复读辛苦而退缩。只是觉得再用一年去学那些重复的知识，没有任何的意义，只会重蹈自己高三一年的无聊。</p>
 <p>那个时候在知乎，讨论化学为四大天坑的话题还是比较少的，但是也有许多对于这个专业前景的讨论了。在阅读了许多相关的前人的经验后，无论是处于世俗还是兴趣，我都决心努力换专业。</p>
 <h3 id="初遇良师"><a href="#初遇良师" class="headerlink" title="初遇良师"></a>初遇良师</h3><p>由于在进校前就确定了转专业的目标，对于学习还是比较认真的。无论是同济出版的那本绿皮高数，还是无机化学上册，书后面的课后习题全部都做了，甚至还买了专门的题来刷。那时我并没有摆脱高中的思维。</p>
@@ -218,7 +218,12 @@
 <p>在大学，要多去尝试不同的学科，说实在的，因为我们在进大学前本就是一张白纸，对于自己所选的专业认识是很浅薄的。所以要去试错，找到自己感兴趣的东西（当然，也可能找不到）。因为，我们在中学的教育不是很强调我们的个性，我们很难去思考考上大学后，我们应该做什么，应该成为什么样的人。</p>
 <p>每个人都有自己对于生活的态度和答案。最重要的是去寻找自己的答案。然而，我们的大学变得像技校一样，因为效率的原因，必须给学生传递知识以使得学生能够适应社会，满足社会的需求。然而，大学一定是发问的地方，是我们认识自己很重要的一个阶段，是培养独立之灵魂、自由之思想的地方。</p>
 <p>从化学到通信再到计算机，算是一个很大的跨越了。虽说过程很辛苦，但是我觉得很幸运，因为我觉得这是我认识了自己的原因。不再以单一的思维看待事物，变得更加宽容。</p>
-
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
   </div>
 </article>
 
@@ -325,7 +330,16 @@
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 

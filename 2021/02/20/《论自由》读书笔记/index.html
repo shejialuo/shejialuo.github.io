@@ -183,7 +183,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="第一章-导论"><a href="#第一章-导论" class="headerlink" title="第一章 导论"></a>第一章 导论</h2><p>开篇一开始，明确本书的主旨：</p>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="第一章-导论"><a href="#第一章-导论" class="headerlink" title="第一章 导论"></a>第一章 导论</h2><p>开篇一开始，明确本书的主旨：</p>
 <blockquote>
 <p>意志之自由一直被误认为是哲学的必然论域，而本文的旨趣恰恰与之相反，是关于公民或社会的自由，即讨论社会合法地作用于个人之力量的属性和界限。</p>
 </blockquote>
@@ -328,7 +328,12 @@
 <blockquote>
 <p>从长远看，国家的价值在于其国民的价值。国家如果把国民精神发展进步的利益摆在它的治术之后，或者类似的由实践产生的细枝末节的事务之后；如果弱其国民，使之成为国家手中温驯的傀儡，即便是出于好意，到头来也会发现，国民弱则一事无成，而那牺牲万千换来的完美国家机器，终将一无是处。因为为了使这机器运转良好，它的代价是这个国家的生命力。</p>
 </blockquote>
-
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
   </div>
 </article>
 
@@ -435,7 +440,16 @@
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 

@@ -185,7 +185,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="摘抄"><a href="#摘抄" class="headerlink" title="摘抄"></a>摘抄</h2><blockquote>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="摘抄"><a href="#摘抄" class="headerlink" title="摘抄"></a>摘抄</h2><blockquote>
 <p>代助现在就是这样想的：与其费尽心机去把镀金的东西冒充成真金，还不如在黄铜就是黄铜的情况下，去忍受人们对黄铜应有的蔑视来得自在。</p>
 </blockquote>
 <blockquote>
@@ -201,7 +201,12 @@
 <p>代助在我看来只是拥有了表面上的自由，他最失败的就是没有意识到所谓的自由必定要承受一定的不自由。如果他是经济独立的，他完全可以不结婚，不必去看父亲和哥哥的脸色行事。命根子都被别人抓住的，何谈自由？</p>
 <p>我们无非都是社会上的螺丝钉，给政客、资本家创作那些映在显示器上的漂亮的数据。大多数的工作就是枯燥无比的、不断重复的，所谓的有创造性的工作终究是少数。然而，无论是拥有什么的理想、心态以及对这个世界的看法，必须做到经济独立，否则永远会受到致命的制约。理想主义和现实主义根本不是对立的，我们永远在现实中追求理想，在理想中反思现实。</p>
 <p>但是，人觉得悲哀。如同头脑被烈火灼烧一样。</p>
-
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
   </div>
 </article>
 
@@ -308,7 +313,16 @@
   <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
 
 
-    <!-- jquery -->
+    <!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+<!-- jquery -->
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
 
