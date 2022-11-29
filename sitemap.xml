@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://luolibrary.com/2022/11/28/CS144-Introduction-to-Computer-Networking-Lab-4/</loc>
+    
+    <lastmod>2022-11-29</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://luolibrary.com/2022/11/23/CS144-Introduction-to-Computer-Networking-Lab-3/</loc>
     
     <lastmod>2022-11-26</lastmod>
@@ -247,7 +256,7 @@
 
   <url>
     <loc>https://luolibrary.com/</loc>
-    <lastmod>2022-11-26</lastmod>
+    <lastmod>2022-11-29</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
