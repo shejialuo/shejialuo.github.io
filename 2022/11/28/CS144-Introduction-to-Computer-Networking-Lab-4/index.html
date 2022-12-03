@@ -17,16 +17,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="Before we write the code, we should think what would TCPConnection do. If you carefully read the docs provided by lab. You will understand the requirements easily. But the most important thing is to u">
+    <meta name="description" content="You can get the whole series from here  Before we write the code, we should think what would TCPConnection do. If you carefully read the docs provided by lab. You will understand the requirements easi">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS144: Introduction to Computer Networking Lab 4">
 <meta property="og:url" content="https://luolibrary.com/2022/11/28/CS144-Introduction-to-Computer-Networking-Lab-4/index.html">
 <meta property="og:site_name" content="洛的藏书阁">
-<meta property="og:description" content="Before we write the code, we should think what would TCPConnection do. If you carefully read the docs provided by lab. You will understand the requirements easily. But the most important thing is to u">
+<meta property="og:description" content="You can get the whole series from here  Before we write the code, we should think what would TCPConnection do. If you carefully read the docs provided by lab. You will understand the requirements easi">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/11/28/Hcbp5rQ6qK8fCzF.png">
 <meta property="article:published_time" content="2022-11-28T11:24:11.000Z">
-<meta property="article:modified_time" content="2022-11-29T08:24:10.306Z">
+<meta property="article:modified_time" content="2022-12-03T13:21:54.796Z">
 <meta property="article:author" content="shejialuo">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="学习">
@@ -163,7 +163,7 @@
       
         <time datetime="2022-11-28T11:24:11.000Z" itemprop="datePublished">2022-11-28</time>
         
-        (Updated: <time datetime="2022-11-29T08:24:10.306Z" itemprop="dateModified">2022-11-29</time>)
+        (Updated: <time datetime="2022-12-03T13:21:54.796Z" itemprop="dateModified">2022-12-03</time>)
         
       
     </div>
@@ -188,7 +188,9 @@
   
 
   <div class="content" itemprop="articleBody">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><p>Before we write the code, we should think what would <code>TCPConnection</code> do. If you carefully read the docs provided by lab. You will understand the requirements easily. But the most important thing is to understand how <code>TCPConnection</code> combines the <code>TCPReceiver</code> and <code>TCPSender</code> and achieves the functionality.</p>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><p>You can get the whole series from <a href="https://luolibrary.com/categories/CS144/">here</a></p>
+<hr>
+<p>Before we write the code, we should think what would <code>TCPConnection</code> do. If you carefully read the docs provided by lab. You will understand the requirements easily. But the most important thing is to understand how <code>TCPConnection</code> combines the <code>TCPReceiver</code> and <code>TCPSender</code> and achieves the functionality.</p>
 <p>Here, I give an example to illustrate the process. I named the two instances of <code>TCPConnection</code> called <code>TCPConnectionA</code> and <code>TCPConnectionB</code>. And the <code>TCPConnectionA</code> has two classes <code>TCPReceiverA</code> and <code>TCPSenderA</code>, respectively, the <code>TCPConnectionB</code> has two classes <code>TCPReceiverB</code> and <code>TCPSenderB</code>.</p>
 <p>When <code>TCPConnectionA</code> sends the segment to <code>TCPConnectionB</code>, it will calls the <code>TCPSenderA</code>‘s <code>fill_window()</code> method to extract the data to the segments. It will maintain the absolute sequence number for the next byte to be sent. However, <em>there is one thing we do not consider, how about the acknowledge number in the header?</em>. We need to do this in the <code>TCPConnection</code> class.</p>
 <p>And when <code>TCPConnectionB</code> using <code>segment_received</code> method to handle the received segments. It should do the following things:</p>
@@ -234,7 +236,7 @@
 <p>Also, I define <code>set_error</code> function to handle the RST set segment or we want to send a new RST set segment.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">TCPConnection::set_error</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    _receiver.<span class="built_in">stream_out</span>().<span class="built_in">set_error</span>();</span><br><span class="line">    _sender.<span class="built_in">stream_in</span>().<span class="built_in">set_error</span>();</span><br><span class="line">    _active = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h2><p>Now we comes to the most important part, when the client wants to connect the server, it calls the <code>connect</code>. It is simple enough, because I have done the job in the &#96;TCPSender.</p>
+<h2 id="connect"><a href="#connect" class="headerlink" title="connect"></a>connect</h2><p>Now we comes to the most important part, when the client wants to connect the server, it calls the <code>connect</code>. It is simple enough, because I have done the job in the <code>TCPSender</code>.</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">TCPConnection::connect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    _sender.<span class="built_in">fill_window</span>();</span><br><span class="line">    <span class="built_in">send_new_segments</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// file: tcp_sender.cc</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TCPSender::fill_window</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">if</span> (_next_seqno == <span class="number">0</span>) &#123;</span><br><span class="line">        segment.<span class="built_in">header</span>().syn = <span class="literal">true</span>;</span><br><span class="line">        segment.<span class="built_in">header</span>().seqno = _isn + _next_seqno;</span><br><span class="line">        _next_seqno += <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="segment-received"><a href="#segment-received" class="headerlink" title="segment_received"></a>segment_received</h2><p>For <code>segment_received</code>, it is tricky.</p>

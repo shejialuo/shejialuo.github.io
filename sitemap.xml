@@ -2,9 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://luolibrary.com/2022/11/28/CS144-Introduction-to-Computer-Networking-Lab-4/</loc>
+    
+    <lastmod>2022-12-03</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://luolibrary.com/2022/11/30/CS144-Introduction-to-Computer-Networking-Lab-6-lab-7/</loc>
     
-    <lastmod>2022-11-30</lastmod>
+    <lastmod>2022-12-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,16 +22,7 @@
   <url>
     <loc>https://luolibrary.com/2022/11/29/CS144-Introduction-to-Computer-Networking-Lab-5/</loc>
     
-    <lastmod>2022-11-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://luolibrary.com/2022/11/28/CS144-Introduction-to-Computer-Networking-Lab-4/</loc>
-    
-    <lastmod>2022-11-29</lastmod>
+    <lastmod>2022-12-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -31,7 +31,7 @@
   <url>
     <loc>https://luolibrary.com/2022/11/23/CS144-Introduction-to-Computer-Networking-Lab-3/</loc>
     
-    <lastmod>2022-11-26</lastmod>
+    <lastmod>2022-12-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -40,7 +40,7 @@
   <url>
     <loc>https://luolibrary.com/2022/11/22/CS144-Introduction-to-Computer-Networking-Lab-2/</loc>
     
-    <lastmod>2022-11-22</lastmod>
+    <lastmod>2022-12-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -49,7 +49,7 @@
   <url>
     <loc>https://luolibrary.com/2022/11/21/CS144-Introduction-to-Computer-Networking-Lab-1/</loc>
     
-    <lastmod>2022-11-21</lastmod>
+    <lastmod>2022-12-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -58,7 +58,7 @@
   <url>
     <loc>https://luolibrary.com/2022/11/21/CS144-Introduction-to-Computer-Networking-Lab-0/</loc>
     
-    <lastmod>2022-11-21</lastmod>
+    <lastmod>2022-12-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -67,7 +67,7 @@
   <url>
     <loc>https://luolibrary.com/2022/11/21/CS144-Introduction-to-Computer-Networking-initial-source-code-reading/</loc>
     
-    <lastmod>2022-11-21</lastmod>
+    <lastmod>2022-12-03</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -274,7 +274,7 @@
 
   <url>
     <loc>https://luolibrary.com/</loc>
-    <lastmod>2022-11-30</lastmod>
+    <lastmod>2022-12-03</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>

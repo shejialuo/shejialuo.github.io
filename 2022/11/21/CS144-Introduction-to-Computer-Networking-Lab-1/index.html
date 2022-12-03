@@ -17,15 +17,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="First, you should carefully read the docs provided by the lab  The TCP sender is dividing its byte stream up into short segments so that they can fit inside a datagram. But the network might reorder t">
+    <meta name="description" content="You can get the whole series from here  First, you should carefully read the docs provided by the lab  The TCP sender is dividing its byte stream up into short segments so that they can fit inside a d">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS144: Introduction to Computer Networking Lab 1">
 <meta property="og:url" content="https://luolibrary.com/2022/11/21/CS144-Introduction-to-Computer-Networking-Lab-1/index.html">
 <meta property="og:site_name" content="洛的藏书阁">
-<meta property="og:description" content="First, you should carefully read the docs provided by the lab  The TCP sender is dividing its byte stream up into short segments so that they can fit inside a datagram. But the network might reorder t">
+<meta property="og:description" content="You can get the whole series from here  First, you should carefully read the docs provided by the lab  The TCP sender is dividing its byte stream up into short segments so that they can fit inside a d">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-21T08:58:55.000Z">
-<meta property="article:modified_time" content="2022-11-21T13:22:01.897Z">
+<meta property="article:modified_time" content="2022-12-03T13:16:33.409Z">
 <meta property="article:author" content="shejialuo">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="学习">
@@ -161,7 +161,7 @@
       
         <time datetime="2022-11-21T08:58:55.000Z" itemprop="datePublished">2022-11-21</time>
         
-        (Updated: <time datetime="2022-11-21T13:22:01.897Z" itemprop="dateModified">2022-11-21</time>)
+        (Updated: <time datetime="2022-12-03T13:16:33.409Z" itemprop="dateModified">2022-12-03</time>)
         
       
     </div>
@@ -186,7 +186,9 @@
   
 
   <div class="content" itemprop="articleBody">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><p>First, you should carefully read the docs provided by the lab</p>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><p>You can get the whole series from <a href="https://luolibrary.com/categories/CS144/">here</a></p>
+<hr>
+<p>First, you should carefully read the docs provided by the lab</p>
 <blockquote>
 <p>The TCP sender is dividing its byte stream up into short <em>segments</em> so that they can fit inside a datagram. But the network might reorder these datagrams, or drop them, or deliver them more than once. The receiver must reassemble the segments into the contiguous stream of bytes that they started out as.</p>
 <p>In this lab you’ll write the data structure that will be responsible for this reassembly: a <code>StreamReassembler</code>. It will receive substrings, consisting of a string of bytes, and the index of the first byte of that string within the larger stream. Each byte of the steam has its own unique index, starting from zero and counting upwards. The <code>StreamReassembler</code> will own a ByteStream for the output: as soon as the reassembler knows the next byte of the stream, it will write it into the <code>ByteStream</code>. The owner can access and read from the <code>ByteStream</code> whenever it wants.</p>
