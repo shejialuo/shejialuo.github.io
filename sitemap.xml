@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://luolibrary.com/2023/02/01/CS149-Assignment2-Building-A-Task-Execution-Library/</loc>
+    
+    <lastmod>2023-02-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://luolibrary.com/2023/01/31/CS149-Assignment1-Performance-Analysis-on-a-Quad-Core-CPU/</loc>
     
     <lastmod>2023-01-31</lastmod>
@@ -292,7 +301,7 @@
 
   <url>
     <loc>https://luolibrary.com/</loc>
-    <lastmod>2023-01-31</lastmod>
+    <lastmod>2023-02-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
