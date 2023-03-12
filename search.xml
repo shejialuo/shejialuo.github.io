@@ -13,14 +13,18 @@
       
       <categories>
           
-          <category> category_name </category>
+          <category> 手把手教你写一个简单的SMTP服务器 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> tag_name </tag>
+            <tag> 技术 </tag>
+            
+            <tag> 学习 </tag>
+            
+            <tag> 教程 </tag>
             
         </tags>
       
