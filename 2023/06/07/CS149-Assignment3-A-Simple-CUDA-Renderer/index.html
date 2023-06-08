@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7M238H24L4');
+  </script>
+
+
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Part 1The result is illustrated in the following figure. Question 1As you can see, due to the parallelism of the GPU, the bandwidth is huge. Question 2From the results, we can get that the bottleneck">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS149-Assignment3 A Simple CUDA Renderer">
+<meta property="og:url" content="https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/index.html">
+<meta property="og:site_name" content="洛的藏书阁">
+<meta property="og:description" content="Part 1The result is illustrated in the following figure. Question 1As you can see, due to the parallelism of the GPU, the bandwidth is huge. Question 2From the results, we can get that the bottleneck">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/06/07/JyrZ64K8W2uI3Tp.png">
+<meta property="article:published_time" content="2023-06-07T14:18:34.000Z">
+<meta property="article:modified_time" content="2023-06-07T14:18:44.075Z">
+<meta property="article:author" content="shejialuo">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/06/07/JyrZ64K8W2uI3Tp.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>CS149-Assignment3 A Simple CUDA Renderer</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/shejialuo">项目</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2023/06/08/CS149-Assignment4-Big-Graph-Processing-in-OpenMP/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/06/07/%E3%80%8A%E7%A7%BD%E7%BF%BC%E7%9A%84%E5%B0%A4%E6%96%AF%E8%92%82%E5%A8%85%E3%80%8B%E2%80%94%E2%80%94%E8%8D%92%E8%AF%9E%E8%BF%98%E6%98%AF%E5%AD%98%E5%9C%A8%EF%BC%9F/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&text=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&title=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&is_video=false&description=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CS149-Assignment3 A Simple CUDA Renderer&body=Check out this article: https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&title=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&title=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&title=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&title=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&name=CS149-Assignment3 A Simple CUDA Renderer&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&t=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1"><span class="toc-number">1.</span> <span class="toc-text">Part 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1"><span class="toc-number">1.1.</span> <span class="toc-text">Question 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-2"><span class="toc-number">1.2.</span> <span class="toc-text">Question 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-2"><span class="toc-number">2.</span> <span class="toc-text">Part 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-3"><span class="toc-number">3.</span> <span class="toc-text">Part 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#First-Implementation"><span class="toc-number">3.1.</span> <span class="toc-text">First Implementation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Improvement"><span class="toc-number">3.2.</span> <span class="toc-text">Improvement</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CS149-Assignment3 A Simple CUDA Renderer
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">shejialuo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-06-07T14:18:34.000Z" itemprop="datePublished">2023-06-07</time>
+        
+        (Updated: <time datetime="2023-06-07T14:18:44.075Z" itemprop="dateModified">2023-06-07</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/CS149/">CS149</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E5%AD%A6%E4%B9%A0/" rel="tag">学习</a>, <a class="tag-link-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="Part-1"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1</h2><p>The result is illustrated in the following figure.</p>
+<h3 id="Question-1"><a href="#Question-1" class="headerlink" title="Question 1"></a>Question 1</h3><p>As you can see, due to the parallelism of the GPU, the bandwidth is huge.</p>
+<h3 id="Question-2"><a href="#Question-2" class="headerlink" title="Question 2"></a>Question 2</h3><p>From the results, we can get that the bottleneck is the memory and CPU of the host itself. For the execution time of the kernel, the speed is very fast. However, the speed is low for copying the host memory into the device memory and vice versa.</p>
+<h2 id="Part-2"><a href="#Part-2" class="headerlink" title="Part 2"></a>Part 2</h2><p>First, we need to implement the parallelism form of <code>scan</code>. The algorithm is super wonderful. You should first understand the algorithm.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">exclusive_scan_iterative</span><span class="params">(<span class="type">int</span>* start, <span class="type">int</span>* end, <span class="type">int</span>* output)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> N = end - start;</span><br><span class="line">    memmove(output, start, N*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// upsweep phase</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> two_d = <span class="number">1</span>; two_d &lt;= N/<span class="number">2</span>; two_d*=<span class="number">2</span>) &#123;</span><br><span class="line">        <span class="type">int</span> two_dplus1 = <span class="number">2</span>*two_d;</span><br><span class="line">        parallel_for (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i += two_dplus1) &#123;</span><br><span class="line">            output[i+two_dplus1<span class="number">-1</span>] += output[i+two_d<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    output[N<span class="number">-1</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// downsweep phase</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> two_d = N/<span class="number">2</span>; two_d &gt;= <span class="number">1</span>; two_d /= <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="type">int</span> two_dplus1 = <span class="number">2</span>*two_d;</span><br><span class="line">        parallel_for (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i += two_dplus1) &#123;</span><br><span class="line">            <span class="type">int</span> t = output[i+two_d<span class="number">-1</span>];</span><br><span class="line">            output[i+two_d<span class="number">-1</span>] = output[i+two_dplus1<span class="number">-1</span>];</span><br><span class="line">            output[i+two_dplus1<span class="number">-1</span>] += t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>It may seem that we need <code>N</code> threads for every inner loop, however, this is a stupid idea, we should calculate how many threads we need for each inner loop.</p>
+<h2 id="Part-3"><a href="#Part-3" class="headerlink" title="Part 3"></a>Part 3</h2><p>Before diving into how to write a render using CUDA. We first think about how to implement a render with cpp. And after that, you need to read the code written with CUDA.</p>
+<h3 id="First-Implementation"><a href="#First-Implementation" class="headerlink" title="First Implementation"></a>First Implementation</h3><p>For the first implementation, I focus on how to write the correct code. The hint part <code>exclusive_scan</code> has made me think we could first store the circle render parameters for each pixel. Thus we can scan the circle render parameters for each pixel.</p>
+<p>Thus, we can solve the two important questions:</p>
+<ul>
+<li><em>Atomicity</em>: we have made the memory independent for each pixel. So we can write whatever we want without any synchronization and mutation.</li>
+<li><em>Order</em>: We have make an explicit array of render parameters. So the order doesn’t matter.</li>
+</ul>
+<p>So, We first need to construct an array to hold the render parameters for each pixel.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cudaMalloc</span>(&amp;cudaDevicePixelData, image-&gt;width * image-&gt;height * numCircles * <span class="number">4</span> * <span class="built_in">sizeof</span>(<span class="type">float</span>));</span><br></pre></td></tr></table></figure>
+
+<p>Now, we first write the render information for every pixel. The core code is below:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> pixelPtrStart = <span class="number">4</span> * cuConstRendererParams.numCircles * (pixelY * imageWidth + pixelX) + <span class="number">4</span> * circleIndex;</span><br><span class="line">float4* pixelPtr = (float4*)(&amp;cuConstRendererParams.pixelData[pixelPtrStart]);</span><br><span class="line">float4 color;</span><br><span class="line">color.x = rgb.x;</span><br><span class="line">color.y = rgb.y;</span><br><span class="line">color.z = rgb.z;</span><br><span class="line">color.w = alpha;</span><br><span class="line"></span><br><span class="line">*pixelPtr = color;</span><br></pre></td></tr></table></figure>
+
+<p>Then we can launch a new kernel to calculate for each pixel:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numCircles; ++i) &#123;</span><br><span class="line">    float4* pixelPtr = (float4*)(&amp;cuConstRendererParams.pixelData[startIndex + i * <span class="number">4</span>]);</span><br><span class="line">    color.x = (*pixelPtr).w * (*pixelPtr).x + (<span class="number">1</span> - (*pixelPtr).w) * color.x;</span><br><span class="line">    color.y = (*pixelPtr).w * (*pixelPtr).y + (<span class="number">1</span> - (*pixelPtr).w) * color.y;</span><br><span class="line">    color.z = (*pixelPtr).w * (*pixelPtr).z + (<span class="number">1</span> - (*pixelPtr).w) * color.z;</span><br><span class="line">    color.w += (*pixelPtr).w;</span><br><span class="line">  &#125;</span><br><span class="line">  *imagePtr = color;</span><br></pre></td></tr></table></figure>
+
+<p>However, <code>cudaDevicePixelData</code> is too big, which will consume so much memory, which would exceed the maximum memory 16GB. So we need to reuse the render information. We should not store the information for every pixel. Because the render information of each circle is deterministic. But the things we need to make sure is that whether the circle has contributed to the pixel. So instead of storing the render information for each pixel, we could just use bit mask to indicate whether the circle has contributed to the pixel.</p>
+<p>Now, the result is illustrated by below.</p>
+<p><a target="_blank" rel="noopener" href="https://s2.loli.net/2023/06/07/JyrZ64K8W2uI3Tp.png" title="first render score" class="gallery-item"><img src="https://s2.loli.net/2023/06/07/JyrZ64K8W2uI3Tp.png" alt="first render score"></a></p>
+<p>As you can see, we have passed some tests and the performance is not good at all. The reason why there are some failed tests is that the bytes exceed $2^{63}$, which would overflow.</p>
+<p>So what’s the problem?</p>
+<h3 id="Improvement"><a href="#Improvement" class="headerlink" title="Improvement"></a>Improvement</h3><p>Don’t be too greedy! In the above scenario, I have made a mistake, I want to make the whole program to be parallelized. I don’t care about any architecture of the GPU.</p>
+<p>Because this is only a tutorial, you should try this work on your own. Below are some suggestions:</p>
+<ol>
+<li>Instead of storing all the pixels, why not use shared memory for better usage?</li>
+<li>Don’t be greedy. We could handle some in sequential.</li>
+</ol>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/shejialuo">项目</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1"><span class="toc-number">1.</span> <span class="toc-text">Part 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1"><span class="toc-number">1.1.</span> <span class="toc-text">Question 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-2"><span class="toc-number">1.2.</span> <span class="toc-text">Question 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-2"><span class="toc-number">2.</span> <span class="toc-text">Part 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-3"><span class="toc-number">3.</span> <span class="toc-text">Part 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#First-Implementation"><span class="toc-number">3.1.</span> <span class="toc-text">First Implementation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Improvement"><span class="toc-number">3.2.</span> <span class="toc-text">Improvement</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&text=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&title=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&is_video=false&description=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CS149-Assignment3 A Simple CUDA Renderer&body=Check out this article: https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&title=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&title=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&title=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&title=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&name=CS149-Assignment3 A Simple CUDA Renderer&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/&t=CS149-Assignment3 A Simple CUDA Renderer"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    shejialuo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/shejialuo">项目</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+<!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'shejialuo/shejialuo.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-light';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
