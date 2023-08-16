@@ -13,14 +13,16 @@
       
       <categories>
           
-          <category> category_name </category>
+          <category> 缓存与内存专栏 </category>
           
       </categories>
       
       
         <tags>
             
-            <tag> tag_name </tag>
+            <tag> 技术 </tag>
+            
+            <tag> 学习 </tag>
             
         </tags>
       
