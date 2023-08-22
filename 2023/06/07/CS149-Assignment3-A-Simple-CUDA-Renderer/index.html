@@ -25,8 +25,9 @@
 <meta property="og:description" content="Part 1The result is illustrated in the following figure. Question 1As you can see, due to the parallelism of the GPU, the bandwidth is huge. Question 2From the results, we can get that the bottleneck">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/06/07/JyrZ64K8W2uI3Tp.png">
+<meta property="og:image" content="https://s2.loli.net/2023/08/22/MWiVgyBYRU2CmlD.png">
 <meta property="article:published_time" content="2023-06-07T14:18:34.000Z">
-<meta property="article:modified_time" content="2023-06-07T14:18:44.075Z">
+<meta property="article:modified_time" content="2023-08-22T14:08:26.598Z">
 <meta property="article:author" content="shejialuo">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="学习">
@@ -137,7 +138,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1"><span class="toc-number">1.</span> <span class="toc-text">Part 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1"><span class="toc-number">1.1.</span> <span class="toc-text">Question 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-2"><span class="toc-number">1.2.</span> <span class="toc-text">Question 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-2"><span class="toc-number">2.</span> <span class="toc-text">Part 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-3"><span class="toc-number">3.</span> <span class="toc-text">Part 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#First-Implementation"><span class="toc-number">3.1.</span> <span class="toc-text">First Implementation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Improvement"><span class="toc-number">3.2.</span> <span class="toc-text">Improvement</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1"><span class="toc-number">1.</span> <span class="toc-text">Part 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1"><span class="toc-number">1.1.</span> <span class="toc-text">Question 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-2"><span class="toc-number">1.2.</span> <span class="toc-text">Question 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-2"><span class="toc-number">2.</span> <span class="toc-text">Part 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-3"><span class="toc-number">3.</span> <span class="toc-text">Part 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#First-Implementation"><span class="toc-number">3.1.</span> <span class="toc-text">First Implementation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Best-practice"><span class="toc-number">3.2.</span> <span class="toc-text">Best practice</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -163,7 +164,7 @@
       
         <time datetime="2023-06-07T14:18:34.000Z" itemprop="datePublished">2023-06-07</time>
         
-        (Updated: <time datetime="2023-06-07T14:18:44.075Z" itemprop="dateModified">2023-06-07</time>)
+        (Updated: <time datetime="2023-08-22T14:08:26.598Z" itemprop="dateModified">2023-08-22</time>)
         
       
     </div>
@@ -215,13 +216,25 @@
 <p>Now, the result is illustrated by below.</p>
 <p><a target="_blank" rel="noopener" href="https://s2.loli.net/2023/06/07/JyrZ64K8W2uI3Tp.png" title="first render score" class="gallery-item"><img src="https://s2.loli.net/2023/06/07/JyrZ64K8W2uI3Tp.png" alt="first render score"></a></p>
 <p>As you can see, we have passed some tests and the performance is not good at all. The reason why there are some failed tests is that the bytes exceed $2^{63}$, which would overflow.</p>
-<p>So what’s the problem?</p>
-<h3 id="Improvement"><a href="#Improvement" class="headerlink" title="Improvement"></a>Improvement</h3><p>Don’t be too greedy! In the above scenario, I have made a mistake, I want to make the whole program to be parallelized. I don’t care about any architecture of the GPU.</p>
-<p>Because this is only a tutorial, you should try this work on your own. Below are some suggestions:</p>
-<ol>
-<li>Instead of storing all the pixels, why not use shared memory for better usage?</li>
-<li>Don’t be greedy. We could handle some in sequential.</li>
-</ol>
+<h3 id="Best-practice"><a href="#Best-practice" class="headerlink" title="Best practice"></a>Best practice</h3><p>We should use a clever way to solve this problem. The problem is a two-dimensional problem. So we’d better design the grid and block for two dimensions, as the following figures illustrates:</p>
+<p><a target="_blank" rel="noopener" href="https://s2.loli.net/2023/08/22/MWiVgyBYRU2CmlD.png" title="grid and block design for rendering" class="gallery-item"><img src="https://s2.loli.net/2023/08/22/MWiVgyBYRU2CmlD.png" alt="grid and block design for rendering"></a></p>
+<p>From the above figures, we could write the following code to initialize the grid and block size:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">CudaRenderer::render</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> block_x = <span class="number">16</span>, block_y = <span class="number">32</span>;</span><br><span class="line">  <span class="function">dim3 <span class="title">blockDim</span><span class="params">(block_x, block_y)</span></span>;</span><br><span class="line">  <span class="type">int</span> grid_x = (image-&gt;width + blockDim.x - <span class="number">1</span>) / blockDim.x;</span><br><span class="line">  <span class="type">int</span> grid_y = (image-&gt;height + blockDim.y - <span class="number">1</span>) / blockDim.y;</span><br><span class="line">  <span class="function">dim3 <span class="title">gridDim</span><span class="params">(grid_x, grid_y)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>And we should render a block each time, we have already split the pixels into the block. For each block, we should handle the each pixel, we could calculate the current pixel’s x coordinate and y coordinate and the current thread id:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> thread_id = threadIdx.y * blockDim.x + threadId.x;</span><br><span class="line"><span class="type">int</span> pixel_index_x = blockId.x * blockDim.x + threadId.x;</span><br><span class="line"><span class="type">int</span> pixel_index_y = blockId.y * blockDim.y + threadId.y;</span><br></pre></td></tr></table></figure>
+
+<p>So what a thread should do? We have already mapped a pixel $(x, y)$ with a specified thread. So the idea should be simple enough.</p>
+<ul>
+<li><strong>We could traverse sequentially all the circles to tell whether the circle has contributed to this pixel, and we calculate to achieve rendering</strong>.</li>
+</ul>
+<p>However, this way is too slow. For every pixel, we could calculate a lot of useless calculation. For example, if there are total 100,000,000 circles, there would be many useless circles for this pixel. So we should find a way to find the circles in the current block. So we could use a shared memory (a bit map) to know whether the <em>BLOCK</em> size circle has contributed to the block. So for each pixel (each thread) we could calculate ONLY one circle to know whether it has contributed to this block. And for each pixel, we could use the contributed circles to sequentially achieve rendering.</p>
+<p>Look at what parallelism we have done:</p>
+<ul>
+<li>Each pixel renders itself using two-dimension task split.</li>
+<li>Each pixel handles 1 circle to tell whether it contributes to the current block for $num_{circles} &#x2F; size_{block}$ loops.</li>
+</ul>
+<p>It’s a really hard question, but it is very useful.</p>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
@@ -264,7 +277,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1"><span class="toc-number">1.</span> <span class="toc-text">Part 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1"><span class="toc-number">1.1.</span> <span class="toc-text">Question 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-2"><span class="toc-number">1.2.</span> <span class="toc-text">Question 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-2"><span class="toc-number">2.</span> <span class="toc-text">Part 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-3"><span class="toc-number">3.</span> <span class="toc-text">Part 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#First-Implementation"><span class="toc-number">3.1.</span> <span class="toc-text">First Implementation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Improvement"><span class="toc-number">3.2.</span> <span class="toc-text">Improvement</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1"><span class="toc-number">1.</span> <span class="toc-text">Part 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1"><span class="toc-number">1.1.</span> <span class="toc-text">Question 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-2"><span class="toc-number">1.2.</span> <span class="toc-text">Question 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-2"><span class="toc-number">2.</span> <span class="toc-text">Part 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-3"><span class="toc-number">3.</span> <span class="toc-text">Part 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#First-Implementation"><span class="toc-number">3.1.</span> <span class="toc-text">First Implementation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Best-practice"><span class="toc-number">3.2.</span> <span class="toc-text">Best practice</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
