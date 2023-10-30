@@ -27,7 +27,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/08/10/gT5WfKButCqpOSV.png">
 <meta property="og:image" content="https://s2.loli.net/2023/08/10/Zs2ypk5TmYiIgHc.png">
 <meta property="article:published_time" content="2023-08-22T08:06:28.000Z">
-<meta property="article:modified_time" content="2023-08-22T08:06:51.776Z">
+<meta property="article:modified_time" content="2023-10-30T12:09:24.992Z">
 <meta property="article:author" content="shejialuo">
 <meta property="article:tag" content="技术">
 <meta property="article:tag" content="学习">
@@ -164,7 +164,7 @@
       
         <time datetime="2023-08-22T08:06:28.000Z" itemprop="datePublished">2023-08-22</time>
         
-        (Updated: <time datetime="2023-08-22T08:06:51.776Z" itemprop="dateModified">2023-08-22</time>)
+        (Updated: <time datetime="2023-10-30T12:09:24.992Z" itemprop="dateModified">2023-10-30</time>)
         
       
     </div>
@@ -237,11 +237,15 @@
 <h2 id="一致性问题解决通用方法"><a href="#一致性问题解决通用方法" class="headerlink" title="一致性问题解决通用方法"></a>一致性问题解决通用方法</h2><p>从上述的例子，我们其实可以很快地可以类比在多线程编程中的读写同步问题。当只读的时候，不存在不一致性问题，问题就在于写入缓存时。在实际的处理器中采用了<em>cache coherence protocol</em>，分为两类：</p>
 <ul>
 <li><em>Consistency-agnostic coherence</em>：首先需要将写入的这个事件通过缓存中的内部网络传递到其它核，再写入缓存。</li>
-<li><em>Consistency-directed coherence</em>：先写入缓存，再广播事件，常用于GpGPU。</li>
+<li><em>Consistency-directed coherence</em>：先写入缓存，再广播事件，常用于GPGPU。</li>
 </ul>
-<h2 id="Consistency-agnostic-缓存一致性不变量"><a href="#Consistency-agnostic-缓存一致性不变量" class="headerlink" title="(Consistency-agnostic)缓存一致性不变量"></a>(Consistency-agnostic)缓存一致性不变量</h2><p>我们能够确定一个十分明确的不变量，*single-writer-multiple-reader(SWMR)*，如下图所示，对于任一时刻，对于某一个内存地址来说，其要么有多个核心在执行读操作，要么只有一个核心在进行读写操作。</p>
+<h2 id="Consistency-agnostic-缓存一致性不变量"><a href="#Consistency-agnostic-缓存一致性不变量" class="headerlink" title="(Consistency-agnostic)缓存一致性不变量"></a>(Consistency-agnostic)缓存一致性不变量</h2><p>我们能够确定一个十分明确的不变量，<em>single-writer-multiple-reader</em>(SWMR)，如下图所示，对于任一时刻，对于某一个内存地址来说，其要么有多个核心在执行读操作，要么只有一个核心在进行读写操作。</p>
 <p><a target="_blank" rel="noopener" href="https://s2.loli.net/2023/08/10/Zs2ypk5TmYiIgHc.png" title="SWMR" class="gallery-item"><img src="https://s2.loli.net/2023/08/10/Zs2ypk5TmYiIgHc.png" alt="SWMR"></a></p>
-<p>同时我们还需要确保数据的一致性，内存位置的值与其最后一个读写时期结束时的值相同。</p>
+<p>同时我们还需要确保数据的一致性，内存位置的值与其最后一个读写时期结束时的值相同。因此我们可以明确如下的两个缓存一致性不变量：</p>
+<ol>
+<li><strong>Single-Writer, Multiple-Read (SWMR) Invariant</strong>.</li>
+<li><strong>Data-Value Invariant</strong>.</li>
+</ol>
 </div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
         var options = {
             selector: '.gallery-item'
