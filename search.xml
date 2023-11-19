@@ -13,16 +13,10 @@
       
       <categories>
           
-          <category> category_name </category>
+          <category> 随笔 </category>
           
       </categories>
       
-      
-        <tags>
-            
-            <tag> tag_name </tag>
-            
-        </tags>
       
     </entry>
     
