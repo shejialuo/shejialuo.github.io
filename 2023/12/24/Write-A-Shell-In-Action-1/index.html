@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- Google Analytics -->
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+  <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7M238H24L4');
+  </script>
+
+
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Why should we write a shell? Well, I think the most important reason is that it is fun. Learning how to write a shell will improve the system programming experience for the UNIX environment. Well, as">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Write A Shell In Action (1)">
+<meta property="og:url" content="https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/index.html">
+<meta property="og:site_name" content="洛的藏书阁">
+<meta property="og:description" content="Why should we write a shell? Well, I think the most important reason is that it is fun. Learning how to write a shell will improve the system programming experience for the UNIX environment. Well, as">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/12/24/DjPidQtCuGmUHvb.png">
+<meta property="article:published_time" content="2023-12-24T15:23:03.000Z">
+<meta property="article:modified_time" content="2023-12-24T15:23:29.951Z">
+<meta property="article:author" content="shejialuo">
+<meta property="article:tag" content="技术">
+<meta property="article:tag" content="教程">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/12/24/DjPidQtCuGmUHvb.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Write A Shell In Action (1)</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.3.0"><link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/shejialuo">项目</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/11/20/%E7%A7%8B%E6%8B%9B%E6%80%BB%E7%BB%93/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&text=Write A Shell In Action (1)"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&title=Write A Shell In Action (1)"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&is_video=false&description=Write A Shell In Action (1)"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Write A Shell In Action (1)&body=Check out this article: https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&title=Write A Shell In Action (1)"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&title=Write A Shell In Action (1)"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&title=Write A Shell In Action (1)"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&title=Write A Shell In Action (1)"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&name=Write A Shell In Action (1)&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&t=Write A Shell In Action (1)"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Minimal-Setup"><span class="toc-number">1.</span> <span class="toc-text">The Minimal Setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Parser"><span class="toc-number">2.</span> <span class="toc-text">The Parser</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Simple-Start"><span class="toc-number">3.</span> <span class="toc-text">A Simple Start</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Write A Shell In Action (1)
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">shejialuo</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-12-24T15:23:03.000Z" itemprop="datePublished">2023-12-24</time>
+        
+        (Updated: <time datetime="2023-12-24T15:23:29.951Z" itemprop="dateModified">2023-12-24</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/Write-a-Shell-In-Action/">Write a Shell In Action</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E6%8A%80%E6%9C%AF/" rel="tag">技术</a>, <a class="tag-link-link" href="/tags/%E6%95%99%E7%A8%8B/" rel="tag">教程</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><p>Why should we write a shell? Well, I think the most important reason is that it is fun. Learning how to write a shell will improve the system programming experience for the UNIX environment. Well, as the Feynman said:</p>
+<blockquote>
+<p>What I cannot create, I do not understand</p>
+</blockquote>
+<h2 id="The-Minimal-Setup"><a href="#The-Minimal-Setup" class="headerlink" title="The Minimal Setup"></a>The Minimal Setup</h2><p>In this tutorial, we will use the c++ as the language to write the shell. So at we should use <code>cmake</code> to construct the build environment. If you are not familiar with <code>cmake</code>, don’t worry about it. It’s easy to understand. For convenience, I hope you can just use the following commands to initialize the repository.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> miniShell &amp;&amp; <span class="built_in">cd</span> miniShell</span><br><span class="line">git init</span><br><span class="line">git remote add upstream https://github.com/shejialuo/miniShell</span><br><span class="line">git pull upstream start-code</span><br></pre></td></tr></table></figure>
+
+<p>At this time, you will find the <code>miniShell.cpp</code> under the root tree, the functionality of the <code>miniShell.cpp</code> is simple enough. Because this is tutorial, we just simplify the program. We assume <code>miniShell</code> would have only two modes like any shell:</p>
+<ul>
+<li>Interactive</li>
+<li>Batch mode</li>
+</ul>
+<p>The idea is actually the same. However, at now. We do not implement any functionality.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">printUsage</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Usage: ./miniShell [file]\n&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (argc != <span class="number">1</span> &amp;&amp; argc != <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">printUsage</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (argc == <span class="number">1</span>) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;This is a mini shell\n&quot;</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;This is a mini shell called with a file &quot;</span> &lt;&lt; argv[<span class="number">1</span>] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>If you are interested in the <code>CMakeLists.txt</code>. You could just provide its content to the ChatGPT, it will give you a wonderful explanation. At now, you could build this program:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build &amp;&amp; cmake .. &amp;&amp; cmake --build .</span><br></pre></td></tr></table></figure>
+
+<p>Under the <code>build</code> directory, you will find the <code>miniShell</code> executable.</p>
+<h2 id="The-Parser"><a href="#The-Parser" class="headerlink" title="The Parser"></a>The Parser</h2><p>We have already set up a minimal development environment, now we need to parse the shell script. Actually, writing a parser could be another theme. So in this tutorial, we will just use native way to parse the shell script.</p>
+<p>So we should first make sure the functionality of the shell. I don’t think it’s a good idea to support the condition or loop control. It’s not the point. We just want to learn the system programming. Below is the spec:</p>
+<ol>
+<li><p>The operations for variables.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">variable=5</span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$variable</span> <span class="comment"># 5</span></span><br><span class="line"><span class="built_in">echo</span> <span class="variable">$&#123;variable&#125;</span> <span class="comment"># 5</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;$&#123;variable&#125;&#x27;</span> <span class="comment"># $&#123;variable&#125;</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;<span class="variable">$&#123;variable&#125;</span>&quot;</span> <span class="comment"># 5</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Command substitution</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">variable=`<span class="built_in">echo</span> 5` <span class="comment"># variable=5</span></span><br><span class="line">variable=$(<span class="built_in">echo</span> 5) <span class="comment"># variable=5</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Redirection</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;5&#x27;</span> &gt; /tmp/txt</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;55&#x27;</span> &gt;&gt; /tmp/txt</span><br><span class="line"><span class="built_in">cat</span> &lt; /tmp/txt</span><br></pre></td></tr></table></figure></li>
+<li><p>Pipe</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command1 | command2 | command3 | command4</span><br></pre></td></tr></table></figure></li>
+<li><p>Job control</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sleep</span> 100 &amp;</span><br><span class="line"><span class="built_in">bg</span> %1</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>As you can see, actually we could simplify the question. We first split the script line by line. For each line, we split the line by <code>|</code>. And we will generate the following classes for further process:</p>
+<ol>
+<li><code>Variable</code>: handle the <code>a=3</code>.</li>
+<li><code>Command</code>: handle the <code>&lt;command&gt; &lt;argument1&gt; &lt;argument2&gt;</code>.</li>
+<li><code>PipeCommand</code>: handle the <code>Command1 | Command2 | Command3</code>.</li>
+</ol>
+<p>I will not dive into this part, because it would be annoying and far away from the theme of this tutorial. Here, I give a snippet:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Command</span> : <span class="keyword">public</span> CommandBase &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  std::string command;</span><br><span class="line">  std::vector&lt;std::string&gt; arguments;</span><br><span class="line">  std::optional&lt;std::string&gt; redirectFile;</span><br><span class="line">  RedirectStatus redirectStatus;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">Command</span>() = <span class="keyword">delete</span>;</span><br><span class="line">  <span class="built_in">Command</span>(std::string &amp;&amp;c, std::vector&lt;std::string&gt; &amp;&amp;ar, std::optional&lt;std::string&gt; &amp;&amp;rf, RedirectStatus status)</span><br><span class="line">      : CommandBase&#123;&#125;</span><br><span class="line">      , command&#123;std::<span class="built_in">move</span>(c)&#125;</span><br><span class="line">      , arguments&#123;std::<span class="built_in">move</span>(ar)&#125;</span><br><span class="line">      , redirectFile&#123;std::<span class="built_in">move</span>(rf)&#125;</span><br><span class="line">      , redirectStatus&#123;status&#125; &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">execute</span><span class="params">()</span> <span class="keyword">final</span></span>;</span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> std::string <span class="title">inspect</span><span class="params">()</span> <span class="keyword">final</span> </span>&#123;</span><br><span class="line">    std::string result = command;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span> &amp;argument : arguments) &#123;</span><br><span class="line">      result += <span class="string">&quot; &quot;</span> + argument;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">virtual</span> ~<span class="built_in">Command</span>() = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>From the above snippet, all we need to do is define the <code>execute</code> function. For each line, we will call the <code>execute</code> function. You could use the following command to pull the latest code:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull upstream add-parser</span><br></pre></td></tr></table></figure>
+
+<p>Below is the code hierarchy, if you are interested about the detail, you could see the <code>parser</code> directory.</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── CMakeLists.txt</span><br><span class="line">├── command</span><br><span class="line">│   ├── CMakeLists.txt</span><br><span class="line">│   ├── command.cpp</span><br><span class="line">│   └── command.hpp</span><br><span class="line">├── miniShell.cpp</span><br><span class="line">├── parser</span><br><span class="line">│   ├── CMakeLists.txt</span><br><span class="line">│   ├── parser.cpp</span><br><span class="line">│   ├── parser.hpp</span><br><span class="line">│   └── tests</span><br><span class="line">│       ├── CMakeLists.txt</span><br><span class="line">│       └── parserTest.cpp</span><br><span class="line">└── README.md</span><br></pre></td></tr></table></figure>
+
+<p>Look at the <code>miniShell.cpp</code>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;parser/parser.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">printUsage</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;Usage: ./miniShell [file]\n&quot;</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">start</span><span class="params">(std::istream &amp;is, <span class="type">bool</span> isFile = <span class="literal">false</span>)</span> </span>&#123;</span><br><span class="line">  Parser parser&#123;&#125;;</span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!isFile) &#123;</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;$ &quot;</span>;</span><br><span class="line">      std::cout.<span class="built_in">flush</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    std::string script&#123;&#125;;</span><br><span class="line">    std::<span class="built_in">getline</span>(is, script);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (script.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!script.<span class="built_in">empty</span>() &amp;&amp; script.<span class="built_in">back</span>() == <span class="string">&#x27;\n&#x27;</span>) &#123;</span><br><span class="line">      script.<span class="built_in">erase</span>(script.<span class="built_in">length</span>() - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> command = parser.<span class="built_in">parseScript</span>(script);</span><br><span class="line">    <span class="keyword">if</span> (command != <span class="literal">nullptr</span>) &#123;</span><br><span class="line">      command-&gt;<span class="built_in">execute</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (argc != <span class="number">1</span> &amp;&amp; argc != <span class="number">2</span>) &#123;</span><br><span class="line">    <span class="built_in">printUsage</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (argc == <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="built_in">start</span>(std::cin);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    std::ifstream ifs&#123;argv[<span class="number">1</span>]&#125;;</span><br><span class="line">    <span class="keyword">if</span> (!ifs.<span class="built_in">is_open</span>()) &#123;</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;Cannot open file &quot;</span> &lt;&lt; argv[<span class="number">1</span>] &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">start</span>(ifs, <span class="literal">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Due to the nice abstraction from cpp, the file stream and standard input stream are all the <code>istream</code>. So we define a <code>start</code> command to abstract the process. The most important function you could see is the <code>execute</code> function.</p>
+<h2 id="A-Simple-Start"><a href="#A-Simple-Start" class="headerlink" title="A Simple Start"></a>A Simple Start</h2><p>Now we try a simple command <code>/usr/bin/ls</code>, we will write the method <code>Command::execute</code>. We will use <code>fork</code> system call to create a child process and waits for its action which would use <code>exec</code> system call for <code>/usr/bin/ls</code>. If you do not understand these concepts, you could read the man page of the <code>fork</code> or just read <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Advanced_Programming_in_the_Unix_Environment">Advanced Programming in the UNIX Environment</a> chapter 8.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Command::execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">pid_t</span> pid = fork();</span><br><span class="line">  <span class="keyword">if</span> (pid == <span class="number">-1</span>) &#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;[fork error]: cannot fork\n&quot;</span>;</span><br><span class="line">    <span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (pid == <span class="number">0</span>) &#123;</span><br><span class="line">    std::vector&lt;<span class="type">char</span> *&gt; argv&#123;&#125;;</span><br><span class="line">    argv.<span class="built_in">resize</span>(arguments.<span class="built_in">size</span>() + <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    argv[<span class="number">0</span>] = <span class="built_in">const_cast</span>&lt;<span class="type">char</span> *&gt;(command.<span class="built_in">c_str</span>());</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; arguments.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">      argv[i + <span class="number">1</span>] = <span class="built_in">const_cast</span>&lt;<span class="type">char</span> *&gt;(arguments[i].<span class="built_in">c_str</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    argv.<span class="built_in">back</span>() = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">execv</span>(command.<span class="built_in">c_str</span>(), argv.<span class="built_in">data</span>());</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="built_in">wait</span>(<span class="literal">NULL</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>However, the above code is clear. What we do is simply pass the command and arguments to the <code>execv</code> system call. Like the following figure illustrates, when we type <code>/usr/bin/ls</code>, the result is OK. However, when we type <code>ls</code>, there is no result. This is because we need to search the <code>$PATH</code> environment. We will improve our code for part 2.</p>
+<p><a target="_blank" rel="noopener" href="https://s2.loli.net/2023/12/24/DjPidQtCuGmUHvb.png" title="ls test result" class="gallery-item"><img src="https://s2.loli.net/2023/12/24/DjPidQtCuGmUHvb.png" alt="ls test result"></a></p>
+<p>As usual, you could use the following command to get the code:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull upstream simple-ls</span><br></pre></td></tr></table></figure>
+</div><script src="https://cdn.jsdelivr.net/lightgallery.js/1.0.1/js/lightgallery.min.js"></script><script>if (typeof lightGallery !== 'undefined') {
+        var options = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options);
+        }</script>
+  </div>
+</article>
+
+
+    <div class="blog-post-comments">
+        <div id="utterances_thread">
+            <noscript>加载评论需要在浏览器启用 JavaScript 脚本支持。</noscript>
+        </div>
+    </div>
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/shejialuo">项目</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Minimal-Setup"><span class="toc-number">1.</span> <span class="toc-text">The Minimal Setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Parser"><span class="toc-number">2.</span> <span class="toc-text">The Parser</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#A-Simple-Start"><span class="toc-number">3.</span> <span class="toc-text">A Simple Start</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&text=Write A Shell In Action (1)"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&title=Write A Shell In Action (1)"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&is_video=false&description=Write A Shell In Action (1)"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Write A Shell In Action (1)&body=Check out this article: https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&title=Write A Shell In Action (1)"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&title=Write A Shell In Action (1)"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&title=Write A Shell In Action (1)"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&title=Write A Shell In Action (1)"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&name=Write A Shell In Action (1)&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://luolibrary.com/2023/12/24/Write-A-Shell-In-Action-1/&t=Write A Shell In Action (1)"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2023
+    shejialuo
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/shejialuo">项目</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+<!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+    <script type="text/javascript">
+      var utterances_repo = 'shejialuo/shejialuo.github.io';
+      var utterances_issue_term = 'pathname';
+      var utterances_label = 'Comment';
+      var utterances_theme = 'github-light';
+
+      (function(){
+          var script = document.createElement('script');
+
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', utterances_repo);
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('label', utterances_label);
+          script.setAttribute('theme', utterances_theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          (document.getElementById('utterances_thread')).appendChild(script);
+      }());
+  </script>
+
+</body>
+</html>
