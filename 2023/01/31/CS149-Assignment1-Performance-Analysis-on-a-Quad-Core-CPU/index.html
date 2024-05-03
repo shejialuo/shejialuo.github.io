@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="CS149-Assignment1 Performance Analysis on a Quad-Core CPU" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="技术, 学习, 洛的藏书阁" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="https://luolibrary.com/2023/01/31/CS149-Assignment1-Performance-Analysis-on-a-Quad-Core-CPU/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-7M238H24L4');
+</script>
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>CS149-Assignment1 Performance Analysis on a Quad-Core CPU - 洛的藏书阁</title>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">洛的藏书阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/tags/">
+      <li class="mobile-menu-item">
+        
+        
+        Tags              </li>
+    </a>
+    
+    <a href="/categories/">
+      <li class="mobile-menu-item">
+        
+        
+        Categories              </li>
+    </a>
+    
+    <a href="/about/">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">洛的藏书阁</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/tags/">  
+              
+              
+              Tags  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/categories/">  
+              
+              
+              Categories  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about/">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      CS149-Assignment1 Performance Analysis on a Quad-Core CPU
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2023-01-31
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/CS149/">CS149</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Program-1"><span class="toc-number">1.</span> <span class="toc-text">Program 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1-1"><span class="toc-number">1.1.</span> <span class="toc-text">Question 1.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1-2"><span class="toc-number">1.2.</span> <span class="toc-text">Question 1.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1-3"><span class="toc-number">1.3.</span> <span class="toc-text">Question 1.3</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1-4"><span class="toc-number">1.4.</span> <span class="toc-text">Question 1.4</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1-5"><span class="toc-number">1.5.</span> <span class="toc-text">Question 1.5</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Program-2"><span class="toc-number">2.</span> <span class="toc-text">Program 2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-2-1"><span class="toc-number">2.1.</span> <span class="toc-text">Question 2.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-2-2"><span class="toc-number">2.2.</span> <span class="toc-text">Question 2.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-2-3"><span class="toc-number">2.3.</span> <span class="toc-text">Question 2.3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Program-3"><span class="toc-number">3.</span> <span class="toc-text">Program 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Part-I"><span class="toc-number">3.1.</span> <span class="toc-text">Part I</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Part-II"><span class="toc-number">3.2.</span> <span class="toc-text">Part II</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Question-3-1"><span class="toc-number">3.2.1.</span> <span class="toc-text">Question 3.1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Question-3-2"><span class="toc-number">3.2.2.</span> <span class="toc-text">Question 3.2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Question-3-3"><span class="toc-number">3.2.3.</span> <span class="toc-text">Question 3.3</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Program-4"><span class="toc-number">4.</span> <span class="toc-text">Program 4</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-4-1"><span class="toc-number">4.1.</span> <span class="toc-text">Question 4.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-4-2"><span class="toc-number">4.2.</span> <span class="toc-text">Question 4.2</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-4-3"><span class="toc-number">4.3.</span> <span class="toc-text">Question 4.3</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Program-5"><span class="toc-number">5.</span> <span class="toc-text">Program 5</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-5-1"><span class="toc-number">5.1.</span> <span class="toc-text">Question 5.1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-5-2"><span class="toc-number">5.2.</span> <span class="toc-text">Question 5.2</span></a></li></ol></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <h2 id="Program-1"><a href="#Program-1" class="headerlink" title="Program 1"></a>Program 1</h2><h3 id="Question-1-1"><a href="#Question-1-1" class="headerlink" title="Question 1.1"></a>Question 1.1</h3><p>It’s easy to split the task.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> numRows =  args-&gt;height / args-&gt;numThreads;</span><br><span class="line"><span class="type">int</span> remainRows = args-&gt;height % args-&gt;numThreads;</span><br><span class="line"><span class="type">int</span> startRow = args-&gt;threadId * numRows;</span><br><span class="line"><span class="keyword">if</span>(args-&gt;threadId == args-&gt;numThreads - <span class="number">1</span> &amp;&amp; remainRows != <span class="number">0</span>) &#123;</span><br><span class="line">  numRows += remainRows;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">mandelbrotSerial</span>(args-&gt;x0, args-&gt;y0, args-&gt;x1, args-&gt;y1,</span><br><span class="line">                 args-&gt;width, args-&gt;height, startRow, numRows,</span><br><span class="line">                 args-&gt;maxIterations ,args-&gt;output);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Question-1-2"><a href="#Question-1-2" class="headerlink" title="Question 1.2"></a>Question 1.2</h3><p>The data for view 1 is below:</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># thread_num # speedup</span><br><span class="line">    1            1</span><br><span class="line">    2            1.99</span><br><span class="line">    3            1.65</span><br><span class="line">    4            2.46</span><br><span class="line">    5            2.50</span><br><span class="line">    6            3.28</span><br><span class="line">    7            3.43</span><br><span class="line">    8            4.07</span><br></pre></td></tr></table></figure>
+
+<p>And I use gnuplot to plot the figure.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">set title &quot;the speedup of the thread for view 1&quot;</span><br><span class="line">set xlabel &quot;thread number&quot;</span><br><span class="line">set ylabel &quot;speedup&quot;</span><br><span class="line">plot &quot;speedup_view1&quot; w lp</span><br><span class="line">set terminal pngcairo</span><br><span class="line">set output &quot;The speedup for view 1.png&quot;</span><br><span class="line">replot</span><br><span class="line">set terminal qt</span><br><span class="line">set output</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/01/31/xQVlHoSAOEngB5D.png" alt="The speedup for view 1"></p>
+<p>By the way, I also plot the speedup for view 2.</p>
+<p><img src="https://s2.loli.net/2023/01/31/iqCK2vWP3IuYQX5.png" alt="The speedup for view 2"></p>
+<p>As this two picture shows, we can find that the speedup for view 2 is nearly linear but not for view 1. The reason is the imbalance of the data. For view 1, some threads handle more data but some handle little, and we still need to wait for all threads which wastes lots of time.</p>
+<h3 id="Question-1-3"><a href="#Question-1-3" class="headerlink" title="Question 1.3"></a>Question 1.3</h3><p><img src="https://s2.loli.net/2023/01/31/zVNjd87tc91QJRk.png" alt="The imbalance of the workload for view 1"></p>
+<p><img src="https://s2.loli.net/2023/01/31/Ru2kFrZjeo34PDY.png" alt="The imbalance of the workload for view 2"></p>
+<h3 id="Question-1-4"><a href="#Question-1-4" class="headerlink" title="Question 1.4"></a>Question 1.4</h3><p>The most important thing to do is to balance the load. But we don’t know the actual load, so we should make slice for each thread job. Don’t let a thread do a consecutive area. Just handle only one raw.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">workerThreadStartBalance</span><span class="params">(WorkerArgs * <span class="type">const</span> args)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> startTime = CycleTimer::<span class="built_in">currentSeconds</span>();</span><br><span class="line">    <span class="type">int</span> numRows =  args-&gt;height / args-&gt;numThreads;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; numRows; ++i) &#123;</span><br><span class="line">      <span class="type">int</span> startRow = i * args-&gt;numThreads + args-&gt;threadId;</span><br><span class="line">      <span class="built_in">mandelbrotSerial</span>(args-&gt;x0, args-&gt;y0, args-&gt;x1, args-&gt;y1,</span><br><span class="line">                       args-&gt;width, args-&gt;height, startRow, <span class="number">1</span>,</span><br><span class="line">                       args-&gt;maxIterations ,args-&gt;output);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Here we need to handle some corner case</span></span><br><span class="line">    <span class="type">int</span> remainRows = args-&gt;height % args-&gt;numThreads - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(remainRows &gt;= <span class="number">0</span> &amp;&amp; args-&gt;threadId &lt;= remainRows) &#123;</span><br><span class="line">      <span class="type">int</span> startRow = numRows * args-&gt;numThreads + args-&gt;threadId;</span><br><span class="line">      <span class="built_in">mandelbrotSerial</span>(args-&gt;x0, args-&gt;y0, args-&gt;x1, args-&gt;y1,</span><br><span class="line">                       args-&gt;width, args-&gt;height, startRow, <span class="number">1</span>,</span><br><span class="line">                       args-&gt;maxIterations ,args-&gt;output);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> endTime = CycleTimer::<span class="built_in">currentSeconds</span>();</span><br><span class="line">    <span class="type">double</span> interval = endTime - startTime;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;[thread %d]:\t\t[%.3f] ms\n&quot;</span>, args-&gt;threadId ,interval * <span class="number">1000</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello world from thread %d\n&quot;</span>, args-&gt;threadId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/01/31/7TN4ioGWXulPf6A.png" alt="The solution to the imbalance"></p>
+<h3 id="Question-1-5"><a href="#Question-1-5" class="headerlink" title="Question 1.5"></a>Question 1.5</h3><p>It’s not, the reason is because that the <em>Amdahl’s</em> law. Which says that if a fraction $r$ of the serial program remain unparallelizm we can’t get a speedup better than $1&#x2F;r$. In this example, we have an important serial function <code>mandelbrotSerial</code>, so we can guess the value of $r$ to be 0.9 (I guess). So no matter how many threads we create, we could not get a speedup better than 9.</p>
+<h2 id="Program-2"><a href="#Program-2" class="headerlink" title="Program 2"></a>Program 2</h2><p>This program is aimed at using SIMD. However, I have learned some basic ideas in CS61C.</p>
+<h3 id="Question-2-1"><a href="#Question-2-1" class="headerlink" title="Question 2.1"></a>Question 2.1</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">clampedExpVectorHelper</span><span class="params">(<span class="type">float</span>* values, <span class="type">int</span>* exponents, <span class="type">float</span>* output, <span class="type">int</span> N)</span> </span>&#123;</span><br><span class="line">  __cs149_vec_float x;</span><br><span class="line">  __cs149_vec_int y;</span><br><span class="line">  __cs149_vec_float result;</span><br><span class="line">  __cs149_vec_int zero = _cs149_vset_int(<span class="number">0</span>);</span><br><span class="line">  __cs149_vec_int one = _cs149_vset_int(<span class="number">1</span>);</span><br><span class="line">  __cs149_vec_float max = _cs149_vset_float(<span class="number">9.999999f</span>);</span><br><span class="line">  __cs149_mask maskAll, maskIsExponentZero;</span><br><span class="line">  __cs149_mask maskIsNotExponentZero, loop, isExceedMax;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> i = <span class="number">0</span> ;</span><br><span class="line">  <span class="keyword">for</span>(;i + VECTOR_WIDTH &lt;= N; i += VECTOR_WIDTH) &#123;</span><br><span class="line">    maskAll = _cs149_init_ones();</span><br><span class="line">    isExceedMax = _cs149_init_ones(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    result = _cs149_vset_float(<span class="number">0.0f</span>);</span><br><span class="line">    _cs149_vload_int(y, exponents + i, maskAll);</span><br><span class="line">    _cs149_veq_int(maskIsExponentZero, y, zero, maskAll);</span><br><span class="line">    _cs149_vset_float(result, <span class="number">1.f</span>, maskIsExponentZero);</span><br><span class="line"></span><br><span class="line">    maskIsNotExponentZero = _cs149_mask_not(maskIsExponentZero);</span><br><span class="line">    _cs149_vload_float(x, values + i, maskIsNotExponentZero);</span><br><span class="line">    _cs149_vadd_float(result, result, x , maskIsNotExponentZero);</span><br><span class="line">    _cs149_vsub_int(y, y, one, maskIsNotExponentZero);</span><br><span class="line">    _cs149_vgt_int(loop, y, zero, maskIsNotExponentZero);</span><br><span class="line">    <span class="keyword">while</span>(_cs149_cntbits(loop) != <span class="number">0</span>) &#123;</span><br><span class="line">      _cs149_vmult_float(result, result, x , loop);</span><br><span class="line">      _cs149_vsub_int(y, y, one, loop);</span><br><span class="line">      _cs149_vgt_int(loop, y, zero, loop);</span><br><span class="line">    &#125;</span><br><span class="line">    _cs149_vgt_float(isExceedMax, result, max, maskIsNotExponentZero);</span><br><span class="line">    _cs149_vset_float(result, <span class="number">9.999999f</span>, isExceedMax);</span><br><span class="line"></span><br><span class="line">    _cs149_vstore_float(output + i, result, maskAll);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">clampedExpVector</span><span class="params">(<span class="type">float</span>* values, <span class="type">int</span>* exponents, <span class="type">float</span>* output, <span class="type">int</span> N)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="type">int</span> index = <span class="built_in">clampedExpVectorHelper</span>(values, exponents, output, N);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(index != N ) &#123;</span><br><span class="line">    <span class="type">float</span> valuesTemp[VECTOR_WIDTH] &#123;&#125;;</span><br><span class="line">    <span class="type">int</span> exponentsTemp[VECTOR_WIDTH] &#123;&#125;;</span><br><span class="line">    <span class="type">float</span> outputTemp[VECTOR_WIDTH] &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = index; i &lt; N; ++i) &#123;</span><br><span class="line">      valuesTemp[i - index] = values[i];</span><br><span class="line">      exponentsTemp[i - index] = exponents[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">clampedExpVectorHelper</span>(valuesTemp, exponentsTemp, outputTemp, VECTOR_WIDTH);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = index ; i &lt; N; ++i) &#123;</span><br><span class="line">      output[i] = outputTemp[i - index];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Question-2-2"><a href="#Question-2-2" class="headerlink" title="Question 2.2"></a>Question 2.2</h3><p>When the vector width is 2:</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vector Width:              2</span><br><span class="line">Total Vector Instructions: 167727</span><br><span class="line">Vector Utilization:        77.3%</span><br><span class="line">Utilized Vector Lanes:     259325</span><br><span class="line">Total Vector Lanes:        335454</span><br></pre></td></tr></table></figure>
+
+<p>When the vector width is 4:</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vector Width:              4</span><br><span class="line">Total Vector Instructions: 97075</span><br><span class="line">Vector Utilization:        70.2%</span><br><span class="line">Utilized Vector Lanes:     272541</span><br><span class="line">Total Vector Lanes:        388300</span><br></pre></td></tr></table></figure>
+
+<p>When the vector width is 8:</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vector Width:              8</span><br><span class="line">Total Vector Instructions: 52877</span><br><span class="line">Vector Utilization:        66.5%</span><br><span class="line">Utilized Vector Lanes:     281229</span><br><span class="line">Total Vector Lanes:        423016</span><br></pre></td></tr></table></figure>
+
+<p>When the vector width is 16:</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Vector Width:              16</span><br><span class="line">Total Vector Instructions: 27592</span><br><span class="line">Vector Utilization:        64.8%</span><br><span class="line">Utilized Vector Lanes:     285861</span><br><span class="line">Total Vector Lanes:        441472</span><br></pre></td></tr></table></figure>
+
+<p>As you can see, the vector utilization decreases, the reason I think is that the branch we make in each vector, when the vector size becomes bigger, the branch is more likely.</p>
+<h3 id="Question-2-3"><a href="#Question-2-3" class="headerlink" title="Question 2.3"></a>Question 2.3</h3><p>It’s easy.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">float</span> <span class="title">arraySumVector</span><span class="params">(<span class="type">float</span>* values, <span class="type">int</span> N)</span> </span>&#123;</span><br><span class="line">  <span class="type">float</span> value[VECTOR_WIDTH] &#123;&#125;;</span><br><span class="line">  __cs149_vec_float sum = _cs149_vset_float(<span class="number">0.0f</span>);</span><br><span class="line">  __cs149_vec_float num;</span><br><span class="line">  __cs149_mask maskAll = _cs149_init_ones();</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;N; i+=VECTOR_WIDTH) &#123;</span><br><span class="line">    _cs149_vload_float(num, values + i, maskAll);</span><br><span class="line">    _cs149_vadd_float(sum, sum, num, maskAll);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="type">int</span> number = VECTOR_WIDTH;</span><br><span class="line">  <span class="keyword">while</span> (number /= <span class="number">2</span>) &#123;</span><br><span class="line">    _cs149_hadd_float(sum, sum);</span><br><span class="line">    _cs149_interleave_float(sum, sum);</span><br><span class="line">  &#125;</span><br><span class="line">  _cs149_vstore_float(value, sum, maskAll);</span><br><span class="line">  <span class="keyword">return</span> value[<span class="number">0</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Program-3"><a href="#Program-3" class="headerlink" title="Program 3"></a>Program 3</h2><h3 id="Part-I"><a href="#Part-I" class="headerlink" title="Part I"></a>Part I</h3><p>We should first understand the code <code>mandelbrot_ispc</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">export void mandelbrot_ispc(uniform float x0, uniform float y0,</span><br><span class="line">                            uniform float x1, uniform float y1,</span><br><span class="line">                            uniform int width, uniform int height,</span><br><span class="line">                            uniform int maxIterations,</span><br><span class="line">                            uniform int output[])</span><br><span class="line">&#123;</span><br><span class="line">    float dx = (x1 - x0) / width;</span><br><span class="line">    float dy = (y1 - y0) / height;</span><br><span class="line"></span><br><span class="line">    foreach (j = 0 ... height, i = 0 ... width) &#123;</span><br><span class="line">            float x = x0 + i * dx;</span><br><span class="line">            float y = y0 + j * dy;</span><br><span class="line"></span><br><span class="line">            int index = j * width + i;</span><br><span class="line">            output[index] = mandel(x, y, maxIterations);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The idea here is obvious. We could split the graph into man $1 \times 1$ squares. And use 8-vector to solve. So the speedup should be 8. However the result is below.</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#  ./mandelbrot_ispc -v 1</span><br><span class="line">[mandelbrot serial]:            [175.258] ms</span><br><span class="line">Wrote image file mandelbrot-serial.ppm</span><br><span class="line">[mandelbrot ispc]:              [30.405] ms</span><br><span class="line">Wrote image file mandelbrot-ispc.ppm</span><br><span class="line">                                (5.76x speedup from ISPC)</span><br><span class="line">#  ./mandelbrot_ispc -v 2</span><br><span class="line">[mandelbrot serial]:            [246.953] ms</span><br><span class="line">Wrote image file mandelbrot-serial.ppm</span><br><span class="line">[mandelbrot ispc]:              [50.832] ms</span><br><span class="line">Wrote image file mandelbrot-ispc.ppm</span><br><span class="line">                                (4.86x speedup from ISPC)</span><br></pre></td></tr></table></figure>
+
+<p>Due to the reason that the ISPC compiler maps gangs of program instances to SIMD instructions executed on a single core. So we can know that the work is imbalance between each job.</p>
+<h3 id="Part-II"><a href="#Part-II" class="headerlink" title="Part II"></a>Part II</h3><h4 id="Question-3-1"><a href="#Question-3-1" class="headerlink" title="Question 3.1"></a>Question 3.1</h4><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># ./mandelbrot_ispc -v 2 -t</span><br><span class="line">[mandelbrot serial]:            [246.911] ms</span><br><span class="line">Wrote image file mandelbrot-serial.ppm</span><br><span class="line">[mandelbrot ispc]:              [50.675] ms</span><br><span class="line">Wrote image file mandelbrot-ispc.ppm</span><br><span class="line">[mandelbrot multicore ispc]:    [30.390] ms</span><br><span class="line">Wrote image file mandelbrot-task-ispc.ppm</span><br><span class="line">                                (4.87x speedup from ISPC)</span><br><span class="line">                                (8.12x speedup from task ISPC)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Question-3-2"><a href="#Question-3-2" class="headerlink" title="Question 3.2"></a>Question 3.2</h4><p>We first look at <code>mandelbrot_ispc_task</code>, the idea of this function is easy, the whole procession is like <code>mandelbrot_ispc</code>. But with different tasks handle different areas.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">task void mandelbrot_ispc_task(uniform float x0, uniform float y0,</span><br><span class="line">                               uniform float x1, uniform float y1,</span><br><span class="line">                               uniform int width, uniform int height,</span><br><span class="line">                               uniform int rowsPerTask,</span><br><span class="line">                               uniform int maxIterations,</span><br><span class="line">                               uniform int output[])</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    // taskIndex is an ISPC built-in</span><br><span class="line"></span><br><span class="line">    uniform int ystart = taskIndex * rowsPerTask;</span><br><span class="line">    uniform int yend = ystart + rowsPerTask;</span><br><span class="line"></span><br><span class="line">    uniform float dx = (x1 - x0) / width;</span><br><span class="line">    uniform float dy = (y1 - y0) / height;</span><br><span class="line"></span><br><span class="line">    foreach (j = ystart ... yend, i = 0 ... width) &#123;</span><br><span class="line">            float x = x0 + i * dx;</span><br><span class="line">            float y = y0 + j * dy;</span><br><span class="line"></span><br><span class="line">            int index = j * width + i;</span><br><span class="line">            output[index] = mandel(x, y, maxIterations);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Well, the answer is the max thread you CPU could support.</p>
+<h4 id="Question-3-3"><a href="#Question-3-3" class="headerlink" title="Question 3.3"></a>Question 3.3</h4><p>Tasks are independent work that can be executed with different cores. Contrary to threads, they do not have execution context and they are only pieces of work. The ISPC compiler takes the tasks and launches how many threads it decides.</p>
+<h2 id="Program-4"><a href="#Program-4" class="headerlink" title="Program 4"></a>Program 4</h2><h3 id="Question-4-1"><a href="#Question-4-1" class="headerlink" title="Question 4.1"></a>Question 4.1</h3><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># ./sqrt</span><br><span class="line">[sqrt serial]:          [1747.862] ms</span><br><span class="line">[sqrt ispc]:            [366.439] ms</span><br><span class="line">[sqrt task ispc]:       [38.224] ms</span><br><span class="line">                                (4.77x speedup from ISPC)</span><br><span class="line">                                (45.73x speedup from task ISPC)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Question-4-2"><a href="#Question-4-2" class="headerlink" title="Question 4.2"></a>Question 4.2</h3><p>For this question, we should make sure that the load is balanced and time-consuming.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">unsigned</span> <span class="type">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">  values[i] = <span class="number">2.99f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># ./sqrt</span><br><span class="line">[sqrt serial]:          [2617.087] ms</span><br><span class="line">[sqrt ispc]:            [396.478] ms</span><br><span class="line">[sqrt task ispc]:       [45.276] ms</span><br><span class="line">                                (6.60x speedup from ISPC)</span><br><span class="line">                                (57.80x speedup from task ISPC)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Question-4-3"><a href="#Question-4-3" class="headerlink" title="Question 4.3"></a>Question 4.3</h3><p>For this question, we should make sure that the load is imbalanced.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">unsigned</span> <span class="type">int</span> i=<span class="number">0</span>; i&lt;N; i++) &#123;</span><br><span class="line">  i % <span class="number">8</span> ? values[i] = <span class="number">1.0f</span> : values[i] = <span class="number">2.99f</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># ./sqrt</span><br><span class="line">[sqrt serial]:          [132.275] ms</span><br><span class="line">[sqrt ispc]:            [142.305] ms</span><br><span class="line">[sqrt task ispc]:       [16.307] ms</span><br><span class="line">                                (0.93x speedup from ISPC)</span><br><span class="line">                                (8.11x speedup from task ISPC)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Program-5"><a href="#Program-5" class="headerlink" title="Program 5"></a>Program 5</h2><h3 id="Question-5-1"><a href="#Question-5-1" class="headerlink" title="Question 5.1"></a>Question 5.1</h3><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># ./saxpy</span><br><span class="line">[saxpy ispc]:           [21.670] ms     [13.753] GB/s   [1.846] GFLOPS</span><br><span class="line">[saxpy task ispc]:      [22.282] ms     [13.375] GB/s   [1.795] GFLOPS</span><br><span class="line">                                (0.97x speedup from use of tasks)</span><br></pre></td></tr></table></figure>
+
+<p>I think in this question, we should use less tasks, due to the cache line the CPU writes, if there are many tasks, we would always meet a cache miss. So I change the task to be 2.</p>
+<p>However, when I change the task to be 2, there is no speedup improvement, so the reason maybe the memory bandwidth.</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[saxpy ispc]:           [21.400] ms     [13.927] GB/s   [1.869] GFLOPS</span><br><span class="line">[saxpy task ispc]:      [23.430] ms     [12.720] GB/s   [1.707] GFLOPS</span><br><span class="line">                                (0.91x speedup from use of tasks)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Question-5-2"><a href="#Question-5-2" class="headerlink" title="Question 5.2"></a>Question 5.2</h3><p>The reason is in Question 5.1. Put the content in the cache line and flash the cache line.</p>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2023/01/31/CS149-Assignment1-Performance-Analysis-on-a-Quad-Core-CPU/">https://luolibrary.com/2023/01/31/CS149-Assignment1-Performance-Analysis-on-a-Quad-Core-CPU/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+      
+      <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2023/02/01/CS149-Assignment2-Building-A-Task-Execution-Library/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">CS149-Assignment2 Building A Task Execution Library</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2023/01/02/%E7%BA%AA%E5%BF%B5%E6%88%91%E7%9A%84%E5%A4%96%E5%A9%86/">  
+        <span class="next-text nav-default">纪念我的外婆</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:shejialuo@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://twitter.com/luo_hope" class="iconfont icon-twitter" title="twitter"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/jialuo-she-913873289/" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/shejialuo" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2020 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">shejialuo</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>

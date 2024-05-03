@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="虚拟缓存" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="技术, 学习, 洛的藏书阁" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="https://luolibrary.com/2023/08/17/虚拟缓存/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-7M238H24L4');
+</script>
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>虚拟缓存 - 洛的藏书阁</title>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">洛的藏书阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/tags/">
+      <li class="mobile-menu-item">
+        
+        
+        Tags              </li>
+    </a>
+    
+    <a href="/categories/">
+      <li class="mobile-menu-item">
+        
+        
+        Categories              </li>
+    </a>
+    
+    <a href="/about/">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">洛的藏书阁</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/tags/">  
+              
+              
+              Tags  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/categories/">  
+              
+              
+              Categories  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about/">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      虚拟缓存
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2023-08-17
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AD%98%E4%B8%93%E6%A0%8F/">缓存与内存专栏</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E7%BC%93%E5%AD%98%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">虚拟缓存的基本操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AD%A7%E4%B9%89-Ambiguity-%E4%B8%8E%E5%88%AB%E5%90%8D-Alias"><span class="toc-number">2.</span> <span class="toc-text">歧义(Ambiguity)与别名(Alias)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%AD%A7%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">歧义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%AB%E5%90%8D"><span class="toc-number">2.2.</span> <span class="toc-text">别名</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%8E%E8%99%9A%E6%8B%9F%E7%BC%93%E5%AD%98%E7%9A%84%E4%BA%A4%E4%BA%92"><span class="toc-number">3.</span> <span class="toc-text">操作系统与虚拟缓存的交互</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2"><span class="toc-number">3.1.</span> <span class="toc-text">上下文切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E5%86%85%E5%AD%98"><span class="toc-number">3.2.</span> <span class="toc-text">共享内存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-O"><span class="toc-number">3.3.</span> <span class="toc-text">I&#x2F;O</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <p>我们已经讲述了缓存最基本的结构，然而一个核心的关键问题在于在现代的体系结构中，运行中的进程都是使用的虚拟地址，这是由硬件和操作系统提供了一个美好的假象。在上一节中，我们已经明确了一个核心关键点，内存地址与缓存之间是有一定的映射关系，那么我们是应该用虚拟地址还是物理地址呢？一种美好的愿望是我们直接使用虚拟地址，因为我们这样就不需要把虚拟地址通过MMU转化为物理地址，从而提高效率。然而，愿望始终是愿望。虚拟缓存给操作系统带来了极大的负担来保证一致性。</p>
+<h2 id="虚拟缓存的基本操作"><a href="#虚拟缓存的基本操作" class="headerlink" title="虚拟缓存的基本操作"></a>虚拟缓存的基本操作</h2><p>无论如何，我们也只能有两种基本的操作，要么读要么写。当我们去读一个虚拟地址其内存值的时候，我们仍然按照相同的操作去查询缓存是否命中，如果缓存命中了，直接返回缓存值即可。如果缓存没有命中，我们需要先把虚拟地址通过MMU转化为物理地址，然后从内存中读取数据，并加载到缓存中。</p>
+<p>写的问题就更加复杂了，由于写的策略有两种write-through和write-back（我们假设其都支持write-allocate）。我们需要考虑在这两种策略下，虚拟缓存是如何进行写的操作的。对于write-through，无论是命中了cache还是没有命中cache，其都需要把虚拟地址通过MMU转化为物理地址，然后写入内存。对于没有命中cache的情况，其会直接读取内存的值写入cache中。对于write-back而言，对于没有命中cache的情况，其和write-through是相似的，对于命中了cache的情况，我们只需要在cache中写入即可。</p>
+<p><img src="https://s2.loli.net/2023/08/16/PGzDoUNlqK4ZdxX.png" alt="虚拟缓存"></p>
+<p>你可能会发现，除了我们需要读取内存的时候要把虚拟地址转化为物理地址的情况，虚拟缓存似乎也没有什么本质改变。然而，我们必须得思考一个问题，就是读写权限的问题。</p>
+<ul>
+<li>缓存读的虚拟地址对应的物理地址实际上已经变得无法读取了，然而缓存并不知道这个信息，如果我们仍然访问这个虚拟地址，缓存会直接给CPU返回其保存的值，显然我们需要判断这个物理地址是否可读。</li>
+<li>同理，缓存写的虚拟地址对应的物理地址也可能变得无法写入了。对于cache miss的情况，我们能够轻易地进行判断，因为我们会把虚拟地址通过MMU转化为物理地址，可以判断这个物理地址是否可写。对于cache hit的情况，如果其dirty flag已经是1，我们显然可以得知这个虚拟地址对应的物理地址是可写的。麻烦的情况在于dirty flag为0，我们必须知道其到底是否可写，所以我们需要把虚拟地址转化为物理地址去判断这个地址是否可写。</li>
+</ul>
+<h2 id="歧义-Ambiguity-与别名-Alias"><a href="#歧义-Ambiguity-与别名-Alias" class="headerlink" title="歧义(Ambiguity)与别名(Alias)"></a>歧义(Ambiguity)与别名(Alias)</h2><h3 id="歧义"><a href="#歧义" class="headerlink" title="歧义"></a>歧义</h3><p>我们首先回忆一下操作系统是如何与硬件结合实现虚拟地址转化到物理地址。对于每一个进程，操作系统需要维持一个页表，这个页表包含了从虚拟地址到物理地址的映射，操作系统分配内存时，会自动从空闲的内存中分配页然后修改页表，然后按照硬件规则完成虚拟地址到物理地址的映射。也就是对于两个不同的进程，其相同的虚拟地址完全可以对应不同的物理地址。当操作系统对进程进行调度后，由于我们是按照虚拟地址进行缓存的映射，虚拟缓存无法意识到这个物理地址已经改变了。因此，操作系统在此时必须做一些事情来刷新缓存。</p>
+<p><img src="https://s2.loli.net/2023/08/16/qvKxtZG1NngHer8.png" alt="虚拟缓存-歧义"></p>
+<h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><p>进程间的通信有一个重要的方法就是共享内存，即不同的虚拟地址能够映射到同一个物理地址。然而，由于两个进程的虚拟地址不同，其对应的cache set也会不同，假设采取的策略为write-back，当某一个进程修改了共享内存，其只会改变与其对应的cache line的值，却不会改变另一个进程的cache line的值，进而导致不一致问题。</p>
+<p><img src="https://s2.loli.net/2023/08/16/sdqVXHNUEbKjBCQ.png" alt="虚拟缓存-别名"></p>
+<h2 id="操作系统与虚拟缓存的交互"><a href="#操作系统与虚拟缓存的交互" class="headerlink" title="操作系统与虚拟缓存的交互"></a>操作系统与虚拟缓存的交互</h2><p>由于歧义和别名问题，在许多场景下，操作系统必须要采取一些策略来保证缓存的一致性。</p>
+<h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><p>当发生上下文切换时，一个虚拟地址可能会映射到另一个物理地址，此时虚拟缓存就应该失效了。所以内核会强制刷新所有当前进程的缓存。对于只进行了读操作的cache line，我们只需要让这个cache line的valid位置为0。对于进行了写的操作，如果其策略为write-through，其操作也很简单，将valid位置为0，然而如果写策略为write-back，我们需要把每一个改变了的cache line重新写入内存，会花费大量的时间。</p>
+<p>除此之外，如果上下文切换相当地频繁，缓存的命中率会急剧地下降。因此，虚拟缓存最合适的场景是计算型任务以及批处理任务。减少了虚拟地址转化为物理地址的损耗，同时避免上下文切换带来的性能损耗。</p>
+<h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><p>对于两个进程使用共享内存的情况，是不存在别名问题的，因为上下文切换时会自动解决这个问题。然而，麻烦的在于可能存在同一个进程两个不同的虚拟地址映射到同一块共享内存，这样就导致了别名问题。一个很简单的解决方法就是不使用cache。</p>
+<h3 id="I-O"><a href="#I-O" class="headerlink" title="I&#x2F;O"></a>I&#x2F;O</h3><p>对于buffered IO而言，由于操作系统管理的内核使用统一的虚拟地址，其不会存在歧义和别名问题。然而，最大的问题在于DMA设备，由于DMA设备直接与内存交互，会导致缓存与内存的不一致问题，即unbuffered I&#x2F;O。</p>
+<p>当用户采用系统调用<code>write</code>时，且缓存写策略为write-back时，不会直接把修改的数据写入到内存中，如果此时DMA设备读取相关的数据，就会导致不一致性问题。所以当DMA设备需要读取数据时，操作系统应强制刷新缓存。如果采用阻塞I&#x2F;O，当执行<code>write</code>或者<code>read</code>系统调用时，操作系统本身就会进行上下文的切换，对缓存进行刷新。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li>UNIX Systems for Modern Architectures Chapter 3</li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/107096130">Cache 组织方式</a></li>
+</ul>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2023/08/17/%E8%99%9A%E6%8B%9F%E7%BC%93%E5%AD%98/">https://luolibrary.com/2023/08/17/%E8%99%9A%E6%8B%9F%E7%BC%93%E5%AD%98/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+      
+      <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2023/08/17/%E5%B8%A6%E6%9C%89%E9%94%AE%E5%80%BC%E7%9A%84%E8%99%9A%E6%8B%9F%E7%BC%93%E5%AD%98/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">带有键值的虚拟缓存</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2023/08/16/%E7%BC%93%E5%AD%98%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">  
+        <span class="next-text nav-default">缓存基础知识</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:shejialuo@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://twitter.com/luo_hope" class="iconfont icon-twitter" title="twitter"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/jialuo-she-913873289/" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/shejialuo" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2020 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">shejialuo</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>

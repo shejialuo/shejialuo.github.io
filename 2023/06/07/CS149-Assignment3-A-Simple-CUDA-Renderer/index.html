@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="CS149-Assignment3 A Simple CUDA Renderer" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="技术, 学习, 洛的藏书阁" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-7M238H24L4');
+</script>
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>CS149-Assignment3 A Simple CUDA Renderer - 洛的藏书阁</title>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">洛的藏书阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/tags/">
+      <li class="mobile-menu-item">
+        
+        
+        Tags              </li>
+    </a>
+    
+    <a href="/categories/">
+      <li class="mobile-menu-item">
+        
+        
+        Categories              </li>
+    </a>
+    
+    <a href="/about/">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">洛的藏书阁</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/tags/">  
+              
+              
+              Tags  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/categories/">  
+              
+              
+              Categories  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about/">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      CS149-Assignment3 A Simple CUDA Renderer
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2023-06-07
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/CS149/">CS149</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-1"><span class="toc-number">1.</span> <span class="toc-text">Part 1</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-1"><span class="toc-number">1.1.</span> <span class="toc-text">Question 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Question-2"><span class="toc-number">1.2.</span> <span class="toc-text">Question 2</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-2"><span class="toc-number">2.</span> <span class="toc-text">Part 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Part-3"><span class="toc-number">3.</span> <span class="toc-text">Part 3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#First-Implementation"><span class="toc-number">3.1.</span> <span class="toc-text">First Implementation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Best-practice"><span class="toc-number">3.2.</span> <span class="toc-text">Best practice</span></a></li></ol></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <h2 id="Part-1"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1</h2><p>The result is illustrated in the following figure.</p>
+<h3 id="Question-1"><a href="#Question-1" class="headerlink" title="Question 1"></a>Question 1</h3><p>As you can see, due to the parallelism of the GPU, the bandwidth is huge.</p>
+<h3 id="Question-2"><a href="#Question-2" class="headerlink" title="Question 2"></a>Question 2</h3><p>From the results, we can get that the bottleneck is the memory and CPU of the host itself. For the execution time of the kernel, the speed is very fast. However, the speed is low for copying the host memory into the device memory and vice versa.</p>
+<h2 id="Part-2"><a href="#Part-2" class="headerlink" title="Part 2"></a>Part 2</h2><p>First, we need to implement the parallelism form of <code>scan</code>. The algorithm is super wonderful. You should first understand the algorithm.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">exclusive_scan_iterative</span><span class="params">(<span class="type">int</span>* start, <span class="type">int</span>* end, <span class="type">int</span>* output)</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> N = end - start;</span><br><span class="line">    memmove(output, start, N*<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// upsweep phase</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> two_d = <span class="number">1</span>; two_d &lt;= N/<span class="number">2</span>; two_d*=<span class="number">2</span>) &#123;</span><br><span class="line">        <span class="type">int</span> two_dplus1 = <span class="number">2</span>*two_d;</span><br><span class="line">        parallel_for (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i += two_dplus1) &#123;</span><br><span class="line">            output[i+two_dplus1<span class="number">-1</span>] += output[i+two_d<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    output[N<span class="number">-1</span>] = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// downsweep phase</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> two_d = N/<span class="number">2</span>; two_d &gt;= <span class="number">1</span>; two_d /= <span class="number">2</span>) &#123;</span><br><span class="line">        <span class="type">int</span> two_dplus1 = <span class="number">2</span>*two_d;</span><br><span class="line">        parallel_for (<span class="type">int</span> i = <span class="number">0</span>; i &lt; N; i += two_dplus1) &#123;</span><br><span class="line">            <span class="type">int</span> t = output[i+two_d<span class="number">-1</span>];</span><br><span class="line">            output[i+two_d<span class="number">-1</span>] = output[i+two_dplus1<span class="number">-1</span>];</span><br><span class="line">            output[i+two_dplus1<span class="number">-1</span>] += t;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>It may seem that we need <code>N</code> threads for every inner loop, however, this is a stupid idea, we should calculate how many threads we need for each inner loop.</p>
+<h2 id="Part-3"><a href="#Part-3" class="headerlink" title="Part 3"></a>Part 3</h2><p>Before diving into how to write a render using CUDA. We first think about how to implement a render with cpp. And after that, you need to read the code written with CUDA.</p>
+<h3 id="First-Implementation"><a href="#First-Implementation" class="headerlink" title="First Implementation"></a>First Implementation</h3><p>For the first implementation, I focus on how to write the correct code. The hint part <code>exclusive_scan</code> has made me think we could first store the circle render parameters for each pixel. Thus we can scan the circle render parameters for each pixel.</p>
+<p>Thus, we can solve the two important questions:</p>
+<ul>
+<li><em>Atomicity</em>: we have made the memory independent for each pixel. So we can write whatever we want without any synchronization and mutation.</li>
+<li><em>Order</em>: We have make an explicit array of render parameters. So the order doesn’t matter.</li>
+</ul>
+<p>So, We first need to construct an array to hold the render parameters for each pixel.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cudaMalloc</span>(&amp;cudaDevicePixelData, image-&gt;width * image-&gt;height * numCircles * <span class="number">4</span> * <span class="built_in">sizeof</span>(<span class="type">float</span>));</span><br></pre></td></tr></table></figure>
+
+<p>Now, we first write the render information for every pixel. The core code is below:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> pixelPtrStart = <span class="number">4</span> * cuConstRendererParams.numCircles * (pixelY * imageWidth + pixelX) + <span class="number">4</span> * circleIndex;</span><br><span class="line">float4* pixelPtr = (float4*)(&amp;cuConstRendererParams.pixelData[pixelPtrStart]);</span><br><span class="line">float4 color;</span><br><span class="line">color.x = rgb.x;</span><br><span class="line">color.y = rgb.y;</span><br><span class="line">color.z = rgb.z;</span><br><span class="line">color.w = alpha;</span><br><span class="line"></span><br><span class="line">*pixelPtr = color;</span><br></pre></td></tr></table></figure>
+
+<p>Then we can launch a new kernel to calculate for each pixel:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; numCircles; ++i) &#123;</span><br><span class="line">    float4* pixelPtr = (float4*)(&amp;cuConstRendererParams.pixelData[startIndex + i * <span class="number">4</span>]);</span><br><span class="line">    color.x = (*pixelPtr).w * (*pixelPtr).x + (<span class="number">1</span> - (*pixelPtr).w) * color.x;</span><br><span class="line">    color.y = (*pixelPtr).w * (*pixelPtr).y + (<span class="number">1</span> - (*pixelPtr).w) * color.y;</span><br><span class="line">    color.z = (*pixelPtr).w * (*pixelPtr).z + (<span class="number">1</span> - (*pixelPtr).w) * color.z;</span><br><span class="line">    color.w += (*pixelPtr).w;</span><br><span class="line">  &#125;</span><br><span class="line">  *imagePtr = color;</span><br></pre></td></tr></table></figure>
+
+<p>However, <code>cudaDevicePixelData</code> is too big, which will consume so much memory, which would exceed the maximum memory 16GB. So we need to reuse the render information. We should not store the information for every pixel. Because the render information of each circle is deterministic. But the things we need to make sure is that whether the circle has contributed to the pixel. So instead of storing the render information for each pixel, we could just use bit mask to indicate whether the circle has contributed to the pixel.</p>
+<p>Now, the result is illustrated by below.</p>
+<p><img src="https://s2.loli.net/2023/06/07/JyrZ64K8W2uI3Tp.png" alt="first render score"></p>
+<p>As you can see, we have passed some tests and the performance is not good at all. The reason why there are some failed tests is that the bytes exceed $2^{63}$, which would overflow.</p>
+<h3 id="Best-practice"><a href="#Best-practice" class="headerlink" title="Best practice"></a>Best practice</h3><p>We should use a clever way to solve this problem. The problem is a two-dimensional problem. So we’d better design the grid and block for two dimensions, as the following figures illustrates:</p>
+<p><img src="https://s2.loli.net/2023/08/22/MWiVgyBYRU2CmlD.png" alt="grid and block design for rendering"></p>
+<p>From the above figures, we could write the following code to initialize the grid and block size:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">CudaRenderer::render</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="type">int</span> block_x = <span class="number">16</span>, block_y = <span class="number">32</span>;</span><br><span class="line">  <span class="function">dim3 <span class="title">blockDim</span><span class="params">(block_x, block_y)</span></span>;</span><br><span class="line">  <span class="type">int</span> grid_x = (image-&gt;width + blockDim.x - <span class="number">1</span>) / blockDim.x;</span><br><span class="line">  <span class="type">int</span> grid_y = (image-&gt;height + blockDim.y - <span class="number">1</span>) / blockDim.y;</span><br><span class="line">  <span class="function">dim3 <span class="title">gridDim</span><span class="params">(grid_x, grid_y)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>And we should render a block each time, we have already split the pixels into the block. For each block, we should handle the each pixel, we could calculate the current pixel’s x coordinate and y coordinate and the current thread id:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> thread_id = threadIdx.y * blockDim.x + threadId.x;</span><br><span class="line"><span class="type">int</span> pixel_index_x = blockId.x * blockDim.x + threadId.x;</span><br><span class="line"><span class="type">int</span> pixel_index_y = blockId.y * blockDim.y + threadId.y;</span><br></pre></td></tr></table></figure>
+
+<p>So what a thread should do? We have already mapped a pixel $(x, y)$ with a specified thread. So the idea should be simple enough.</p>
+<ul>
+<li><strong>We could traverse sequentially all the circles to tell whether the circle has contributed to this pixel, and we calculate to achieve rendering</strong>.</li>
+</ul>
+<p>However, this way is too slow. For every pixel, we could calculate a lot of useless calculation. For example, if there are total 100,000,000 circles, there would be many useless circles for this pixel. So we should find a way to find the circles in the current block. So we could use a shared memory (a bit map) to know whether the <em>BLOCK</em> size circle has contributed to the block. So for each pixel (each thread) we could calculate ONLY one circle to know whether it has contributed to this block. And for each pixel, we could use the contributed circles to sequentially achieve rendering.</p>
+<p>Look at what parallelism we have done:</p>
+<ul>
+<li>Each pixel renders itself using two-dimension task split.</li>
+<li>Each pixel handles 1 circle to tell whether it contributes to the current block for $num_{circles} &#x2F; size_{block}$ loops.</li>
+</ul>
+<p>It’s a really hard question, but it is very useful.</p>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/">https://luolibrary.com/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+      
+      <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2023/06/08/CS149-Assignment4-Big-Graph-Processing-in-OpenMP/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">CS149-Assignment4 Big Graph Processing in OpenMP</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2023/06/07/%E3%80%8A%E7%A7%BD%E7%BF%BC%E7%9A%84%E5%B0%A4%E6%96%AF%E8%92%82%E5%A8%85%E3%80%8B%E2%80%94%E2%80%94%E8%8D%92%E8%AF%9E%E8%BF%98%E6%98%AF%E5%AD%98%E5%9C%A8%EF%BC%9F/">  
+        <span class="next-text nav-default">《秽翼的尤斯蒂娅》——荒诞还是存在？</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:shejialuo@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://twitter.com/luo_hope" class="iconfont icon-twitter" title="twitter"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/jialuo-she-913873289/" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/shejialuo" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2020 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">shejialuo</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>

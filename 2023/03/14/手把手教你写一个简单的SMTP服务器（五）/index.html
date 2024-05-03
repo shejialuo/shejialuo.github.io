@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="手把手教你写一个简单的SMTP服务器（五）" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="技术, 学习, 教程, 洛的藏书阁" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="https://luolibrary.com/2023/03/14/手把手教你写一个简单的SMTP服务器（五）/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-7M238H24L4');
+</script>
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>手把手教你写一个简单的SMTP服务器（五） - 洛的藏书阁</title>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">洛的藏书阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/tags/">
+      <li class="mobile-menu-item">
+        
+        
+        Tags              </li>
+    </a>
+    
+    <a href="/categories/">
+      <li class="mobile-menu-item">
+        
+        
+        Categories              </li>
+    </a>
+    
+    <a href="/about/">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">洛的藏书阁</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/tags/">  
+              
+              
+              Tags  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/categories/">  
+              
+              
+              Categories  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about/">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      手把手教你写一个简单的SMTP服务器（五）
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2023-03-14
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8/">手把手教你写一个简单的SMTP服务器</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Context"><span class="toc-number">1.</span> <span class="toc-text">Context</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SMTP-Server"><span class="toc-number">2.</span> <span class="toc-text">SMTP Server</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">3.</span> <span class="toc-text">总结</span></a></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <ul>
+<li><a href="https://luolibrary.com/2023/03/12/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89/">手把手教你写一个简单的SMTP服务器（一）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89/">手把手教你写一个简单的SMTP服务器（二）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89/">手把手教你写一个简单的SMTP服务器（三）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89/">手把手教你写一个简单的SMTP服务器（四）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%94%EF%BC%89/">手把手教你写一个简单的SMTP服务器（五）</a></li>
+</ul>
+<hr>
+<h2 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h2><p>在教程四中，我们已经实现了状态机，接下来我们定义一个<code>Context</code>类，其仅仅简单地封装一下，维持一个<code>current</code>变量指向当前的状态即可。我们需要在<code>miniSMTPServer/context</code>目录下创建<code>context.hpp</code>和<code>context.cpp</code>文件并修改<code>CMakeLists.txt</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/context.hpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;state.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Context</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  std::unique_ptr&lt;State&gt; *current;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">Context</span>();</span><br><span class="line">  <span class="function">std::string <span class="title">transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters)</span></span>;</span><br><span class="line">  ~<span class="built_in">Context</span>() = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/context.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;context.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;state.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line">Context::<span class="built_in">Context</span>() &#123; current = &amp;States::idleState; &#125;</span><br><span class="line"><span class="function">std::string <span class="title">Context::transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (*current)-&gt;<span class="built_in">transitive</span>(parameters, current);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># miniSMTPServer/context/CMakeLists.txt</span></span><br><span class="line"><span class="keyword">add_library</span>(context STATIC state.cpp context.cpp)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>可以看出<code>Context</code>类十分的简单，这是因为大部分工作都已经实现了。</p>
+<h2 id="SMTP-Server"><a href="#SMTP-Server" class="headerlink" title="SMTP Server"></a>SMTP Server</h2><p>现在，我们终于可以开始写我们的Server了，我们只需要完成一个简单得不能再简单的工作：按照空格分割字符串。然而你可能会想到最直接的方法就是定义一个<code>istringstream</code>。然而这是不正确的，因为可能会存在如下的情况：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MAIL shejialuo@gmail.com OK</span><br><span class="line">MAIL  shejialuo@gmail.com NOT OK</span><br></pre></td></tr></table></figure>
+
+<p>ABNF中严格地定义了只允许拥有一个空格。而所有命令的参数最多不超过1个。我们采取的策略就可以非常简单了，直接以一个空格分割字符串即可。但是值得注意的是，我们必须删除接收到的字符串的最后两个，根据协议其最后两个字符为<code>CRLF</code>，即<code>\r\n</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/miniSMTPServer.cpp</span></span><br><span class="line"><span class="function">std::vector&lt;std::string&gt; <span class="title">getParameters</span><span class="params">(std::string &amp;request)</span> </span>&#123;</span><br><span class="line">  request.<span class="built_in">pop_back</span>();</span><br><span class="line">  request.<span class="built_in">pop_back</span>();</span><br><span class="line">  <span class="type">int</span> split = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (; split &lt; request.<span class="built_in">size</span>(); split++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (request[split] == <span class="string">&#x27; &#x27;</span>) &#123;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  std::string command = request.<span class="built_in">substr</span>(<span class="number">0</span>, split);</span><br><span class="line">  <span class="keyword">if</span> (split != request.<span class="built_in">size</span>()) &#123;</span><br><span class="line">    std::string parameter = request.<span class="built_in">substr</span>(split + <span class="number">1</span>, request.<span class="built_in">size</span>() - split - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> &#123;command, parameter&#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> &#123;command&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后我们只需要修改主函数就可以了，其逻辑十分的简单：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/miniSMTPServer.cpp</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Hello, This is a simple SMTP server\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">  TCPSocket socket&#123;&#125;;</span><br><span class="line">  socket.<span class="built_in">set_reuseaddr</span>();</span><br><span class="line">  socket.<span class="built_in">bind</span>();</span><br><span class="line">  socket.<span class="built_in">listen</span>();</span><br><span class="line"></span><br><span class="line">  std::string request&#123;&#125;;</span><br><span class="line">  Context context&#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">auto</span> s = socket.<span class="built_in">accept</span>();</span><br><span class="line"></span><br><span class="line">    <span class="type">bool</span> isDone = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">while</span> (!isDone) &#123;</span><br><span class="line">      s.<span class="built_in">read</span>(request);</span><br><span class="line">      <span class="keyword">if</span> (request.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;S: Connection lost\n&quot;</span>;</span><br><span class="line">        s.<span class="built_in">close</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;C: &quot;</span> &lt;&lt; request;</span><br><span class="line">      std::string parameter&#123;&#125;;</span><br><span class="line">      std::vector&lt;std::string&gt; parameters = <span class="built_in">getParameters</span>(request);</span><br><span class="line"></span><br><span class="line">      std::string result = context.<span class="built_in">transitive</span>(parameters);</span><br><span class="line"></span><br><span class="line">      s.<span class="built_in">write</span>(result + <span class="string">&quot;\r\n&quot;</span>);</span><br><span class="line">      std::cout &lt;&lt; <span class="string">&quot;S: &quot;</span> &lt;&lt; result &lt;&lt; std::endl;</span><br><span class="line">      <span class="keyword">if</span> (result.<span class="built_in">substr</span>(<span class="number">0</span>, <span class="number">3</span>) == <span class="string">&quot;221&quot;</span>) &#123;</span><br><span class="line">        s.<span class="built_in">close</span>();</span><br><span class="line">        isDone = <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后我们需要修改<code>miniSMTPServer/CMakeLists.txt</code>文件如下所示：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># miniSMTPServer/CMakeLists.txt</span></span><br><span class="line"><span class="keyword">add_executable</span>(miniSMTP miniSMTPServer.cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set_target_properties</span>(miniSMTP PROPERTIES RUNTIME_OUTPUT_DIRECTORY <span class="variable">$&#123;PROJECT_SOURCE_DIR&#125;</span>/)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_include_directories</span>(miniSMTP PRIVATE ./util ./context)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(miniSMTP util context)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_subdirectory</span>(./util)</span><br><span class="line"><span class="keyword">add_subdirectory</span>(./context)</span><br></pre></td></tr></table></figure>
+
+<p>然后进行编译最终运行<code>./miniSMTP</code>。你可以尝试许多的输入输出，如果你发现了Bug，欢迎给仓库提交<a target="_blank" rel="noopener" href="https://github.com/shejialuo/miniSMTPServer">miniSMTPServer</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout finish-all</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>你可能会发现我们没有对邮件进行任何的处理，之所以我不打算做这样的处理是因为这并不是我们应该做的重点。如果你想保存用户发送的邮件，是一个非常简单的事情。你可能会想是不是需要在<code>transitive</code>函数中做这样的处理。实际上最合理的方式是新增加一个<code>doAction</code>的虚函数。对于每一个状态其存在一个处理函数：</p>
+<ul>
+<li><code>IdleState</code>：清空邮件信息的缓存。</li>
+<li><code>EhloState</code>：清空邮件信息的缓存。</li>
+<li><code>MailState</code>：记录邮件的发送人。</li>
+<li><code>RcptState</code>：记录邮件的接收人。</li>
+<li><code>DataStartState</code>：记录发送的信息。</li>
+<li><code>DataStartDone</code>：如果收到了<code>QUIT</code>命令，将邮件保存到硬盘。</li>
+</ul>
+<p>希望能够阅读到这儿的你，或多或少能有所收获。这是我第一次尝试写一个教程，终于明白了写一个教程的艰辛。希望你能有一天用自己的知识帮助到他人。</p>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%94%EF%BC%89/">https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%94%EF%BC%89/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+      
+      <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+      
+      <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2023/06/07/%E3%80%8A%E7%A7%BD%E7%BF%BC%E7%9A%84%E5%B0%A4%E6%96%AF%E8%92%82%E5%A8%85%E3%80%8B%E2%80%94%E2%80%94%E8%8D%92%E8%AF%9E%E8%BF%98%E6%98%AF%E5%AD%98%E5%9C%A8%EF%BC%9F/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">《秽翼的尤斯蒂娅》——荒诞还是存在？</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89/">  
+        <span class="next-text nav-default">手把手教你写一个简单的SMTP服务器（四）</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:shejialuo@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://twitter.com/luo_hope" class="iconfont icon-twitter" title="twitter"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/jialuo-she-913873289/" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/shejialuo" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2020 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">shejialuo</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>

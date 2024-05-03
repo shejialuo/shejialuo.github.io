@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="手把手教你写一个简单的SMTP服务器（二）" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="技术, 学习, 教程, 洛的藏书阁" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="https://luolibrary.com/2023/03/14/手把手教你写一个简单的SMTP服务器（二）/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-7M238H24L4');
+</script>
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>手把手教你写一个简单的SMTP服务器（二） - 洛的藏书阁</title>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">洛的藏书阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/tags/">
+      <li class="mobile-menu-item">
+        
+        
+        Tags              </li>
+    </a>
+    
+    <a href="/categories/">
+      <li class="mobile-menu-item">
+        
+        
+        Categories              </li>
+    </a>
+    
+    <a href="/about/">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">洛的藏书阁</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/tags/">  
+              
+              
+              Tags  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/categories/">  
+              
+              
+              Categories  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about/">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      手把手教你写一个简单的SMTP服务器（二）
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2023-03-14
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8/">手把手教你写一个简单的SMTP服务器</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">顺序定义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E5%90%AF%E5%8A%A8%E5%8F%8A%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">1.1.</span> <span class="toc-text">会话启动及客户端初始化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%82%AE%E4%BB%B6%E4%BA%8B%E5%8A%A1"><span class="toc-number">1.2.</span> <span class="toc-text">邮件事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%9A%E8%AF%9D%E7%BB%93%E6%9D%9F"><span class="toc-number">1.3.</span> <span class="toc-text">会话结束</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E9%A1%BA%E5%BA%8F%E9%99%90%E5%88%B6"><span class="toc-number">1.4.</span> <span class="toc-text">命令顺序限制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E5%92%8C%E5%93%8D%E5%BA%94"><span class="toc-number">2.</span> <span class="toc-text">请求和响应</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-number">2.2.</span> <span class="toc-text">返回值</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-number">3.</span> <span class="toc-text">状态机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-number">4.</span> <span class="toc-text">代码实现状态机</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">小结</span></a></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <ul>
+<li><a href="https://luolibrary.com/2023/03/12/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89/">手把手教你写一个简单的SMTP服务器（一）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89/">手把手教你写一个简单的SMTP服务器（二）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89/">手把手教你写一个简单的SMTP服务器（三）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89/">手把手教你写一个简单的SMTP服务器（四）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%94%EF%BC%89/">手把手教你写一个简单的SMTP服务器（五）</a></li>
+</ul>
+<hr>
+<p>在教程一中，我们已经完成了一个十分简单的TCP服务器。如果你跳过了教程一的某些部分，你可以执行以下的命令获取到在此阶段的代码：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/shejialuo/miniSMTPServer</span><br><span class="line"><span class="built_in">cd</span> miniSMTPServer &amp;&amp; git checkout tcp-server</span><br></pre></td></tr></table></figure>
+
+<p>我们终于来到了有意思的部分了，我们要开始实现一个简单的SMTP协议。然而，RFC标准定义的SMTP协议过于复杂了，故本教程拟提取出一些核心的东西将其简化。</p>
+<h2 id="顺序定义"><a href="#顺序定义" class="headerlink" title="顺序定义"></a>顺序定义</h2><h3 id="会话启动及客户端初始化"><a href="#会话启动及客户端初始化" class="headerlink" title="会话启动及客户端初始化"></a>会话启动及客户端初始化</h3><p>当客户端连接到服务器时，服务器会发送<code>220</code>代码加上其版本等信息。而客户端会发送<code>EHLO</code>命令，加上客户端的IP地址等自定义信息（在本教程中默认只发送IP地址，其值只能为127.0.0.1）。其过程如下所示：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">S: 200 Service ready</span><br><span class="line">C: EHLO 127.0.0.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="邮件事务"><a href="#邮件事务" class="headerlink" title="邮件事务"></a>邮件事务</h3><p>邮件的事务总共有三步：事务的开始是通过<code>MAIL</code>命令开始的，<code>MAIL</code>命令需要指定发送人的邮箱。然后是一系列的<code>RCPT</code>命令指定接收人的邮箱。最后是<code>DATA</code>命令指定邮件的内容有哪些，最后以单独的<code>.</code>命令表示内容的结束。</p>
+<h3 id="会话结束"><a href="#会话结束" class="headerlink" title="会话结束"></a>会话结束</h3><p>当客户端向服务器发送<code>QUIT</code>命令时，服务器发送回复就意味着本次SMTP会话的终结。</p>
+<h3 id="命令顺序限制"><a href="#命令顺序限制" class="headerlink" title="命令顺序限制"></a>命令顺序限制</h3><ul>
+<li>必须使用<code>EHLO</code>命令开启一个新的会话。</li>
+<li><code>EHLO</code>命令可以在任何一个状态使用，其的使用将会清楚SMTP服务器所有的状态，其存储的发送人、收件人和邮件内容等缓存必须全部清空，该效果等同于客户端发送<code>RSET</code>命令一样。</li>
+<li><code>RSET</code>命令可以在任意阶段使用，哪怕没有收到客户端发送的<code>EHLO</code>命令。</li>
+<li><code>MAIL</code>命令开启一个新的邮件事务，其后面只能按照顺序依次接多个<code>RCPT</code>命令，然后是多个<code>DATA</code>命令。客户端可以通过<code>RSET</code>和<code>EHLO</code>命令重置本次邮件事务。当开启了一个新的邮件事务，<code>MAIL</code>命令就再也无法使用。在这个过程中，如果命令的参数不正确，服务器端必须发送<code>501</code>代码，且服务器维持的状态不能有任何的改变。如果命令顺序不对，服务器端就发送<code>503</code>代码。</li>
+<li>会话里面最后的一个命令必须是<code>QUIT</code>。</li>
+</ul>
+<h2 id="请求和响应"><a href="#请求和响应" class="headerlink" title="请求和响应"></a>请求和响应</h2><p>为了简单起见，我们首先定义如下的全局规则：客户端的每次请求必须恰好对应一次服务器的响应。除第一次的客户端请求外，客户端都必须在收到服务器对其上一次请求的响应后才能进行下一次的请求。</p>
+<h3 id="请求"><a href="#请求" class="headerlink" title="请求"></a>请求</h3><p>我们只支持如下的6个请求，下面的请求有些需要使用参数，有些不需要使用参数，我们会在实现具体的命令功能时再进行详细的介绍，现在我们先从整体的角度出发：</p>
+<ul>
+<li><code>EHLO</code>：客户端请求开始会话。</li>
+<li><code>MAIL</code>：客户端开始邮件事务。</li>
+<li><code>RCPT</code>：指定收件人。</li>
+<li><code>RSET</code>：重置会话。</li>
+<li><code>NOOP</code>：空操作。</li>
+<li><code>QUIT</code>：结束会话。</li>
+</ul>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>对于返回值，我们给出如下的定义：</p>
+<ul>
+<li><code>220</code>: Service ready</li>
+<li><code>221</code>: Service closing transmission channel</li>
+<li><code>250</code>: Requested mail action okay, completed</li>
+<li><code>354</code>: Start mail input; end with &lt;CRLF&gt;.&lt;CRLF&gt;</li>
+<li><code>500</code>: Syntax error, command unrecognized</li>
+<li><code>501</code>: Syntax error in parameters or arguments</li>
+<li><code>503</code>: Bad sequence of commands</li>
+</ul>
+<h2 id="状态机"><a href="#状态机" class="headerlink" title="状态机"></a>状态机</h2><p>经过上述对协议规则的详细解释，我们可以作出下图所示的状态转换图。当客户端输入的命令与该状态转换图对应不上时，服务器端需要输出<code>503</code>错误代码。</p>
+<pre class="mermaid">stateDiagram-v2
+    [*] --> idle: server start
+    idle --> ehlo: EHLO
+    idle --> idle: RSET
+
+    ehlo --> mail: MAIL
+    mail --> rcpt: RCPT
+    rcpt --> rcpt: RCPT
+    rcpt --> dataStart: DATA
+    dataStart --> dataStart : except .
+    dataStart --> dataDone: .
+
+    ehlo --> ehlo: RSET, EHLO
+    mail --> ehlo: RSET, EHLO
+    rcpt --> ehlo: RSET, EHLO
+    dataStart --> ehlo: RSET, EHLO
+    dataDone --> ehlo: RSET, EHLO
+    dataDone --> mail: MAIL
+
+    idle --> [*]: QUIT
+    ehlo --> [*]: QUIT
+    mail --> [*]: QUIT
+    rcpt --> [*]: QUIT
+    dataStart --> [*]: QUIT
+    dataDone --> [*]: QUIT</pre>
+
+<p>由上图可知，我们根据规则设定了六个状态：<code>idle</code>, <code>ehlo</code>, <code>mail</code>, <code>rcpt</code>, <code>dataStart</code>和<code>dataDone</code>。在上述的状态图中，我们忽略了唯一一个命令<code>NOOP</code>，由于<code>NOOP</code>没有操作，就没有在图里面展示出来了。</p>
+<h2 id="代码实现状态机"><a href="#代码实现状态机" class="headerlink" title="代码实现状态机"></a>代码实现状态机</h2><p>我们该如何通过代码实现上述的状态机了，有一个最简单的方式，就是定义一个<code>enum class State</code>包含状态机的6种状态，然后服务器端根据接收到的命令和目前现在维护的状态，判断是否应该前往下一步，其示例代码如下所示：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum class</span> <span class="title class_">State</span>&#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (state == State::idle &amp;&amp; command == <span class="string">&quot;ehlo&quot;</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (state == State::rcpt &amp;&amp; command == <span class="string">&quot;quit&quot;</span>) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (...) &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样的代码是实现状态机最简单的方式，但是却是最不好的方式，原因如下：</p>
+<ol>
+<li>缺乏扩展性。如果我们的状态机新增了一个状态，我们需要不断地增加分支。</li>
+<li>不断增加的分支会让代码的可读性下降。</li>
+</ol>
+<p>本教程拟采用c++运行时绑定机制（多态）来实现状态机，其基本的思路在于创建一个<code>Context</code>类，该<code>Context</code>类包含一个指向<code>State</code>类的指针，每当服务器收到了客户端发送的请求后，<code>Context</code>类将会执行<code>State</code>类的某个方法，根据该方法判断能否移动状态，进而处理客户端发送的请求。</p>
+<p>因此我们需要定义虚基类<code>State</code>，此处我们必须尽最大可能抽象出基类应该所具备的能力。尽可能让代码变得干净一些。</p>
+<ul>
+<li><p>首先，我们在<code>miniSMTPServer/context/state.hpp</code>定义两个静态变量，其中一个为<code>commands</code>，表示所有能够接收的命令。其次是<code>codeToMessages</code>表明映射关系。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.cpp</span></span><br><span class="line"><span class="type">static</span> std::unordered_set&lt;std::string&gt; commands&#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;MAIL&quot;</span>, <span class="string">&quot;RCPT&quot;</span>, <span class="string">&quot;RSET&quot;</span>, <span class="string">&quot;NOOP&quot;</span>, <span class="string">&quot;QUIT&quot;</span>, <span class="string">&quot;DATA&quot;</span>, <span class="string">&quot;.&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> std::unordered_map&lt;std::string, std::string&gt; codeToMessages&#123;</span><br><span class="line">    &#123;<span class="string">&quot;220&quot;</span>, <span class="string">&quot;Service ready&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;221&quot;</span>, <span class="string">&quot;Service closing transmission channel&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;250&quot;</span>, <span class="string">&quot;Requested mail action okay, completed&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;354&quot;</span>, <span class="string">&quot;Start mail input end &lt;CRLF&gt;.&lt;CRLF&gt;&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;500&quot;</span>, <span class="string">&quot;Syntax error, command unrecognized&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;501&quot;</span>, <span class="string">&quot;Syntax error in parameters or arguments&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;503&quot;</span>, <span class="string">&quot;Bad sequence of commands&quot;</span>&#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其次，对于所有的类都应该根据其自身现有的状态去判断是否应该接收当前的客户端命令。故每一个状态需要维护一个<code>allowed</code>的变量，存储当前状态允许接收的命令。显然，<code>allowed</code>变量需要具备快速查找能力，故使用<code>unordered_set</code>容器。同时，在<code>State</code>类中我们应该定义一个函数<code>canTransitive</code>用于实现该功能。在虚基类中，我们应该添加<code>RSET</code>，<code>EHLO</code>，<code>NOOP</code>，<code>QUIT</code>命令。无论服务器端处于什么样的状态，其都应该支持这些命令。对于客户端的命令，我们将其抽象为<code>std::vector&lt;std::string&gt;</code>。同时我们将该操作封装到<code>checkCommand</code>函数中。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.hpp</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">State</span> &#123;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief allowed operations for each state, it should be used in</span></span><br><span class="line"><span class="comment">  * derive class, so make it protected.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  std::unordered_set&lt;std::string&gt; allowed;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief Construct a new State object. It will initialize the `allowed`</span></span><br><span class="line"><span class="comment">  * for adding four commands.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="built_in">State</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief can transitive to another state</span></span><br><span class="line"><span class="comment">  * @details check whether parameters[0] is in the allowed</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param parameters the command and its parameters</span></span><br><span class="line"><span class="comment">  * @return true the command is OK for transition</span></span><br><span class="line"><span class="comment">  * @return false the command is not OK for transition</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">canTransitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief check the command whether it is in the command</span></span><br><span class="line"><span class="comment">  * and call `canTransitive`.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param parameters</span></span><br><span class="line"><span class="comment">  * @return std::optional&lt;std::string&gt;</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function">std::optional&lt;std::string&gt; <span class="title">checkCommand</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.cpp</span></span><br><span class="line">State::<span class="built_in">State</span>() &#123;</span><br><span class="line">  allowed.<span class="built_in">insert</span>(<span class="string">&quot;RSET&quot;</span>);</span><br><span class="line">  allowed.<span class="built_in">insert</span>(<span class="string">&quot;EHLO&quot;</span>);</span><br><span class="line">  allowed.<span class="built_in">insert</span>(<span class="string">&quot;QUIT&quot;</span>);</span><br><span class="line">  allowed.<span class="built_in">insert</span>(<span class="string">&quot;NOOP&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">State::canTransitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters)</span> </span>&#123; <span class="keyword">return</span> allowed.<span class="built_in">count</span>(parameters[<span class="number">0</span>]); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function">std::optional&lt;std::string&gt; <span class="title">State::checkCommand</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!commands.<span class="built_in">count</span>(parameters[<span class="number">0</span>])) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;500 &quot;</span> + codeToMessages[<span class="string">&quot;500&quot;</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">canTransitive</span>(parameters)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;503 &quot;</span> + codeToMessages[<span class="string">&quot;503&quot;</span>];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> std::<span class="literal">nullopt</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当服务器端收到命令时，其处理的逻辑如下：首先需要判断客户端的命令是否存在于<code>commands</code>中，然后判断在该状态下是否能够接收该命令，即在上述定义的<code>checkCommand</code>函数的作用，最后需要判断参数是否正确。观察可发现，前三者在所有的状态中都是共通的，故我们需要直接在基类定义这些函数，我们已经定义好了<code>checkCommand</code>函数，因此需要再定义<code>isCorrectParameters</code>用于判断当前的参数是否正确。在目前，我们对此不做任何的处理，只让其返回空值。我们会慢慢地完善这个函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.hpp</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">State</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief is the parameters are correct</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param[in] parameters the command and its parameters</span></span><br><span class="line"><span class="comment">  * @return std::optional&lt;std::string&gt;</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function">std::optional&lt;std::string&gt; <span class="title">isCorrectParameters</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.cpp</span></span><br><span class="line"><span class="function">std::optional&lt;std::string&gt; <span class="title">State::isCorrectParameters</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// <span class="doctag">TODO:</span> finish later</span></span><br><span class="line">  <span class="keyword">return</span> std::<span class="literal">nullopt</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后我们定义纯虚函数 <code>transitive</code>，用于表征状态转换过程应该实现的操作：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.hpp</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">State</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief transitive to another state and return the response string.</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param[in] parameters the command and its parameters</span></span><br><span class="line"><span class="comment">  * @param[out] current the current state</span></span><br><span class="line"><span class="comment">  * @return std::string the results should be sent back to the client</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function"><span class="keyword">virtual</span> std::string <span class="title">transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> </span>= <span class="number">0</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>似乎现在我们已经尽可能地抽象出来了基类，但是我们还可以继续进一步地抽象，注意到<code>QUIT</code>和<code>NOOP</code>命令，对于任何状态来说，这个两个命令都是有确定的效果的。故我们直接可以在基类就直接处理。但是注意<code>QUIT</code>命令需要进行状态的转换，而我们现在却仅定义了一个虚基类，所以这部分我们将留在后面处理。同时，我们定义<code>transitiveHelper</code>函数抽象出所有状态都需要处理的操作。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.hpp</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">State</span>&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  ...</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief QUIT command handle</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @param[in] current the current state</span></span><br><span class="line"><span class="comment">  * @return std::string the response code</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function">std::string <span class="title">transitiveFromQuit</span><span class="params">(std::unique_ptr&lt;State&gt; *&amp;current)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief NOOP command handle</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  * @return std::string the response code</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function">std::string <span class="title">transitiveFromNoop</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * @brief The operations all the states need to do</span></span><br><span class="line"><span class="comment">  *</span></span><br><span class="line"><span class="comment">  */</span></span><br><span class="line">  <span class="function">std::optional&lt;std::string&gt; <span class="title">transitiveHelper</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.cpp</span></span><br><span class="line"><span class="function">std::string <span class="title">State::transitiveFromQuit</span><span class="params">(std::unique_ptr&lt;State&gt; *&amp;current)</span> </span>&#123;</span><br><span class="line">  <span class="comment">// <span class="doctag">TODO:</span> add transition later</span></span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;221 &quot;</span> + codeToMessages[<span class="string">&quot;221&quot;</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">State::transitiveFromNoop</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="string">&quot;250 &quot;</span> + codeToMessages[<span class="string">&quot;250&quot;</span>]; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function">std::optional&lt;std::string&gt; <span class="title">State::transitiveHelper</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters,</span></span></span><br><span class="line"><span class="params"><span class="function">                                                  std::unique_ptr&lt;State&gt; *&amp;current)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">auto</span> result = <span class="built_in">checkCommand</span>(parameters); result.<span class="built_in">has_value</span>()) &#123;</span><br><span class="line">    <span class="keyword">return</span> result.<span class="built_in">value</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">auto</span> result = <span class="built_in">isCorrectParameters</span>(parameters); result.<span class="built_in">has_value</span>()) &#123;</span><br><span class="line">    <span class="keyword">return</span> result.<span class="built_in">value</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (parameters[<span class="number">0</span>] == <span class="string">&quot;QUIT&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">transitiveFromQuit</span>(current);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (parameters[<span class="number">0</span>] == <span class="string">&quot;NOOP&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">transitiveFromNoop</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> std::<span class="literal">nullopt</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>别忘记了将析构函数设置为虚函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.hpp</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">State</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">virtual</span> ~<span class="built_in">State</span>() = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>最后别忘记了在再<code>miniSMTPServer/context</code>目录下创建<code>CMakeLists.txt</code>，同时修改<code>miniSMTPServer</code>中的<code>CMakeLists.txt</code>：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># miniSMTPServer/context/CMakeLists.txt</span></span><br><span class="line"><span class="keyword">add_library</span>(context STATIC state.cpp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># miniSMTPServer/CMakeLists.txt</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">add_subdirectory</span>(./context)</span><br></pre></td></tr></table></figure>
+
+<p>然后你就可以再次执行命令进行编译，如果你遇到了任何编译的问题，你可以先使用<code>git add . &amp;&amp; git stash</code>命令暂存你现在的工作区然后执行<code>git checkout state-class</code>发现你的错误。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>在我看来，我们已经完成了最难部分的工作。看似我们的代码很少，但是我们已经抽象出了状态图并构建了最基本的代码结构，剩下的工作我们只需要定义每一个状态即可，根据每个状态实现相应的函数即可。</p>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89/">https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+      
+      <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+      
+      <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">手把手教你写一个简单的SMTP服务器（三）</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2023/03/12/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89/">  
+        <span class="next-text nav-default">手把手教你写一个简单的SMTP服务器（一）</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:shejialuo@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://twitter.com/luo_hope" class="iconfont icon-twitter" title="twitter"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/jialuo-she-913873289/" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/shejialuo" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2020 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">shejialuo</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="CS144: Introduction to Computer Networking Lab 1" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="技术, 学习, 洛的藏书阁" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="https://luolibrary.com/2022/11/21/CS144-Introduction-to-Computer-Networking-Lab-1/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-7M238H24L4');
+</script>
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>CS144: Introduction to Computer Networking Lab 1 - 洛的藏书阁</title>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">洛的藏书阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/tags/">
+      <li class="mobile-menu-item">
+        
+        
+        Tags              </li>
+    </a>
+    
+    <a href="/categories/">
+      <li class="mobile-menu-item">
+        
+        
+        Categories              </li>
+    </a>
+    
+    <a href="/about/">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">洛的藏书阁</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/tags/">  
+              
+              
+              Tags  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/categories/">  
+              
+              
+              Categories  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about/">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      CS144: Introduction to Computer Networking Lab 1
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2022-11-21
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/CS144/">CS144</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Constructor"><span class="toc-number">1.</span> <span class="toc-text">Constructor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Easy-Functions"><span class="toc-number">2.</span> <span class="toc-text">Easy Functions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reassembler"><span class="toc-number">3.</span> <span class="toc-text">Reassembler</span></a></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <p>You can get the whole series from <a href="https://luolibrary.com/categories/CS144/">here</a></p>
+<hr>
+<p>First, you should carefully read the docs provided by the lab</p>
+<blockquote>
+<p>The TCP sender is dividing its byte stream up into short <em>segments</em> so that they can fit inside a datagram. But the network might reorder these datagrams, or drop them, or deliver them more than once. The receiver must reassemble the segments into the contiguous stream of bytes that they started out as.</p>
+<p>In this lab you’ll write the data structure that will be responsible for this reassembly: a <code>StreamReassembler</code>. It will receive substrings, consisting of a string of bytes, and the index of the first byte of that string within the larger stream. Each byte of the steam has its own unique index, starting from zero and counting upwards. The <code>StreamReassembler</code> will own a ByteStream for the output: as soon as the reassembler knows the next byte of the stream, it will write it into the <code>ByteStream</code>. The owner can access and read from the <code>ByteStream</code> whenever it wants.</p>
+</blockquote>
+<p>And it provides the following public interface:</p>
+<ul>
+<li><code>StreamReassembler(const size_t capacity)</code>: Construct a <code>StreamReassembler</code> that will store up to <code>capacity</code> bytes.</li>
+<li><code>push_substring(const string &amp;data, const size_t index, const bool eof)</code>: Receive a substring and write any newly contiguous bytes into the stream.</li>
+<li><code>ByteStream &amp;stream_out()</code>: Access the reassembled ByteStream (Lab 0)</li>
+<li><code>size_t unaseembled_bytes() const</code>: The number of bytes in the substrings stored but not yet reassembled.</li>
+</ul>
+<p>So, the requirement is obvious. We need to maintain a window. When the datagram comes, we should check whether we should accept the datagram. In order to achieve the functionality, we should consider the following things:</p>
+<ul>
+<li>Indicate the start index of the current window we want to accept.</li>
+<li>The capacity of the window.</li>
+</ul>
+<p>So we need an array to hold the data which I named <code>_stream</code>. And for this array, the logical index is <code>_next_index</code> which means the next index we need. The logical index must exceed the actual length of the <code>stream</code> but we could easily deal with that using <code>_next_index % _capacity</code>. Also, we need a value <code>_unassembly</code> to record the current number of bytes stored but not yet reassembled. And we need a way to know whether the array index is accessed. So maybe hash is a good idea, however, I think here I can only need an array called <code>_dirty</code> to indicate whether the array index is accessed. Simple idea.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">StreamReassembler</span> &#123;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    ByteStream _output;           <span class="comment">//!&lt; The reassembled in-order byte stream</span></span><br><span class="line">    <span class="type">size_t</span> _capacity;             <span class="comment">//!&lt; The maximum number of bytes</span></span><br><span class="line">    <span class="type">size_t</span> _next_index = <span class="number">0</span>;       <span class="comment">//!&lt; The next index we except</span></span><br><span class="line">    <span class="type">size_t</span> _unassembly = <span class="number">0</span>;       <span class="comment">//!&lt; The number of bytes in the substrings stored but not yet reassembled</span></span><br><span class="line">    <span class="type">bool</span> _should_eof = <span class="literal">false</span>;     <span class="comment">//!&lt; Flag about telling ByteStream to end input</span></span><br><span class="line">    std::vector&lt;<span class="type">char</span>&gt; _stream&#123;&#125;;  <span class="comment">//!&lt; The window</span></span><br><span class="line">    std::vector&lt;<span class="type">bool</span>&gt; _dirty&#123;&#125;;   <span class="comment">//!&lt; A table to indicate whether the element is stored</span></span><br><span class="line">    <span class="function"><span class="type">size_t</span> <span class="title">next</span><span class="params">(<span class="type">size_t</span> ptr)</span> </span>&#123; <span class="keyword">return</span> (ptr + <span class="number">1</span>) % _capacity; &#125;</span><br><span class="line">  ...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Constructor"><a href="#Constructor" class="headerlink" title="Constructor"></a>Constructor</h2><p>For constructor, it is easy, we should initialize the <code>_capacity</code> and <code>_output</code>, and initialize the <code>_stream</code> and <code>_dirty</code>.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">StreamReassembler::<span class="built_in">StreamReassembler</span>(<span class="type">const</span> <span class="type">size_t</span> capacity) : _output(capacity), _capacity(capacity) &#123;</span><br><span class="line">    _stream.<span class="built_in">resize</span>(capacity, <span class="number">0</span>);</span><br><span class="line">    _dirty.<span class="built_in">resize</span>(capacity, <span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Easy-Functions"><a href="#Easy-Functions" class="headerlink" title="Easy Functions"></a>Easy Functions</h2><p>There are some extremely easy functions:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">size_t</span> <span class="title">StreamReassembler::unassembled_bytes</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> &#123;_unassembly&#125;; &#125;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">StreamReassembler::empty</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> &#123;_unassembly == <span class="number">0</span>&#125;; &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Reassembler"><a href="#Reassembler" class="headerlink" title="Reassembler"></a>Reassembler</h2><p>Now we come to the most interesting part. We should consider the following situations:</p>
+<ul>
+<li>When the data is totally before the <code>_next_index</code>: we should reject.</li>
+<li>When the data is totally after the <code>_next_index + _capacity</code>: we should reject.</li>
+<li>When the data is inside the window: we should store the value to <code>_stream</code>, and sets the corresponding <code>_dirty</code> to <code>true</code>. If we can find continuos range from <code>_next_index</code>, we should write the data to the ByteStream and move the <code>_next_index</code> pointer.</li>
+<li>When the data is partially inside the window: do as above.</li>
+</ul>
+<p>And next we should indicate whether we should signal the ByteStream that the input is end. The <code>push_substring</code> function provides a boolean value <code>eof</code> to indicate this string is the end. However, when should we accept this information. This should be a <em>valid</em> data, which means that we could write the data to the ByteStream. However, pay attention to the corner case: the data could be empty in this situation.</p>
+<p>However, there are some trivial details. You could see the following code with descriptive comments.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">StreamReassembler::push_substring</span><span class="params">(<span class="type">const</span> string &amp;data, <span class="type">const</span> <span class="type">size_t</span> index, <span class="type">const</span> <span class="type">bool</span> eof)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// When the string is out of the `_next_index+_capacity` or the end of the string</span></span><br><span class="line">    <span class="comment">// is before the `_next_index`, we should do NOTHING.</span></span><br><span class="line">    <span class="keyword">if</span> (index &gt;= _capacity + _next_index || _next_index &gt; index + data.<span class="built_in">size</span>())</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Here we should consider the situation that we should accept part of</span></span><br><span class="line">    <span class="comment">// the string, when `actual_index &lt; _next_index`. We should set the `actual_index`</span></span><br><span class="line">    <span class="comment">// to be the `_next_index` to drop the previous string, and make `data_index`</span></span><br><span class="line">    <span class="comment">// to be the `_next_index-index`.</span></span><br><span class="line">    <span class="type">size_t</span> actual_index = index;</span><br><span class="line">    <span class="type">size_t</span> data_index = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (index &lt; _next_index) &#123;</span><br><span class="line">        actual_index = _next_index;</span><br><span class="line">        data_index += _next_index - index;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Here we need to find the start index and loop index</span></span><br><span class="line">    <span class="type">size_t</span> start_index = _next_index % _capacity;</span><br><span class="line">    <span class="type">size_t</span> loop_index = actual_index % _capacity;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Corner case: when the data is empty. This is important</span></span><br><span class="line">    <span class="comment">// Because the below iteration does not consider</span></span><br><span class="line">    <span class="keyword">if</span> (data.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="keyword">if</span> (eof) &#123;</span><br><span class="line">            _should_eof = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Here, when `_dirty[index] == false` We store the byte into</span></span><br><span class="line">    <span class="comment">// the `_stream[index]` and set the `_dirty[index]` to be true.</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = loop_index, j = data_index; j &lt; data.<span class="built_in">size</span>(); i = <span class="built_in">next</span>(i), j++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (!_dirty[i]) &#123;</span><br><span class="line">            _stream[i] = data[j];</span><br><span class="line">            _unassembly++;</span><br><span class="line">            _dirty[i] = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (j + <span class="number">1</span> == data.<span class="built_in">size</span>()) &#123;</span><br><span class="line">          <span class="keyword">if</span> (eof) &#123;</span><br><span class="line">            _should_eof = <span class="literal">true</span>;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">next</span>(i) == start_index)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// We should calculate consecutive `_dirty[index]` from `_next_index`.</span></span><br><span class="line">    <span class="comment">// Pay attention, you shouldn&#x27;t set the `dirty[index]` to false,</span></span><br><span class="line">    <span class="comment">// because we DO NOT KNOW the ByteStream&#x27;s size, so we</span></span><br><span class="line">    <span class="comment">// need to get the bytes actually written into the `_output`.</span></span><br><span class="line">    string send_str&#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = start_index; _dirty[i]; i = <span class="built_in">next</span>(i)) &#123;</span><br><span class="line">        send_str.<span class="built_in">push_back</span>(_stream[i]);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">next</span>(i) == start_index)</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If there is need to send the bytes</span></span><br><span class="line">    <span class="keyword">if</span> (!send_str.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="type">size_t</span> write_num = <span class="built_in">stream_out</span>().<span class="built_in">write</span>(send_str);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">size_t</span> i = start_index, j = <span class="number">0</span>; j &lt; write_num; i = <span class="built_in">next</span>(i), ++j) &#123;</span><br><span class="line">            _dirty[i] = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        _next_index += write_num;</span><br><span class="line">        _unassembly -= write_num;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (_should_eof &amp;&amp; <span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="built_in">stream_out</span>().<span class="built_in">end_input</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2022/11/21/CS144-Introduction-to-Computer-Networking-Lab-1/">https://luolibrary.com/2022/11/21/CS144-Introduction-to-Computer-Networking-Lab-1/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+      
+      <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2022/11/22/CS144-Introduction-to-Computer-Networking-Lab-2/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">CS144: Introduction to Computer Networking Lab 2</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2022/11/21/CS144-Introduction-to-Computer-Networking-Lab-0/">  
+        <span class="next-text nav-default">CS144: Introduction to Computer Networking Lab 0</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:shejialuo@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://twitter.com/luo_hope" class="iconfont icon-twitter" title="twitter"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/jialuo-she-913873289/" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/shejialuo" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2020 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">shejialuo</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>

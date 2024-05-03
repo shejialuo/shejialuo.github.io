@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="手把手教你写一个简单的SMTP服务器（一）" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="技术, 学习, 教程, 洛的藏书阁" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="https://luolibrary.com/2023/03/12/手把手教你写一个简单的SMTP服务器（一）/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-7M238H24L4');
+</script>
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>手把手教你写一个简单的SMTP服务器（一） - 洛的藏书阁</title>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">洛的藏书阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/tags/">
+      <li class="mobile-menu-item">
+        
+        
+        Tags              </li>
+    </a>
+    
+    <a href="/categories/">
+      <li class="mobile-menu-item">
+        
+        
+        Categories              </li>
+    </a>
+    
+    <a href="/about/">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">洛的藏书阁</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/tags/">  
+              
+              
+              Tags  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/categories/">  
+              
+              
+              Categories  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about/">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      手把手教你写一个简单的SMTP服务器（一）
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2023-03-12
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8/">手把手教你写一个简单的SMTP服务器</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%81%87%E8%AE%BE"><span class="toc-number">1.</span> <span class="toc-text">假设</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">2.</span> <span class="toc-text">基础知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%9D%E5%A7%8B%E4%BB%A3%E7%A0%81"><span class="toc-number">3.</span> <span class="toc-text">初始代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%81%E8%A3%85TCP-Server"><span class="toc-number">4.</span> <span class="toc-text">封装TCP Server</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8"><span class="toc-number">4.1.</span> <span class="toc-text">封装系统调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%81%E8%A3%85TCPSocket"><span class="toc-number">4.2.</span> <span class="toc-text">封装TCPSocket</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">5.</span> <span class="toc-text">测试</span></a></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <ul>
+<li><a href="https://luolibrary.com/2023/03/12/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89/">手把手教你写一个简单的SMTP服务器（一）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89/">手把手教你写一个简单的SMTP服务器（二）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89/">手把手教你写一个简单的SMTP服务器（三）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89/">手把手教你写一个简单的SMTP服务器（四）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%94%EF%BC%89/">手把手教你写一个简单的SMTP服务器（五）</a></li>
+</ul>
+<hr>
+<p>本系列的教程拟使用现代C++一步一步地实现一个简单的SMTP服务器，其主要目的在于国内目前计算机网络教学多是针对于协议本身的教学而忽略了实践。<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol">Simple Mail Transfer Protocol (SMTP)</a>是应用层中较为简单的协议，十分适合用来进行实践。在这里，借用费曼的话：</p>
+<blockquote>
+<p>What I cannot create, I do not understand.</p>
+</blockquote>
+<p>然而，完整的SMTP协议也是相当繁琐的。故本教程会对完整的SMTP协议进行简化，并假设SMTP服务器运行在本地的环境，不需要扩展以支持通过Internet的TCP连接进而能用在现实世界中。服务器所有的通信都应包含在本地回环（local loopback）中。</p>
+<p>在开始之前，你应该对SMTP协议有一些基本的了解，并对C++的现代特性有所了解，如果你对此没有把握，你可以参考互联网的资料进行学习。</p>
+<h2 id="假设"><a href="#假设" class="headerlink" title="假设"></a>假设</h2><p>为了让教程聚焦于核心的部分，本教程做出了以下的前提条件：</p>
+<ul>
+<li>SMTP服务器仅只需要运行在本地，所有的通信都应包含在本地回环中。</li>
+<li>对于每一次客户端的请求，SMTP服务器仅只产生一个响应。且只有客户端接收了服务器的相应，才能够再次发送请求。</li>
+<li>SMTP服务器仅支持以下的命令：<ul>
+<li><code>EHLO</code></li>
+<li><code>MAIL</code></li>
+<li><code>RCPT</code></li>
+<li><code>DATA</code></li>
+<li><code>RSET</code></li>
+<li><code>NOOP</code></li>
+<li><code>QUIT</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%89%A9%E5%85%85%E5%B7%B4%E7%A7%91%E6%96%AF%E8%8C%83%E5%BC%8F">扩充巴科斯范式（ABNF）</a>：本教程将采用ABNF来定义通信的协议。其思路很容易理解，读者可参考链接有一个初步的认识。</li>
+<li>Socket网络编程基础：本教程拟在Linux环境下实现，读者需掌握Socket的基本使用。</li>
+</ul>
+<h2 id="初始代码"><a href="#初始代码" class="headerlink" title="初始代码"></a>初始代码</h2><p>不幸的是，<code>cpp</code>的编译构建系统远不如其他语言方便，为了减少读者的心智负担，本教程提供了最初的代码。读者可以通过以下的命令下载初始代码：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/shejialuo/miniSMTPServer</span><br><span class="line"></span><br><span class="line">git checkout start-code</span><br></pre></td></tr></table></figure>
+
+<p>用你最喜欢的编辑器或者IDE打开，你应该看到如下的目录结构：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">├── CMakeLists.txt</span><br><span class="line">├── miniSMTPServer</span><br><span class="line">│   ├── CMakeLists.txt</span><br><span class="line">│   └── miniSMTPServer.cpp</span><br><span class="line">└── README.md</span><br></pre></td></tr></table></figure>
+
+<p>然后你可以执行如下的命令进行编译并生成可执行文件（在这个过程中，你需要使用代理下载第三方库）：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build &amp;&amp; <span class="built_in">cd</span> build &amp;&amp; cmake .. &amp;&amp; cmake --build .</span><br></pre></td></tr></table></figure>
+
+<p>当你执行完后，你会在主目录下看到生成了一个名为<code>miniSMTP</code>的可执行文件。在终端运行<code>./miniSMTP</code>，产生如下的结果：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello, This is a simple SMTP server</span><br></pre></td></tr></table></figure>
+
+<h2 id="封装TCP-Server"><a href="#封装TCP-Server" class="headerlink" title="封装TCP Server"></a>封装TCP Server</h2><p>实际上，本教程可以直接通过<code>socket</code>编程进行实现，然而这样的实现过于地丑陋。故本教程拟对TCP Server进行一个简单地封装。其核心的内容的思路来源于<a target="_blank" rel="noopener" href="https://github.com/CS144/sponge">CS144</a>，如果你对此部分不感兴趣或者感到困难的话，可以直接跳过本部分，毕竟此处不是教程的重点。</p>
+<h3 id="封装系统调用"><a href="#封装系统调用" class="headerlink" title="封装系统调用"></a>封装系统调用</h3><p>首先我们在<code>miniSMTPServer</code>目录下创建一个名为<code>util</code>的目录，然后在<code>util</code>目录下创建<code>util.hpp</code>，<code>util.cpp</code>和<code>CMakeLists.txt</code>。 我们只需要实现一个功能，就是封装系统调用，并提供相应的错误检测机制。其实现逻辑十分简单，此处不赘述。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># miniSMTPServer/util/CMakeLists.txt</span></span><br><span class="line"><span class="keyword">add_library</span>(util STATIC util.cpp)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/util/util.hpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cerrno&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;system_error&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief std::system_error plus the name of what was being</span></span><br><span class="line"><span class="comment"> * attempted.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">tagged_error</span> :</span> public <span class="built_in">std</span>::system_error &#123;</span><br><span class="line">private:</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">string</span> attempt_and_error;  <span class="comment">//!&lt; what was attempted, and what happened</span></span><br><span class="line"></span><br><span class="line">public:</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief Construct from a category, an attempt, and an error code.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * @param[in] category is the category of error</span></span><br><span class="line"><span class="comment">   * @param[in] attempt is what was supposed to happen</span></span><br><span class="line"><span class="comment">   * @param[in] error_code is the resulting error</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  tagged_error(<span class="type">const</span> <span class="built_in">std</span>::error_category &amp;category, <span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;attempt, <span class="type">const</span> <span class="type">int</span> error_code)</span><br><span class="line">      : <span class="built_in">std</span>::system_error&#123;error_code, category&#125;, attempt_and_error&#123;attempt + <span class="string">&quot;: &quot;</span> + <span class="built_in">std</span>::system_error::what()&#125; &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief Returns a C string describing the error</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="type">const</span> <span class="type">char</span> *<span class="title function_">what</span><span class="params">()</span> <span class="type">const</span> noexcept override &#123; <span class="keyword">return</span> attempt_and_error.c_str(); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief A tagged_error for syscalls</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">unix_error</span> :</span> public tagged_error &#123;</span><br><span class="line">public:</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief  Construct from a syscall name and the resulting errno</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * @param[in] attempt is the name of the syscall attempted</span></span><br><span class="line"><span class="comment">   * @param[in] error is the [errno(3)](\ref man3::errno) that resulted</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  explicit <span class="title function_">unix_error</span><span class="params">(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;attempt, <span class="type">const</span> <span class="type">int</span> error = errno)</span></span><br><span class="line">      : tagged_error&#123;<span class="built_in">std</span>::system_category(), attempt, error&#125; &#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief Error-checking wrapper for most syscalls</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">SystemCall</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *attempt, <span class="type">const</span> <span class="type">int</span> return_value, <span class="type">const</span> <span class="type">int</span> errno_mask = <span class="number">0</span>)</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief Version of SystemCall that takes a C++ std::string</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">SystemCall</span><span class="params">(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;attempt, <span class="type">const</span> <span class="type">int</span> return_value, <span class="type">const</span> <span class="type">int</span> errno_mask = <span class="number">0</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/util/util.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;util.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">SystemCall</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *attempt, <span class="type">const</span> <span class="type">int</span> return_value, <span class="type">const</span> <span class="type">int</span> errno_mask)</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (return_value &gt;= <span class="number">0</span> || errno == errno_mask) &#123;</span><br><span class="line">    <span class="keyword">return</span> return_value;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  throw unix_error(attempt);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">SystemCall</span><span class="params">(<span class="type">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;attempt, <span class="type">const</span> <span class="type">int</span> return_value, <span class="type">const</span> <span class="type">int</span> errno_mask)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> SystemCall(attempt.c_str(), return_value, errno_mask);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后，需要在<code>miniSMTPServer</code>的<code>CMakeLists.txt</code>的末尾添加如下的语句：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># miniSMTPServer/CMakeLists.txt</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">add_subdirectory</span>(./util)</span><br></pre></td></tr></table></figure>
+
+<p>你也可以直接使用如下的命令获取到本小节的代码：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout system-call</span><br></pre></td></tr></table></figure>
+
+<h3 id="封装TCPSocket"><a href="#封装TCPSocket" class="headerlink" title="封装TCPSocket"></a>封装TCPSocket</h3><p>如何封装一个<code>TCPSocket</code>呢？我们可以分为一下三步走：</p>
+<ol>
+<li>封装文件描述符类<code>FileDescriptor</code></li>
+<li>封装地址类<code>Address</code>。</li>
+<li>继承<code>FileDescriptor</code>得到<code>TCPSocket</code>。</li>
+</ol>
+<p>首先我们在<code>util</code>目录下创建<code>socket.hpp</code>和<code>socket.cpp</code>，并修改<code>CMakeLists.txt</code>将<code>socket.cpp</code>加入编译单元中。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># miniSMTPServer/util/CMakeLists.txt</span></span><br><span class="line"><span class="keyword">add_library</span>(util STATIC util.cpp socket.cpp)</span><br></pre></td></tr></table></figure>
+
+<p>首先，我们需要构造一个<code>FileDescriptor</code>类，实际上对于该类的封装的思路可以很简单，也可以很复杂，如果我们不考虑其复制等生命周期问题，我们完全可以直接使用一个<code>int</code>类型的变量然后添加一些操作文件描述符的方法。在此处，我们采用更为复杂的设计模式：</p>
+<ol>
+<li><code>FileDescriptor</code>包含一个私有的<code>FDWrapper</code>，其包含了真正的文件描述符的信息。<code>FDWrapper</code>不能被复制也不能被移动。</li>
+<li>由于<code>FDWrapper</code>不能被复制也不能被移动，故<code>FileDescriptor</code>包含变量<code>internal_fd</code>的智能指针，表示<code>FDWrapper</code>被引用的数量，通过<code>shared_ptr</code>表示<code>FDWrapper</code>的生命周期。</li>
+</ol>
+<p>于是，我们就可以给出如下的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/util/socket.hpp</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">FileDescriptor</span> &#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief  A handle on a kernel file descriptor.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * @details FileDescriptor objects contain a std::shared_ptr to a FDWrapper.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">class</span> <span class="title class_">FDWrapper</span> &#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="type">int</span> fd;               <span class="comment">//!&lt; The file descriptor number returned by the kernel</span></span><br><span class="line">    <span class="type">bool</span> eof = <span class="literal">false</span>;     <span class="comment">//!&lt; Flag indicating whether FDWrapper::_fd is at EOF</span></span><br><span class="line">    <span class="type">bool</span> closed = <span class="literal">false</span>;  <span class="comment">//!&lt; Flag indicating whether FDWrapper::_fd has been closed</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @brief Construct from a file descriptor number returned by the kernel</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">FDWrapper</span><span class="params">(<span class="type">const</span> <span class="type">int</span> fd)</span></span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @brief Closes the file descriptor upon destruction</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    ~<span class="built_in">FDWrapper</span>();</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * @brief Calls [close(2)](\ref man2::close) on FDWrapper::fd</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">close</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">FDWrapper</span>(<span class="type">const</span> FDWrapper &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">    FDWrapper &amp;<span class="keyword">operator</span>=(<span class="type">const</span> FDWrapper &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="built_in">FDWrapper</span>(FDWrapper &amp;&amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">    FDWrapper &amp;<span class="keyword">operator</span>=(FDWrapper &amp;&amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! A reference-counted handle to a shared FDWrapper</span></span><br><span class="line">  std::shared_ptr&lt;FDWrapper&gt; internal_fd;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// private constructor used to duplicate the FileDescriptor (increase the reference count)</span></span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">FileDescriptor</span><span class="params">(std::shared_ptr&lt;FDWrapper&gt; other_shared_ptr)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">//! Construct from a file descriptor number returned by the kernel</span></span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">FileDescriptor</span><span class="params">(<span class="type">const</span> <span class="type">int</span> fd)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Free the std::shared_ptr; the FDWrapper destructor calls close() when the refcount goes to zero.</span></span><br><span class="line">  ~<span class="built_in">FileDescriptor</span>() = <span class="keyword">default</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Read up to `limit` bytes</span></span><br><span class="line">  <span class="function">std::string <span class="title">read</span><span class="params">(<span class="type">const</span> <span class="type">size_t</span> limit = std::numeric_limits&lt;<span class="type">size_t</span>&gt;::max())</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Read up to `limit` bytes into `str` (caller can allocate storage)</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">read</span><span class="params">(std::string &amp;str, <span class="type">const</span> <span class="type">size_t</span> limit = std::numeric_limits&lt;<span class="type">size_t</span>&gt;::max())</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Write a string, possibly blocking until all is written</span></span><br><span class="line">  <span class="function"><span class="type">size_t</span> <span class="title">write</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Write a string, possibly blocking until all is written</span></span><br><span class="line">  <span class="function"><span class="type">size_t</span> <span class="title">write</span><span class="params">(<span class="type">const</span> std::string &amp;str)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Close the underlying file descriptor</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123; internal_fd-&gt;<span class="built_in">close</span>(); &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Copy a FileDescriptor explicitly, increasing the FDWrapper refcount</span></span><br><span class="line">  <span class="function">FileDescriptor <span class="title">duplicate</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">int</span> <span class="title">fd_num</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> internal_fd-&gt;fd; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">eof</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> internal_fd-&gt;eof; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">closed</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> internal_fd-&gt;closed; &#125;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">FileDescriptor</span>(<span class="type">const</span> FileDescriptor &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">  FileDescriptor &amp;<span class="keyword">operator</span>=(<span class="type">const</span> FileDescriptor &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">  <span class="built_in">FileDescriptor</span>(FileDescriptor &amp;&amp;other) = <span class="keyword">default</span>;</span><br><span class="line">  FileDescriptor &amp;<span class="keyword">operator</span>=(FileDescriptor &amp;&amp;other) = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/util/socket.cpp</span></span><br><span class="line">FileDescriptor::FDWrapper::<span class="built_in">FDWrapper</span>(<span class="type">const</span> <span class="type">int</span> f) : fd&#123;f&#125; &#123;</span><br><span class="line">  <span class="keyword">if</span> (fd &lt; <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> std::<span class="built_in">runtime_error</span>(<span class="string">&quot;invalid fd number:&quot;</span> + std::<span class="built_in">to_string</span>(fd));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> FileDescriptor::FDWrapper::<span class="built_in">close</span>() &#123;</span><br><span class="line">  <span class="built_in">SystemCall</span>(<span class="string">&quot;close&quot;</span>, ::<span class="built_in">close</span>(fd));</span><br><span class="line">  eof = closed = <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FileDescriptor::FDWrapper::~<span class="built_in">FDWrapper</span>() &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (closed) &#123;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">close</span>();</span><br><span class="line">  &#125; <span class="built_in">catch</span> (<span class="type">const</span> std::exception &amp;e) &#123;</span><br><span class="line">    std::cerr &lt;&lt; <span class="string">&quot;Exception destructing FileWrapper: &quot;</span> &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; std::endl;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">FileDescriptor::<span class="built_in">FileDescriptor</span>(<span class="type">const</span> <span class="type">int</span> fd) : internal_fd&#123;std::<span class="built_in">make_shared</span>&lt;FDWrapper&gt;(fd)&#125; &#123;&#125;</span><br><span class="line"></span><br><span class="line">FileDescriptor::<span class="built_in">FileDescriptor</span>(std::shared_ptr&lt;FDWrapper&gt; other) : internal_fd&#123;std::<span class="built_in">move</span>(other)&#125; &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">FileDescriptor <span class="title">FileDescriptor::duplicate</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">FileDescriptor</span>(internal_fd); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">FileDescriptor::read</span><span class="params">(std::string &amp;str, <span class="type">const</span> <span class="type">size_t</span> limit)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constexpr</span> <span class="type">size_t</span> BUFFER_SIZE = <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line">  <span class="type">const</span> <span class="type">size_t</span> size_to_read = std::<span class="built_in">min</span>(BUFFER_SIZE, limit);</span><br><span class="line">  str.<span class="built_in">resize</span>(size_to_read);</span><br><span class="line"></span><br><span class="line">  <span class="type">ssize_t</span> bytes_read = <span class="built_in">SystemCall</span>(<span class="string">&quot;read&quot;</span>, ::<span class="built_in">read</span>(<span class="built_in">fd_num</span>(), str.<span class="built_in">data</span>(), size_to_read));</span><br><span class="line">  <span class="keyword">if</span> (limit &gt; <span class="number">0</span> &amp;&amp; bytes_read == <span class="number">0</span>) &#123;</span><br><span class="line">    internal_fd-&gt;eof = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (bytes_read &gt; <span class="built_in">static_cast</span>&lt;<span class="type">ssize_t</span>&gt;(size_to_read)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> std::<span class="built_in">runtime_error</span>(<span class="string">&quot;read() read more than requested&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  str.<span class="built_in">resize</span>(bytes_read);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">std::string <span class="title">FileDescriptor::read</span><span class="params">(<span class="type">const</span> <span class="type">size_t</span> limit)</span> </span>&#123;</span><br><span class="line">  std::string ret;</span><br><span class="line">  <span class="built_in">read</span>(ret, limit);</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">size_t</span> <span class="title">FileDescriptor::write</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str)</span> </span>&#123;</span><br><span class="line">  <span class="type">size_t</span> bytes_written = <span class="number">0</span>;</span><br><span class="line">  bytes_written = <span class="built_in">SystemCall</span>(<span class="string">&quot;write&quot;</span>, ::<span class="built_in">write</span>(<span class="built_in">fd_num</span>(), str, <span class="built_in">strlen</span>(str)));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (bytes_written == <span class="number">0</span> &amp;&amp; <span class="built_in">strlen</span>(str) != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> std::<span class="built_in">runtime_error</span>(<span class="string">&quot;write() returned 0 given non-empty input&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (bytes_written &gt; <span class="built_in">strlen</span>(str)) &#123;</span><br><span class="line">    <span class="keyword">throw</span> std::<span class="built_in">runtime_error</span>(<span class="string">&quot;write() wrote more than requested&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> bytes_written;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">size_t</span> <span class="title">FileDescriptor::write</span><span class="params">(<span class="type">const</span> std::string &amp;str)</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">write</span>(str.<span class="built_in">c_str</span>());</span><br></pre></td></tr></table></figure>
+
+<p>如果为了更好的扩展性，我们应该去新建一个<code>Address</code>类表示地址，但是此处我偷懒了，因为我们的重心并不在此处。<code>TCPSocket</code>的操作就比较简单了，只需要在<code>FileDescriptor</code>的基础上，增加以下的方法：</p>
+<ul>
+<li><code>bind</code></li>
+<li><code>listen</code></li>
+<li><code>accept</code></li>
+<li><code>set_reuseaddr</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/util/socket.hpp</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TCPSocket</span> : <span class="keyword">public</span> FileDescriptor &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">//! Construct via [socket(2)](\ref man2::socket)</span></span><br><span class="line">  <span class="built_in">TCPSocket</span>();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">TCPSocket</span><span class="params">(FileDescriptor &amp;&amp;fd)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Wrapper around [setsockopt(2)](\ref man2::setsockopt)</span></span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> option_type&gt;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">setsockopt</span><span class="params">(<span class="type">const</span> <span class="type">int</span> level, <span class="type">const</span> <span class="type">int</span> option, <span class="type">const</span> option_type &amp;option_value)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Bind a socket to a specified address with [bind(2)](\ref man2::bind), usually for listen/accept</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">bind</span><span class="params">(<span class="type">int</span> port = <span class="number">9400</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Mark a socket as listening for incoming connections</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">listen</span><span class="params">(<span class="type">const</span> <span class="type">int</span> backlog = <span class="number">16</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Accept a new incoming connection</span></span><br><span class="line">  <span class="function">TCPSocket <span class="title">accept</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//! Allow local address to be reused sooner via [SO_REUSEADDR](\ref man7::socket)</span></span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">set_reuseaddr</span><span class="params">()</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/util/socket.cpp</span></span><br><span class="line">TCPSocket::<span class="built_in">TCPSocket</span>() : FileDescriptor&#123;<span class="built_in">SystemCall</span>(<span class="string">&quot;socket&quot;</span>, ::<span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>))&#125; &#123;&#125;</span><br><span class="line"></span><br><span class="line">TCPSocket::<span class="built_in">TCPSocket</span>(FileDescriptor &amp;&amp;fd) : <span class="built_in">FileDescriptor</span>(std::<span class="built_in">move</span>(fd)) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> option_type&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TCPSocket::setsockopt</span><span class="params">(<span class="type">const</span> <span class="type">int</span> level, <span class="type">const</span> <span class="type">int</span> option, <span class="type">const</span> option_type &amp;option_value)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">SystemCall</span>(<span class="string">&quot;setsockopt&quot;</span>, ::<span class="built_in">setsockopt</span>(<span class="built_in">fd_num</span>(), level, option, &amp;option_value, <span class="built_in">sizeof</span>(option_value)));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TCPSocket::set_reuseaddr</span><span class="params">()</span> </span>&#123; <span class="built_in">setsockopt</span>(SOL_SOCKET, SO_REUSEADDR, <span class="built_in">int</span>(<span class="literal">true</span>)); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TCPSocket::bind</span><span class="params">(<span class="type">int</span> port)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">sockaddr_in</span> address;</span><br><span class="line"></span><br><span class="line">  address.sin_family = AF_INET;</span><br><span class="line">  address.sin_port = <span class="built_in">htons</span>(port);</span><br><span class="line">  <span class="built_in">inet_pton</span>(AF_INET, <span class="string">&quot;127.0.0.1&quot;</span>, &amp;address.sin_addr);</span><br><span class="line">  <span class="built_in">SystemCall</span>(<span class="string">&quot;bind&quot;</span>, ::<span class="built_in">bind</span>(<span class="built_in">fd_num</span>(), (<span class="keyword">struct</span> sockaddr *)&amp;address, <span class="built_in">sizeof</span>(address)));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">TCPSocket::listen</span><span class="params">(<span class="type">const</span> <span class="type">int</span> backlog)</span> </span>&#123; <span class="built_in">SystemCall</span>(<span class="string">&quot;listen&quot;</span>, ::<span class="built_in">listen</span>(<span class="built_in">fd_num</span>(), backlog)); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function">TCPSocket <span class="title">TCPSocket::accept</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">TCPSocket</span>(<span class="built_in">FileDescriptor</span>(<span class="built_in">SystemCall</span>(<span class="string">&quot;accept&quot;</span>, ::<span class="built_in">accept</span>(<span class="built_in">fd_num</span>(), <span class="literal">nullptr</span>, <span class="literal">nullptr</span>))));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你也可以直接使用以下的命令得到上述的代码：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout tcp-socket</span><br></pre></td></tr></table></figure>
+
+<p>你可以发现，我们其实绕了一大圈最终也只是为了实现这些命令，但是这些类的建立为我们写代码提供了良好的抽象能力。</p>
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>在完成了<code>TCPSocket</code>类的实现后，我们就可以开始写一个简单的服务器了，在这个简单的服务器中，我们不使用任何的线程，不使用任何的I&#x2F;O复用，我们就简单地一个一个处理到来的请求。毕竟我们的重点并不在于服务器高性能的实现。</p>
+<p>在<code>miniSMTPServer/miniSMTPServer.cpp</code>中编写如下的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;socket.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  std::cout &lt;&lt; <span class="string">&quot;Hello, This is a simple SMTP server\n&quot;</span>;</span><br><span class="line"></span><br><span class="line">  TCPSocket socket&#123;&#125;;</span><br><span class="line">  socket.<span class="built_in">bind</span>();</span><br><span class="line">  socket.<span class="built_in">listen</span>();</span><br><span class="line"></span><br><span class="line">  std::string result&#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">auto</span> s = socket.<span class="built_in">accept</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">      s.<span class="built_in">read</span>(result);</span><br><span class="line">      <span class="keyword">if</span> (result.<span class="built_in">size</span>() == <span class="number">0</span>) &#123;</span><br><span class="line">        std::cout &lt;&lt; <span class="string">&quot;S: Connection lost\n&quot;</span>;</span><br><span class="line">        s.<span class="built_in">close</span>();</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      s.<span class="built_in">write</span>(<span class="string">&quot;Hello, this is the server\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同时，我们需要修改<code>miniSMTPServer/CMakeLists.txt</code>为其添加相应的头文件和库：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_include_directories</span>(miniSMTP PRIVATE ./util)</span><br><span class="line"><span class="keyword">target_link_libraries</span>(miniSMTP util)</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>同样地，你也可以使用下面的命令得到如上所示的代码：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout tcp-server</span><br></pre></td></tr></table></figure>
+
+<p>编译代码运行<code>./miniSMTP</code>，然后执行命令<code>telnet 127.0.0.1 9400</code>，你应该能够得到如下图所示的执行的结果。</p>
+<p><img src="https://s2.loli.net/2023/03/12/TnurykNBVoLYeXx.png" alt="Simple Server Test Result"></p>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2023/03/12/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89/">https://luolibrary.com/2023/03/12/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+      
+      <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+      
+      <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">手把手教你写一个简单的SMTP服务器（二）</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2023/02/01/CS149-Assignment2-Building-A-Task-Execution-Library/">  
+        <span class="next-text nav-default">CS149-Assignment2 Building A Task Execution Library</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:shejialuo@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://twitter.com/luo_hope" class="iconfont icon-twitter" title="twitter"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/jialuo-she-913873289/" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/shejialuo" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2020 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">shejialuo</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>

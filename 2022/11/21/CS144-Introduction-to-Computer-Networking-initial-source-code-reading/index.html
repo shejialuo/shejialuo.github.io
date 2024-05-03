@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="CS144: Introduction to Computer Networking initial source code reading" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="技术, 学习, 洛的藏书阁" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="https://luolibrary.com/2022/11/21/CS144-Introduction-to-Computer-Networking-initial-source-code-reading/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-7M238H24L4');
+</script>
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>CS144: Introduction to Computer Networking initial source code reading - 洛的藏书阁</title>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">洛的藏书阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/tags/">
+      <li class="mobile-menu-item">
+        
+        
+        Tags              </li>
+    </a>
+    
+    <a href="/categories/">
+      <li class="mobile-menu-item">
+        
+        
+        Categories              </li>
+    </a>
+    
+    <a href="/about/">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">洛的藏书阁</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/tags/">  
+              
+              
+              Tags  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/categories/">  
+              
+              
+              Categories  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about/">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      CS144: Introduction to Computer Networking initial source code reading
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2022-11-21
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/CS144/">CS144</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#File-Descriptor"><span class="toc-number">1.</span> <span class="toc-text">File Descriptor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Buf"><span class="toc-number">2.</span> <span class="toc-text">Buf</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reading-and-Writing-File"><span class="toc-number">3.</span> <span class="toc-text">Reading and Writing File</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Address"><span class="toc-number">4.</span> <span class="toc-text">Address</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EventLoop"><span class="toc-number">5.</span> <span class="toc-text">EventLoop</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Socket"><span class="toc-number">6.</span> <span class="toc-text">Socket</span></a></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <p>You can get the whole series from <a href="https://luolibrary.com/categories/CS144/">here</a></p>
+<hr>
+<h2 id="File-Descriptor"><a href="#File-Descriptor" class="headerlink" title="File Descriptor"></a>File Descriptor</h2><p>First, the source code uses <code>FileDescriptor</code> class to wrap the file descriptor. The <code>FileDescriptor</code> class first defines a private <code>FDWrapper</code> class, and also defines a private <code>shared_ptr</code> to point to the <code>FDWrapper</code> class. The code has also provided the private constructor to duplicate the <code>FileDescriptor</code>, and a public constructor to accept a <code>const int</code> file descriptor for initialization. Because there is no need to copy or move the <code>FDWrapper</code>, we disable all these operations. And due to the principle of the RAII, we should close the file in the destructor.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FDwrapper</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="type">int</span> _fd;</span><br><span class="line">  <span class="type">bool</span> _eof = <span class="literal">false</span>;</span><br><span class="line">  <span class="type">bool</span> _closed = <span class="literal">false</span>;</span><br><span class="line">  <span class="type">unsigned</span> _read_count = <span class="number">0</span>;</span><br><span class="line">  <span class="type">unsigned</span> _read_count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">FDWrapper</span><span class="params">(<span class="type">const</span> <span class="type">int</span> fd)</span> </span>&#123;</span><br><span class="line">    _fd = fd;</span><br><span class="line">    <span class="keyword">if</span>(fd &lt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="built_in">runtime_error</span>(<span class="string">&quot;invalid fd number:&quot;</span> + <span class="built_in">to_string</span>(fd));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ~<span class="built_in">FDWrapper</span>() &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">if</span>(_closed) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">close</span>();</span><br><span class="line">    &#125; <span class="built_in">catch</span>(<span class="type">const</span> exception &amp;e) &#123;</span><br><span class="line">      std::cerr &lt;&lt; <span class="string">&quot;Exception destructing FDWrapper: &quot;</span> &lt;&lt; e.<span class="built_in">what</span>() &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">SystemCall</span>(<span class="string">&quot;close&quot;</span>, ::<span class="built_in">close</span>(_fd));</span><br><span class="line">    _eof = _closed = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">FDWrapper</span>(<span class="type">const</span> FDWrapper &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">  FDWrapper &amp;<span class="keyword">operator</span>=(<span class="type">const</span> FDWrapper &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">  <span class="built_in">FDWrapper</span>(FDWrapper &amp;&amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">  FDWrapper &amp;<span class="keyword">operator</span>=(FDWrapper &amp;&amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>This code uses <code>SystemCall</code> in <code>util.cc</code>, it just wraps to easily deal with the return value and error handle.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">SystemCall</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *attempt, <span class="type">const</span> <span class="type">int</span> return_value, <span class="type">const</span> <span class="type">int</span> errno_mask = <span class="number">0</span>)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(return_value &gt;= <span class="number">0</span> || errno == errno_mask) &#123;</span><br><span class="line">    <span class="keyword">return</span> return_value;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">throw</span> <span class="built_in">unix_error</span>(attempt);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">SystemCall</span><span class="params">(<span class="type">const</span> string &amp;attempt, <span class="type">const</span> <span class="type">int</span> return_value, <span class="type">const</span> <span class="type">int</span> errno_mask)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">SystemCall</span>(attempt.<span class="built_in">c_str</span>(), return_value errno_mask);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The code defines new exception class <code>unix_error</code>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">unix_error</span> : <span class="keyword">public</span> tagged_error &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">unix_error</span><span class="params">(<span class="type">const</span> std::string &amp;attempt, <span class="type">const</span> <span class="type">int</span> error = errno)</span></span></span><br><span class="line"><span class="function">    :tagged_error(std::system_category(), attempt, error)&#123;</span>&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Well, let’s look at the <code>tagged_error</code>, which just wraps the attempt to make the information of the exception more precise.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">tagged_error</span> : <span class="keyword">public</span> std::system_error &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  std::string _attempt_and_error;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">tagged_error</span>(<span class="type">const</span> std::error_category&amp; category,<span class="type">const</span> std::string &amp;attempt, <span class="type">const</span> <span class="type">int</span> error_code)</span><br><span class="line">    : <span class="built_in">system_error</span>(error_code, category), _attempt_and_error(attempt + <span class="string">&quot;: &quot;</span> + std::system_error::<span class="built_in">what</span>()) &#123;&#125;</span><br><span class="line">  <span class="function"><span class="type">const</span> <span class="type">char</span> *<span class="title">what</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span> <span class="keyword">override</span> </span>&#123; <span class="keyword">return</span> _attempt_and_error.<span class="built_in">c_str</span>(); &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Now we have explained the <code>FDWrapper</code>, the <code>FileDescriptor</code> is easy, and the most operation we will use is to read and write the file, however, we will talk the operation later.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FileDescriptor</span> &#123;</span><br><span class="line">  <span class="keyword">class</span> <span class="title class_">FDWrapper</span>;</span><br><span class="line">  std::shared_ptr&lt;FDWrapper&gt; _internal_fd;</span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">FileDescriptor</span><span class="params">(std::shared_ptr&lt;FDWrapper&gt; other_shared_ptr)</span> </span>&#123;</span><br><span class="line">    _internal_fd = <span class="built_in">move</span>(other_shared_ptr)</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  <span class="type">void</span> <span class="built_in">register_read</span>() &#123;</span><br><span class="line">    ++_internal_fd-&gt;_read_count;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">register_write</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ++_internal_fd-&gt;_write_count;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="function"><span class="keyword">explicit</span> <span class="title">FileDescriptor</span><span class="params">(<span class="type">const</span> <span class="type">int</span> fd)</span> </span>&#123;</span><br><span class="line">    _internal_fd = <span class="built_in">make_shared</span>&lt;FDWrapper&gt;(fd);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function">FileDescriptor <span class="title">duplicate</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">FileDescriptor</span>(_internal_fd);</span><br><span class="line">  &#125;</span><br><span class="line">  ~<span class="built_in">FileDescriptor</span>() = <span class="keyword">default</span>;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">close</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    _internal_fd-&gt;<span class="built_in">close</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">int</span> <span class="title">fd_num</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> _internal_fd-&gt;_fd; &#125;</span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">eof</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> _internal_fd-&gt;_eof; &#125;</span><br><span class="line">  <span class="function"><span class="type">bool</span> <span class="title">closed</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> _internal_fd-&gt;_closed; &#125;</span><br><span class="line">  <span class="function"><span class="type">unsigned</span> <span class="type">int</span> <span class="title">read_count</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> _internal_fd-&gt;_read_count; &#125;</span><br><span class="line">  <span class="function"><span class="type">unsigned</span> <span class="type">int</span> <span class="title">write_count</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> _internal_fd-&gt;_write_count; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">FileDescriptor</span>(<span class="type">const</span> FileDescriptor &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">    FileDescriptor &amp;<span class="keyword">operator</span>=(<span class="type">const</span> FileDescriptor &amp;other) = <span class="keyword">delete</span>;</span><br><span class="line">    <span class="built_in">FileDescriptor</span>(FileDescriptor &amp;&amp;other) = <span class="keyword">default</span>;</span><br><span class="line">    FileDescriptor &amp;<span class="keyword">operator</span>=(FileDescriptor &amp;&amp;other) = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Buf"><a href="#Buf" class="headerlink" title="Buf"></a>Buf</h2><p>It’s important to store a buffer, so the code first defines the basic class <code>Buffer</code>. The <code>Buffer</code> class use <code>string</code> as the buffer, just like <code>FileDescriptor</code>, it will holds a shared ptr to the buffer.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Buffer</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  std::shared_ptr&lt;std::string&gt; _storage&#123;&#125;;</span><br><span class="line">  <span class="type">size_t</span> _starting_offset&#123;&#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">Buffer</span>() = <span class="keyword">default</span>;</span><br><span class="line">  <span class="built_in">Buffer</span>(std::string &amp;&amp;str) <span class="keyword">noexcept</span></span><br><span class="line">    : _storage(std::<span class="built_in">make_shared</span>&lt;std::string&gt;(std::<span class="built_in">move</span>(str))) &#123;&#125;</span><br><span class="line">  <span class="function">std::string_view <span class="title">str</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">not</span> _storage) &#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;_storage-&gt;<span class="built_in">data</span>() + _starting_offset, _storage-&gt;<span class="built_in">size</span>() - _starting_offset&#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">operator</span> <span class="title">std::string_view</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">str</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">uint8_t</span> <span class="title">at</span><span class="params">(<span class="type">const</span> <span class="type">size_t</span> n)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">str</span>().<span class="built_in">at</span>(n);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">size_t</span> <span class="title">size</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">str</span>().<span class="built_in">size</span>(); &#125;</span><br><span class="line">  <span class="function">std::string <span class="title">copy</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">string</span>(<span class="built_in">str</span>());</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">remove_prefix</span><span class="params">(<span class="type">const</span> <span class="type">size_t</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &gt; <span class="built_in">str</span>().size) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="built_in">out_of_range</span>(<span class="string">&quot;Buffer::remove_prefix&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    _starting_offset += n;</span><br><span class="line">    <span class="keyword">if</span>(_storage <span class="keyword">and</span> _starting_offset == _storage-&gt;<span class="built_in">size</span>()) &#123;</span><br><span class="line">      _storage.<span class="built_in">reset</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>The <code>Buffer</code> class uses C++17 <code>string_view</code> to substitute the <code>const string</code> to avoid unnecessary copy, <code>string_view</code> don’t do any copy operation, it just points to the same memory. However, in order to manage the buffers, the code defines <code>BufferList</code> class. It is easy to understand.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BufferList</span> &#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  std::deque&lt;Buffer&gt; _buffers&#123;&#125;;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">BufferList</span>() = <span class="keyword">default</span>;</span><br><span class="line">  <span class="built_in">BufferList</span>(Buffer buffer) : _buffers&#123;buffer&#125; &#123;&#125;</span><br><span class="line">  <span class="built_in">BufferList</span>(std::string &amp;&amp;str) <span class="keyword">noexcept</span> &#123;</span><br><span class="line">    Buffer buf&#123;std::<span class="built_in">move</span>(str)&#125;;</span><br><span class="line">    <span class="built_in">append</span>(buf);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">const</span> std::deque&lt;Buffer&gt; &amp;<span class="title">buffers</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> _buffers;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">append</span><span class="params">(<span class="type">const</span> BufferList &amp;other)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span>&amp; buf: other._buffers) &#123;</span><br><span class="line">      _buffers.<span class="built_in">push_back</span>(buf);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">operator</span> <span class="title">Buffer</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="keyword">switch</span>(_buffers.<span class="built_in">size</span>()) &#123;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">      <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> _buffers[<span class="number">0</span>];</span><br><span class="line">      <span class="keyword">default</span>: &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">runtime_error</span>(<span class="string">&quot;</span></span><br><span class="line"><span class="string">                BufferList: please use concatenate() to combine a multi-Buffer BufferList into one Buffer&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function">std::string <span class="title">concatenate</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    std::string ret;</span><br><span class="line">    ret.<span class="built_in">reserve</span>(<span class="built_in">size</span>());</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span> &amp;buf : _buffers) &#123;</span><br><span class="line">      ret.<span class="built_in">append</span>(buf);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">size_t</span> <span class="title">size</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="type">size_t</span> ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span>&amp; buf: _buffers) &#123;</span><br><span class="line">      ret += buf.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">remove_prefix</span><span class="params">(<span class="type">size_t</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span>(_buffers.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">out_of_range</span>(<span class="string">&quot;BufferList::remove_prefix&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span>(n &lt; _buffers.<span class="built_in">front</span>().<span class="built_in">size</span>()) &#123;</span><br><span class="line">        n = <span class="number">0</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        n -= _buffers.<span class="built_in">front</span>().<span class="built_in">size</span>();</span><br><span class="line">        _buffers.<span class="built_in">pop_front</span>();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Now we have <code>BufferList</code>, sometimes we just want to view the buffer content, so we utilize the c++17 <code>string_view</code> to make a <code>BufferViewList</code> class.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">BufferViewList</span> &#123;</span><br><span class="line">  std::deque&lt;std::string_view&gt; _views&#123;&#125;;</span><br><span class="line">  <span class="built_in">BufferViewList</span>(<span class="type">const</span> std::string &amp;str) : <span class="built_in">BufferViewList</span>(std::<span class="built_in">string_view</span>(str)) &#123;&#125;</span><br><span class="line">  <span class="built_in">BufferViewList</span>(<span class="type">const</span> <span class="type">char</span> *s) : <span class="built_in">BufferViewList</span>(std::<span class="built_in">string_view</span>(s)) &#123;&#125;</span><br><span class="line">  <span class="built_in">BufferViewList</span>(std::string_view str) &#123; _views.<span class="built_in">push_back</span>(&#123;<span class="built_in">const_cast</span>&lt;<span class="type">char</span> *&gt;(str.<span class="built_in">data</span>()), str.<span class="built_in">size</span>()&#125;); &#125;</span><br><span class="line">  <span class="built_in">BufferViewList</span>(<span class="type">const</span> BufferList &amp;buffers) &#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span> &amp;x : buffers.<span class="built_in">buffers</span>()) &#123;</span><br><span class="line">      _views.<span class="built_in">push_back</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">remove_prefix</span><span class="params">(<span class="type">size_t</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (_views.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">out_of_range</span>(<span class="string">&quot;BufferListView::remove_prefix&quot;</span>)</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span>(n &lt; _views.<span class="built_in">front</span>().<span class="built_in">size</span>()) &#123;</span><br><span class="line">        _views.<span class="built_in">front</span>().<span class="built_in">remove_prefix</span>(n);</span><br><span class="line">        n = <span class="number">0</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        n -= _views.<span class="built_in">front</span>().<span class="built_in">size</span>();</span><br><span class="line">        _views.<span class="built_in">pop_front</span>();</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">size_t</span> <span class="title">size</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">    <span class="type">size_t</span> ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">const</span> <span class="keyword">auto</span>&amp; buf: _views) &#123;</span><br><span class="line">        ret += buf.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Here, I omit <code>as_iovecs</code> function. Later for it.</p>
+<h2 id="Reading-and-Writing-File"><a href="#Reading-and-Writing-File" class="headerlink" title="Reading and Writing File"></a>Reading and Writing File</h2><p>We have talked about the source code of the buffer, it’s time to find how <code>FileDescriptor</code> to read and write files. Well, actually, it is not complicated.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FileDescriptor</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  ...</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">read</span><span class="params">(std::string &amp;str, <span class="type">const</span> <span class="type">size_t</span> limit)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constexpr</span> <span class="type">size_t</span> BUFFER_SIZE = <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">size_t</span> size_to_read = <span class="built_in">min</span>(BUFFER_SIZE, limit);</span><br><span class="line">    str.<span class="built_in">resize</span>(size_to_read);</span><br><span class="line"></span><br><span class="line">    <span class="type">ssize_t</span> bytes_read = <span class="built_in">SystemCall</span>(<span class="string">&quot;read&quot;</span>, ::<span class="built_in">read</span>(<span class="built_in">fd_num</span>(), str.<span class="built_in">data</span>(), size_to_read));</span><br><span class="line">    <span class="keyword">if</span>(limit &gt; <span class="number">0</span> &amp;&amp; bytes_read == <span class="number">0</span>) &#123;</span><br><span class="line">      _internal_fd-&gt;_eof = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (bytes_read &gt; <span class="built_in">static_cast</span>&lt;<span class="type">ssize_t</span>&gt;(size_to_read)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="built_in">runtime_error</span>(<span class="string">&quot;read() read more than requested&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    str.<span class="built_in">resize</span>(bytes_read);</span><br><span class="line">    <span class="built_in">register_read</span>();</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function">std::string <span class="title">read</span><span class="params">(<span class="type">const</span> <span class="type">size_t</span> limit = std::numeric_limits&lt;<span class="type">size_t</span>&gt;::max())</span> </span>&#123;</span><br><span class="line">    string ret;</span><br><span class="line">    <span class="built_in">read</span>(ret, limit);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>For <code>read</code> operation, it is easy. The most important thing is that the class provides user allocation string or string allocated by class. The encapsulation is wonderful.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">FileDescriptor</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  ...</span><br><span class="line">  <span class="function"><span class="type">size_t</span> <span class="title">write</span><span class="params">(BufferViewList buffer, <span class="type">const</span> <span class="type">bool</span> write_all = <span class="literal">true</span>)</span> </span>&#123;</span><br><span class="line">    <span class="type">size_t</span> total_ bytes_written = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">do</span> &#123;</span><br><span class="line">      <span class="keyword">auto</span> iovecs = buffer.<span class="built_in">as_iovecs</span>();</span><br><span class="line">      <span class="type">const</span> <span class="type">ssize_t</span> bytes_written = <span class="built_in">SystemCall</span>(<span class="string">&quot;writev&quot;</span>, ::<span class="built_in">writev</span>(<span class="built_in">fd_num</span>(), iovecs.<span class="built_in">data</span>(), iovecs.<span class="built_in">size</span>()));</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span>(bytes_written == <span class="number">0</span> <span class="keyword">and</span> buffer.<span class="built_in">size</span>() != <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">runtime_error</span>(<span class="string">&quot;write returned 0 given non-empty input buffer&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span>(bytes_written &gt; <span class="built_in">ssize_t</span>(buffer.<span class="built_in">size</span>())) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">runtime_error</span>(<span class="string">&quot;write wrote more than length of input buffer&quot;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">register_write</span>();</span><br><span class="line">      buffer.<span class="built_in">remove_prefix</span>(bytes_written);</span><br><span class="line">      total_bytes_written += bytes_written;</span><br><span class="line">    &#125;<span class="keyword">while</span> (write_all <span class="keyword">and</span> buffer.<span class="built_in">size</span>());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> total_bytes_written;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">size_t</span> <span class="title">write</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *str, <span class="type">const</span> <span class="type">bool</span> write_all = <span class="literal">true</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">write</span>(<span class="built_in">BufferViewList</span>(str), write_all);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">size_t</span> <span class="title">write</span><span class="params">(<span class="type">const</span> std::string &amp;str, <span class="type">const</span> <span class="type">bool</span> write_all = <span class="literal">true</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">write</span>(<span class="built_in">BufferViewList</span>(str), write_all);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>From the code above, we have known that for <code>string</code> and <code>c-string</code>, we all convert them into the <code>BufferViewList</code> class. Now, we don’t consider how <code>BufferViewList::as_iovecs()</code> works. First, we look at the <code>iovec</code>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">iovec</span> &#123;</span><br><span class="line">  <span class="type">ptr_t</span> iov_base;</span><br><span class="line">  <span class="type">size_t</span> iov_len;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>So we could make an array of <code>iovec</code> for system call <code>writev</code>. Now let’s what <code>BufferViewList::as_iovecs()</code> does:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">vector&lt;iovec&gt; <span class="title">BufferViewList::as_iovecs</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">  vector&lt;iovec&gt; ret;</span><br><span class="line">  ret.<span class="built_in">reserve</span>(_views.<span class="built_in">size</span>());</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">const</span> <span class="keyword">auto</span> &amp;x : _views) &#123;</span><br><span class="line">    ret.<span class="built_in">push_back</span>(&#123;<span class="built_in">const_cast</span>&lt;<span class="type">char</span> *&gt;(x.<span class="built_in">data</span>()), x.<span class="built_in">size</span>()&#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Well, it converts the <code>_views</code> to be a vector of the <code>struct iovec</code>. What a beautiful abstraction!</p>
+<h2 id="Address"><a href="#Address" class="headerlink" title="Address"></a>Address</h2><p>Well, for <code>Address</code> class, the content is tedious. Because it does the wrapper for the system call. And it is not difficult to understand.</p>
+<h2 id="EventLoop"><a href="#EventLoop" class="headerlink" title="EventLoop"></a>EventLoop</h2><p>Well, I think the most interesting part is the <code>EventLoop</code> class, which waits for events on file descriptors and executing callbacks.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EventLoop</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">enum class</span> <span class="title class_">Direction</span>: <span class="type">short</span> &#123;</span><br><span class="line">    In = POLLIN,</span><br><span class="line">    Out = POLLOUT</span><br><span class="line">  &#125;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  <span class="keyword">using</span> CallbackT = std::function&lt;<span class="built_in">void</span>(<span class="type">void</span>)&gt;;</span><br><span class="line">  <span class="keyword">using</span> InterestT = std::function&lt;<span class="built_in">bool</span>(<span class="type">void</span>)&gt;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">class</span> <span class="title class_">Rule</span> &#123;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    FileDescriptor fd;</span><br><span class="line">    Direction direction;</span><br><span class="line">    CallbackT callback;</span><br><span class="line">    InterestT interest;</span><br><span class="line">    CallbackT cancel;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">unsigned</span> <span class="type">int</span> <span class="title">service_count</span><span class="params">()</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> direction == Direction::In ? fd.<span class="built_in">read_count</span>() : fd.<span class="built_in">write_count</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  std::list&lt;Rule&gt; _rules&#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>At this time, we have known that EventLoop abstracts the <code>Rule</code> class, which holds the activity.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EventLoop</span> &#123;</span><br><span class="line">...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="keyword">enum class</span> <span class="title class_">Result</span> &#123;</span><br><span class="line">    Success,</span><br><span class="line">    Timeout,</span><br><span class="line">    Exit</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">add_rule</span><span class="params">(<span class="type">const</span> FileDescriptor &amp;fd,</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="type">const</span> Direction direction,</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="type">const</span> CallbackT &amp;callback,</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="type">const</span> InterestT &amp;interest = [] &#123; <span class="keyword">return</span> <span class="literal">true</span>; &#125;,</span></span></span><br><span class="line"><span class="params"><span class="function">                <span class="type">const</span> CallbackT &amp;cancel = [] &#123;&#125;)</span> </span>&#123;</span><br><span class="line">    _rules.<span class="built_in">push_back</span>(&#123;fd.<span class="built_in">duplicate</span>(), direction, callback, interest, cancel&#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Well, the logic is simple, when we want to do a new activity, we add a new rule.</p>
+<p>How should we do the loop? Well, this is the multiplexing I&#x2F;O, the code use <code>poll</code> to deal with that, first, it creates the <code>vector&lt;pollfd&gt;</code> to wrap the array of the <code>pollfd</code>. How we process the event loop, the idea is simple, we just iterate the <code>_rules</code>:</p>
+<ul>
+<li>When the event is done, we delete it from the <code>list&lt;_rules&gt;</code>.</li>
+<li>When the event’s file descriptor is closed, we do the above.</li>
+<li>When event’s <code>interest()</code> is true, add it to the <code>vector&lt;pollfd&gt;</code>.</li>
+</ul>
+<p>Now we use system call <code>poll</code> to do I&#x2F;O. Then process the I&#x2F;O result.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">EventLoop::Result <span class="title">EventLoop::wait_next_event</span><span class="params">(<span class="type">const</span> <span class="type">int</span> timeout_ms)</span> </span>&#123;</span><br><span class="line">  vector&lt;pollfd&gt; pollfds&#123;&#125;;</span><br><span class="line">  pollfds.<span class="built_in">reserve</span>(_rules.<span class="built_in">size</span>());</span><br><span class="line">  <span class="type">bool</span> something_to_poll = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">auto</span> it = _rules.<span class="built_in">cbegin</span>(); it != _rules.<span class="built_in">cend</span>();) &#123;</span><br><span class="line">    <span class="type">const</span> <span class="keyword">auto</span> &amp;this_rule = *it;</span><br><span class="line">    <span class="keyword">if</span> (this_rule.direction == Direction::In &amp;&amp; this_rule.fd.<span class="built_in">eof</span>()) &#123;</span><br><span class="line">      this_rule.<span class="built_in">cancel</span>();</span><br><span class="line">      it = _rules.<span class="built_in">erase</span>(it);</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(this_rule.fd.<span class="built_in">closed</span>()) &#123;</span><br><span class="line">      this_rule.<span class="built_in">cancel</span>();</span><br><span class="line">      it = _rules.<span class="built_in">erase</span>(it);</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (this_rule.<span class="built_in">interest</span>()) &#123;</span><br><span class="line">      pollfds.<span class="built_in">push_back</span>(&#123;this_rule.fd.<span class="built_in">fd_num</span>(), <span class="built_in">static_cast</span>&lt;<span class="type">short</span>&gt;(this_rule.direction), <span class="number">0</span>&#125;);</span><br><span class="line">        something_to_poll = <span class="literal">true</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      pollfds.<span class="built_in">push_back</span>(&#123;this_rule.fd.<span class="built_in">fd_num</span>(), <span class="number">0</span>, <span class="number">0</span>&#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    ++it;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">not</span> something_to_poll) &#123;</span><br><span class="line">      <span class="keyword">return</span> Result::Exit;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="number">0</span> == <span class="built_in">SystemCall</span>(<span class="string">&quot;poll&quot;</span>, ::<span class="built_in">poll</span>(pollfds.<span class="built_in">data</span>(), pollfds.<span class="built_in">size</span>(), timeout_ms))) &#123;</span><br><span class="line">        <span class="keyword">return</span> Result::Timeout;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="built_in">catch</span> (unix_error <span class="type">const</span> &amp;e) &#123;</span><br><span class="line">      <span class="keyword">if</span> (e.<span class="built_in">code</span>().<span class="built_in">value</span>() == EINTR) &#123;</span><br><span class="line">        <span class="keyword">return</span> Result::Exit;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// do the polling</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><p>Well, <code>Socket</code> is also a file descriptor, but there are many more details. But I don’t think it is meaningful to talk about the source code. Because file descriptor is a wonderful wrapper which contains the most trivial part.</p>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2022/11/21/CS144-Introduction-to-Computer-Networking-initial-source-code-reading/">https://luolibrary.com/2022/11/21/CS144-Introduction-to-Computer-Networking-initial-source-code-reading/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+      
+      <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2022/11/21/CS144-Introduction-to-Computer-Networking-Lab-0/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">CS144: Introduction to Computer Networking Lab 0</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2022/11/14/Kubernetes-client-go-%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90%E2%80%94%E2%80%94WorkQueue/">  
+        <span class="next-text nav-default">Kubernetes client-go 源码解析——WorkQueue</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:shejialuo@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://twitter.com/luo_hope" class="iconfont icon-twitter" title="twitter"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/jialuo-she-913873289/" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/shejialuo" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2020 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">shejialuo</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>

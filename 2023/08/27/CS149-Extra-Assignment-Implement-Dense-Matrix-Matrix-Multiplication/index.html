@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="CS149-Extra-Assignment-Implement Dense Matrix-Matrix Multiplication" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="技术, 学习, 洛的藏书阁" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="https://luolibrary.com/2023/08/27/CS149-Extra-Assignment-Implement-Dense-Matrix-Matrix-Multiplication/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-7M238H24L4');
+</script>
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>CS149-Extra-Assignment-Implement Dense Matrix-Matrix Multiplication - 洛的藏书阁</title>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">洛的藏书阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/tags/">
+      <li class="mobile-menu-item">
+        
+        
+        Tags              </li>
+    </a>
+    
+    <a href="/categories/">
+      <li class="mobile-menu-item">
+        
+        
+        Categories              </li>
+    </a>
+    
+    <a href="/about/">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">洛的藏书阁</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/tags/">  
+              
+              
+              Tags  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/categories/">  
+              
+              
+              Categories  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about/">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      CS149-Extra-Assignment-Implement Dense Matrix-Matrix Multiplication
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2023-08-27
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/CS149/">CS149</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-native-implementation"><span class="toc-number">1.</span> <span class="toc-text">The native implementation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Blocked-matrix-multiplication"><span class="toc-number">2.</span> <span class="toc-text">Blocked matrix multiplication</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Blocked-matrix-multiplication-with-memory-layout-change"><span class="toc-number">3.</span> <span class="toc-text">Blocked matrix multiplication with memory layout change</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Blocking-for-multiple-levels-of-cache"><span class="toc-number">4.</span> <span class="toc-text">Blocking for multiple levels of cache</span></a></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <p>It’s hard to implement Matrix-Matrix Multiplication. So I recommend the following repository for you. I also refer to this repository when doing this assignment.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/flame/blislab">blislab</a></li>
+</ul>
+<h2 id="The-native-implementation"><a href="#The-native-implementation" class="headerlink" title="The native implementation"></a>The native implementation</h2><p>We do not use 2-D array, we flat the array to one dimension. We assume that $A$ is $M \times K$, $B$ is $K \times N$, and $C$ is $M \times N$. We need to implement the $\alpha A \times B + \beta \times C$.</p>
+<p><img src="https://s2.loli.net/2023/08/23/dHTJDkhwBfIiA74.png" alt="Flatten matrix multiplication"></p>
+<p>We could calculate the following:</p>
+<ul>
+<li>$C[0] &#x3D; A[0]B[0] + A[1]B[N] + \cdots + A[K - 1]B[(K - 1)N]$</li>
+<li>$C[1] &#x3D; A[K]B[1] + A[K + 1]B[N + 1] + \cdots + A[2K - 1]B[(K - 1)N + 1]$</li>
+</ul>
+<p>Thus, we could writing the following code:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Gemm</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief Disable constructor</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="built_in">Gemm</span>() = <span class="keyword">delete</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief Calculate the GEMM sequentially</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * @details The matrix A, B, C are all one-dimensional array, so the need</span></span><br><span class="line"><span class="comment">   * to find the way to calculate the matrix multiplication.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">gemm</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> k, <span class="type">double</span> *A, <span class="type">double</span> *B, <span class="type">double</span> *C,</span></span></span><br><span class="line"><span class="params"><span class="function">                   <span class="type">double</span> alpha, <span class="type">double</span> beta)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">        <span class="type">double</span> inner_pod = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> kk = <span class="number">0</span>; kk &lt; k; kk++) &#123;</span><br><span class="line">          inner_pod += A[i * k + kk] * B[kk * n + j];</span><br><span class="line">        &#125;</span><br><span class="line">        C[i * n + j] = alpha * inner_pod + beta * C[i * n + j];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">gemm</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> k, <span class="type">double</span> *A, <span class="type">double</span> *B, <span class="type">double</span> *C, <span class="type">double</span> alpha,</span></span></span><br><span class="line"><span class="params"><span class="function">          <span class="type">double</span> beta)</span> </span>&#123;</span><br><span class="line">  Gemm::<span class="built_in">gemm</span>(m, n, k, A, B, C, alpha, beta);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>We assume that $A$ is $1024 \times 1024$ and $B$ is $1024 \times 1024$, we could see that the Intel mkl library would only execute 18ms, the reference implementation would execute 62ms. However, the native implementation executes 5746ms.</p>
+<p><img src="https://s2.loli.net/2023/08/24/AJwG1Nect8qREkh.png" alt="The native implementation result"></p>
+<h2 id="Blocked-matrix-multiplication"><a href="#Blocked-matrix-multiplication" class="headerlink" title="Blocked matrix multiplication"></a>Blocked matrix multiplication</h2><p>The efficiency is low because we do not use the cache. So the idea is use the blocked matrix multiplication thus improving the cache hit rate. The idea is intuitive. If you’are not familiar with the<br>blocked multiplication, I recommend you to read some materials.</p>
+<p>From the below figure, we first need to split the matrix into the blocked matrices. We assume each block would be the $size \times size$. For $A$, we first need to split for the row $M$. And for $B$, we need to split for the col $N$. And for both $A$ and $B$, we could simultaneously handle $K$. However, the trouble is that we need to know each block top-left coordinate, because we need to find the absolute position. So we should define the coordinates for the absolute position.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @brief A wrapper to wrap the coordinates for indicating the</span></span><br><span class="line"><span class="comment"> * start left-top point for the current blocked matrix.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Point2D</span> &#123;</span><br><span class="line">  <span class="type">int</span> i&#123;&#125;; <span class="comment">/**&lt; The absolute i */</span></span><br><span class="line">  <span class="type">int</span> j&#123;&#125;; <span class="comment">/**&lt; The absolute j */</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://s2.loli.net/2023/08/27/kMEThCBtFmDdW82.png" alt="Blocked matrix-matrix multiplication"></p>
+<p>So we need to first split for $M$ and for $N$, then for $K$, we could get the following incomplete c++ code:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i += size;) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j += size;) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> kk = <span class="number">0</span>; kk &lt; k; k += size) &#123;</span><br><span class="line">      ...</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>In the first loop, we should set the $A$’s start point of <code>i</code> and we also need to tell whether <code>i + size &lt; m</code>. Similarly, in the second loop, we should set the $B$’s start point of <code>j</code> and we also need to tell whether <code>j + size &lt; n</code>. In the last loop, we should set the $A$’s start point of <code>j</code> and $B$’s start point of <code>i</code> and also need to tell whether <code>k + size &lt; kk</code>.</p>
+<p>It’s easy to calculate the start points of $C$. It is dependent on the <code>i</code> and <code>j</code>. Thus we could have the following code:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Point2D a&#123;&#125;, b&#123;&#125;, c&#123;&#125;;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> size = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i += size) &#123;</span><br><span class="line">  <span class="type">int</span> mBlock = i + size &lt; m ? size : m - i;</span><br><span class="line">  a.i = i;</span><br><span class="line">  c.i = i;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j += size) &#123;</span><br><span class="line">    b.j = j;</span><br><span class="line">    c.j = j;</span><br><span class="line">    <span class="type">int</span> nBlock = j + size &lt; n ? size : n - j;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> kk = <span class="number">0</span>; kk &lt; k; kk += size) &#123;</span><br><span class="line">      a.j = kk;</span><br><span class="line">      b.i = kk;</span><br><span class="line">      <span class="type">int</span> kBlock = kk + size &lt; k ? size : k - kk;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>At now, it’s not hard to write the calculate:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GemmBlock</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief Disable constructor</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="built_in">GemmBlock</span>() = <span class="keyword">delete</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief Apply the C = beta C, it should be calculated at first.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">scalarMultiplication</span><span class="params">(<span class="type">int</span> mBlock, <span class="type">int</span> nBlock, <span class="type">int</span> n, Point2D &amp;c,</span></span></span><br><span class="line"><span class="params"><span class="function">                                   <span class="type">double</span> *C, <span class="type">double</span> beta)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; mBlock; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; nBlock; j++) &#123;</span><br><span class="line">        C[(i + c.i) * n + (j + c.j)] = beta * C[(i + c.i) * n + (j + c.j)];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief Matrix multiplication with block</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * @details In order to implement the block matrix multiplication, we need</span></span><br><span class="line"><span class="comment">   * to calculate the blocked matrix A and blocked matrix B. For example</span></span><br><span class="line"><span class="comment">   * A11 A12  B11 B12  C11 C12</span></span><br><span class="line"><span class="comment">   * A21 A22  B21 B22  C21 C22</span></span><br><span class="line"><span class="comment">   * C11 = A11 X b11 + A12 X B21</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">matrixMultiplicationBlock</span><span class="params">(<span class="type">int</span> mBlock, <span class="type">int</span> nBlock, <span class="type">int</span> kBlock,</span></span></span><br><span class="line"><span class="params"><span class="function">                                        <span class="type">int</span> n, <span class="type">int</span> k, Point2D &amp;a, Point2D &amp;b,</span></span></span><br><span class="line"><span class="params"><span class="function">                                        Point2D &amp;c, <span class="type">double</span> *A, <span class="type">double</span> *B,</span></span></span><br><span class="line"><span class="params"><span class="function">                                        <span class="type">double</span> *C, <span class="type">double</span> alpha)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; mBlock; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; nBlock; j++) &#123;</span><br><span class="line">        <span class="type">double</span> inner_pod = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> kk = <span class="number">0</span>; kk &lt; kBlock; kk++) &#123;</span><br><span class="line">          inner_pod +=</span><br><span class="line">              A[(i + a.i) * k + (kk + a.j)] * B[(kk + b.i) * n + (j + b.j)];</span><br><span class="line">        &#125;</span><br><span class="line">        C[(i + c.i) * n + (j + c.j)] += alpha * inner_pod;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief Split the matrix</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">gemmUsingBlock</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> k, <span class="type">double</span> *A, <span class="type">double</span> *B,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="type">double</span> *C, <span class="type">double</span> alpha, <span class="type">double</span> beta)</span> </span>&#123;</span><br><span class="line">    Point2D a&#123;&#125;, b&#123;&#125;, c&#123;&#125;;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> size = <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i += size) &#123;</span><br><span class="line">      <span class="type">int</span> mBlock = i + size &lt; m ? size : m - i;</span><br><span class="line">      a.i = i;</span><br><span class="line">      c.i = i;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j += size) &#123;</span><br><span class="line">        b.j = j;</span><br><span class="line">        c.j = j;</span><br><span class="line">        <span class="type">int</span> nBlock = j + size &lt; n ? size : n - j;</span><br><span class="line">        <span class="built_in">scalarMultiplication</span>(mBlock, nBlock, n, c, C, beta);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> kk = <span class="number">0</span>; kk &lt; k; kk += size) &#123;</span><br><span class="line">          a.j = kk;</span><br><span class="line">          b.i = kk;</span><br><span class="line">          <span class="type">int</span> kBlock = kk + size &lt; k ? size : k - kk;</span><br><span class="line">          <span class="built_in">matrixMultiplicationBlock</span>(mBlock, nBlock, kBlock, n, k, a, b, c, A, B,</span><br><span class="line">                                    C, alpha);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">gemm</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> k, <span class="type">double</span> *A, <span class="type">double</span> *B, <span class="type">double</span> *C,</span></span></span><br><span class="line"><span class="params"><span class="function">                   <span class="type">double</span> alpha, <span class="type">double</span> beta)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">gemmUsingBlock</span>(m, n, k, A, B, C, alpha, beta);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Then executing <code>./gemm 1024</code>. As the result shows, we execute 843ms. It is much better than the native implementation.</p>
+<p><img src="https://s2.loli.net/2023/08/27/YyUZxQDwveBTsGc.png" alt="Blocked matrix-matrix multiplication result"></p>
+<h2 id="Blocked-matrix-multiplication-with-memory-layout-change"><a href="#Blocked-matrix-multiplication-with-memory-layout-change" class="headerlink" title="Blocked matrix multiplication with memory layout change"></a>Blocked matrix multiplication with memory layout change</h2><p>We can still improvement the efficiency, we still access the matrix $B$ with col. However, when the matrix size is big, it would cause cache miss. When executing <code>./gemm 2048</code>. The program would cause 7476ms. This is because the memory layout of $B$ is bad for cache hit. So we could change the layout of $B$.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GemmBlockWithMemoryLayoutChange</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief Disable constructor</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="built_in">GemmBlockWithMemoryLayoutChange</span>() = <span class="keyword">delete</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">scalarMultiplication</span><span class="params">(<span class="type">int</span> mBlock, <span class="type">int</span> nBlock, <span class="type">int</span> n, Point2D &amp;c,</span></span></span><br><span class="line"><span class="params"><span class="function">                                   <span class="type">double</span> *C, <span class="type">double</span> beta)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; mBlock; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; nBlock; j++) &#123;</span><br><span class="line">        C[(i + c.i) * n + (j + c.j)] = beta * C[(i + c.i) * n + (j + c.j)];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">matrixMultiplicationBlock</span><span class="params">(<span class="type">int</span> mBlock, <span class="type">int</span> nBlock, <span class="type">int</span> kBlock,</span></span></span><br><span class="line"><span class="params"><span class="function">                                        <span class="type">int</span> n, <span class="type">int</span> k, Point2D &amp;a, Point2D &amp;b,</span></span></span><br><span class="line"><span class="params"><span class="function">                                        Point2D &amp;c, <span class="type">double</span> *A, <span class="type">double</span> *B,</span></span></span><br><span class="line"><span class="params"><span class="function">                                        <span class="type">double</span> *C, <span class="type">double</span> alpha)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; mBlock; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; nBlock; j++) &#123;</span><br><span class="line">        <span class="type">double</span> inner_pod = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> kk = <span class="number">0</span>; kk &lt; kBlock; kk++) &#123;</span><br><span class="line">          inner_pod +=</span><br><span class="line">              A[(i + a.i) * k + (kk + a.j)] * B[(j + b.i) * n + (kk + b.j)];</span><br><span class="line">        &#125;</span><br><span class="line">        C[(i + c.i) * n + (j + c.j)] += alpha * inner_pod;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">gemmUsingBlock</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> k, <span class="type">double</span> *A, <span class="type">double</span> *B,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="type">double</span> *C, <span class="type">double</span> alpha, <span class="type">double</span> beta)</span> </span>&#123;</span><br><span class="line">    Point2D a&#123;&#125;, b&#123;&#125;, c&#123;&#125;;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> size = <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i += size) &#123;</span><br><span class="line">      <span class="type">int</span> mBlock = i + size &lt; m ? size : m - i;</span><br><span class="line">      a.i = i;</span><br><span class="line">      c.i = i;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j += size) &#123;</span><br><span class="line">        b.i = j;</span><br><span class="line">        c.j = j;</span><br><span class="line">        <span class="type">int</span> nBlock = j + size &lt; n ? size : n - j;</span><br><span class="line">        <span class="built_in">scalarMultiplication</span>(mBlock, nBlock, n, c, C, beta);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> kk = <span class="number">0</span>; kk &lt; k; kk += size) &#123;</span><br><span class="line">          a.j = kk;</span><br><span class="line">          b.j = kk;</span><br><span class="line">          <span class="type">int</span> kBlock = kk + size &lt; k ? size : k - kk;</span><br><span class="line">          <span class="built_in">matrixMultiplicationBlock</span>(mBlock, nBlock, kBlock, n, k, a, b, c, A, B,</span><br><span class="line">                                    C, alpha);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">gemm</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> k, <span class="type">double</span> *A, <span class="type">double</span> *B, <span class="type">double</span> *C,</span></span></span><br><span class="line"><span class="params"><span class="function">                   <span class="type">double</span> alpha, <span class="type">double</span> beta)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> *newB = <span class="keyword">new</span> <span class="type">double</span>[n * k];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; k; i++) &#123;</span><br><span class="line">        newB[j * k + i] = B[i * n + j];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">gemmUsingBlock</span>(m, n, k, A, newB, C, alpha, beta);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span>[] newB;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Then executing <code>./gemm 1024</code>. As the result shows, we execute 478ms. We gain more performance.</p>
+<p><img src="https://s2.loli.net/2023/08/27/VhNcertR6vYDEim.png" alt="Blocked matrix-matrix multiplication with memory layout change result"></p>
+<h2 id="Blocking-for-multiple-levels-of-cache"><a href="#Blocking-for-multiple-levels-of-cache" class="headerlink" title="Blocking for multiple levels of cache"></a>Blocking for multiple levels of cache</h2><p>It’s hard to explain this idea, you should carefully read the <a target="_blank" rel="noopener" href="https://github.com/flame/blislab">blislab</a> tutorial and read the following paper carefully:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/10.1145/1356052.1356053">Anatomy of High-Performance Matrix Multiplication</a></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">GemmBlockWithThreeCacheLevel</span> &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief Disable constructing this class</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="built_in">GemmBlockWithThreeCacheLevel</span>() = <span class="keyword">delete</span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">matrixMultiplicationBlock</span><span class="params">(<span class="type">int</span> mBlock, <span class="type">int</span> nBlock, <span class="type">int</span> kBlock,</span></span></span><br><span class="line"><span class="params"><span class="function">                                        <span class="type">int</span> n, <span class="type">int</span> k, Point2D &amp;a, Point2D &amp;b,</span></span></span><br><span class="line"><span class="params"><span class="function">                                        Point2D &amp;c, <span class="type">double</span> *A, <span class="type">double</span> *B,</span></span></span><br><span class="line"><span class="params"><span class="function">                                        <span class="type">double</span> *C, <span class="type">double</span> alpha)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; mBlock; i++) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; nBlock; j++) &#123;</span><br><span class="line">        <span class="type">double</span> inner_pod = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> kk = <span class="number">0</span>; kk &lt; kBlock; kk++) &#123;</span><br><span class="line">          inner_pod +=</span><br><span class="line">              A[(i + a.i) * k + (kk + a.j)] * B[(j + b.i) * k + (kk + b.j)];</span><br><span class="line">        &#125;</span><br><span class="line">        C[(i + c.i) * n + (j + c.j)] += alpha * inner_pod;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * @brief Use five loop tp calculate the matrix-matrix multiplication, for</span></span><br><span class="line"><span class="comment">   * simplicity here, I only implement C = alpha AB.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">gemmUsingBlock</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> k, <span class="type">double</span> *A, <span class="type">double</span> *B,</span></span></span><br><span class="line"><span class="params"><span class="function">                             <span class="type">double</span> *C, <span class="type">double</span> alpha, <span class="type">double</span> beta)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> sizeN = <span class="number">4096</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> sizeK = <span class="number">256</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> sizeM = <span class="number">96</span>;</span><br><span class="line"></span><br><span class="line">    Point2D a&#123;&#125;, b&#123;&#125;, c&#123;&#125;, ra&#123;&#125;, rb&#123;&#125;, rc&#123;&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> rSizeN = <span class="number">4</span>;</span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> rSizeM = <span class="number">8</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// We need to create pack A and pack B. It&#x27;s a bad idea to allocate</span></span><br><span class="line">    <span class="comment">// memory in the loop.</span></span><br><span class="line">    <span class="type">double</span> *packedA = <span class="keyword">new</span> <span class="type">double</span>[sizeM * sizeK];</span><br><span class="line">    <span class="type">double</span> *packedB = <span class="keyword">new</span> <span class="type">double</span>[sizeN * sizeK];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; n; j += sizeN) &#123;</span><br><span class="line">      <span class="comment">// In this loop, we only handle for the matrix B, it would</span></span><br><span class="line">      <span class="comment">// be split up by `sizeN` for the col.</span></span><br><span class="line">      b.j = j;</span><br><span class="line">      c.j = j;</span><br><span class="line">      <span class="type">int</span> nBlock = j + sizeN &lt; n ? sizeN : n - j;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">int</span> kk = <span class="number">0</span>; kk &lt; k; kk += sizeK) &#123;</span><br><span class="line">        <span class="comment">// In this loop, we handle for the matrix A and matrix B.</span></span><br><span class="line">        <span class="comment">// For the matrix A it would be split up by `sizeK` for the col</span></span><br><span class="line">        <span class="comment">// For the matrix B it would be split up by `sizeK` for the row</span></span><br><span class="line">        a.j = kk;</span><br><span class="line">        b.i = kk;</span><br><span class="line">        <span class="type">int</span> kBlock = kk + sizeK &lt; k ? sizeK : k - kk;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// At here, we should pack the B into a consecutive memory, in</span></span><br><span class="line">        <span class="comment">// order to improve the cache hit rate and avoid TLB miss. We make</span></span><br><span class="line">        <span class="comment">// `packedB` into the L3 cache, So the L3 size should be greater</span></span><br><span class="line">        <span class="comment">// than the `sizeN * sizeK`. So in the following `for` loop all</span></span><br><span class="line">        <span class="comment">// the access to the `packedB` would gain great efficiency. And we</span></span><br><span class="line">        <span class="comment">// will convert the row-major to the col-major.</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j_ = <span class="number">0</span>; j_ &lt; nBlock; j_++) &#123;</span><br><span class="line">          <span class="keyword">for</span> (<span class="type">int</span> i_ = <span class="number">0</span>; i_ &lt; kBlock; i_++) &#123;</span><br><span class="line">            packedB[j_ * sizeK + i_] = B[(b.i + i_) * n + (b.j + j_)];</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; m; i += sizeM) &#123;</span><br><span class="line">          <span class="comment">// In this loop, we handle for the matrix A, it would be split</span></span><br><span class="line">          <span class="comment">// up by the `sizeI` for the row.</span></span><br><span class="line">          a.i = i;</span><br><span class="line">          c.i = i;</span><br><span class="line">          <span class="type">int</span> mBlock = i + sizeM &lt; m ? sizeM : m - i;</span><br><span class="line"></span><br><span class="line">          <span class="comment">// At here, we should pack the A into a consecutive memory, in</span></span><br><span class="line">          <span class="comment">// order to improve the cache hit rate and avoid TLB miss. We</span></span><br><span class="line">          <span class="comment">// make `packedA` into the L2 cache, so the L2 cache must be</span></span><br><span class="line">          <span class="comment">// greater than `sizeM * sizeK`. So the following `for` loop</span></span><br><span class="line">          <span class="comment">// for accessing to the `packedA` would get great efficiency.</span></span><br><span class="line">          <span class="keyword">for</span> (<span class="type">int</span> i_ = <span class="number">0</span>; i_ &lt; mBlock; i_++) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> j_ = <span class="number">0</span>; j_ &lt; kBlock; j_++) &#123;</span><br><span class="line">              packedA[i_ * sizeK + j_] = A[(a.i + i_) * k + (a.j + j_)];</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          <span class="comment">// Here, we already split the matrix A and matrix B into the block.</span></span><br><span class="line">          <span class="comment">// However, we need to split again just like the above, this would</span></span><br><span class="line">          <span class="comment">// be super easy.</span></span><br><span class="line">          <span class="keyword">for</span> (<span class="type">int</span> jr = <span class="number">0</span>; jr &lt; nBlock; jr += rSizeN) &#123;</span><br><span class="line">            <span class="type">int</span> rNBlock = jr + rSizeN &lt; nBlock ? rSizeN : nBlock - jr;</span><br><span class="line">            rb.i = jr;</span><br><span class="line">            rc.j = jr + c.j;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> ri = <span class="number">0</span>; ri &lt; mBlock; ri += rSizeM) &#123;</span><br><span class="line">              <span class="type">int</span> rMBlock = ri + rSizeM &lt; mBlock ? rSizeM : mBlock - ri;</span><br><span class="line">              ra.i = ri;</span><br><span class="line">              rc.i = ri + c.i;</span><br><span class="line"></span><br><span class="line">              <span class="keyword">for</span> (<span class="type">int</span> internalK = <span class="number">0</span>; internalK &lt; kBlock; internalK++) &#123;</span><br><span class="line">                ra.j = internalK;</span><br><span class="line">                rb.j = internalK;</span><br><span class="line"></span><br><span class="line">                <span class="built_in">matrixMultiplicationBlock</span>(rMBlock, rNBlock, <span class="number">1</span>, n, sizeK, ra, rb,</span><br><span class="line">                                          rc, packedA, packedB, C, alpha);</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">delete</span>[] packedA;</span><br><span class="line">    <span class="keyword">delete</span>[] packedB;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">gemm</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> k, <span class="type">double</span> *A, <span class="type">double</span> *B, <span class="type">double</span> *C,</span></span></span><br><span class="line"><span class="params"><span class="function">                   <span class="type">double</span> alpha, <span class="type">double</span> beta)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">gemmUsingBlock</span>(m, n, k, A, B, C, alpha, beta);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2023/08/27/CS149-Extra-Assignment-Implement-Dense-Matrix-Matrix-Multiplication/">https://luolibrary.com/2023/08/27/CS149-Extra-Assignment-Implement-Dense-Matrix-Matrix-Multiplication/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+      
+      <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2023/09/11/MIT6-858-SUNDR%E7%9A%84%E5%AE%9E%E7%8E%B0/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">MIT6.858-SUNDR的实现</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2023/08/22/%E5%A4%9A%E6%A0%B8%E5%A4%84%E7%90%86%E5%99%A8%E5%B8%A6%E6%9D%A5%E7%9A%84%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98/">  
+        <span class="next-text nav-default">多核处理器带来的缓存一致性问题</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:shejialuo@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://twitter.com/luo_hope" class="iconfont icon-twitter" title="twitter"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/jialuo-she-913873289/" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/shejialuo" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2020 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">shejialuo</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>

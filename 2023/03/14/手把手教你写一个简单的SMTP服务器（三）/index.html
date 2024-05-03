@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="手把手教你写一个简单的SMTP服务器（三）" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="技术, 学习, 教程, 洛的藏书阁" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="https://luolibrary.com/2023/03/14/手把手教你写一个简单的SMTP服务器（三）/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-7M238H24L4');
+</script>
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>手把手教你写一个简单的SMTP服务器（三） - 洛的藏书阁</title>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">洛的藏书阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/tags/">
+      <li class="mobile-menu-item">
+        
+        
+        Tags              </li>
+    </a>
+    
+    <a href="/categories/">
+      <li class="mobile-menu-item">
+        
+        
+        Categories              </li>
+    </a>
+    
+    <a href="/about/">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">洛的藏书阁</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/tags/">  
+              
+              
+              Tags  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/categories/">  
+              
+              
+              Categories  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about/">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      手把手教你写一个简单的SMTP服务器（三）
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2023-03-14
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8/">手把手教你写一个简单的SMTP服务器</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#IdleState"><span class="toc-number">1.</span> <span class="toc-text">IdleState</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">2.</span> <span class="toc-text">小结</span></a></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <ul>
+<li><a href="https://luolibrary.com/2023/03/12/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%80%EF%BC%89/">手把手教你写一个简单的SMTP服务器（一）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89/">手把手教你写一个简单的SMTP服务器（二）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89/">手把手教你写一个简单的SMTP服务器（三）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89/">手把手教你写一个简单的SMTP服务器（四）</a></li>
+<li><a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%94%EF%BC%89/">手把手教你写一个简单的SMTP服务器（五）</a></li>
+</ul>
+<hr>
+<p>在教程二中我们已经完成了最重要的工作，构建了最基本的虚基类<code>State</code>。回顾在教程二中我们对于状态的定义，我们拟定义如下6个类来表征状态机中的状态：</p>
+<ol>
+<li><code>IdleState</code></li>
+<li><code>EhloState</code></li>
+<li><code>MailState</code></li>
+<li><code>RcptState</code></li>
+<li><code>DataStartState</code></li>
+<li><code>DataDoneState</code></li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.hpp</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IdleState</span> : <span class="keyword">public</span> State &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">IdleState</span>();</span><br><span class="line">  <span class="function">std::string <span class="title">transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> <span class="keyword">override</span></span>;</span><br><span class="line">  ~<span class="built_in">IdleState</span>() <span class="keyword">override</span> = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">EhloState</span> : <span class="keyword">public</span> State &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">EhloState</span>();</span><br><span class="line">  <span class="function">std::string <span class="title">transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> <span class="keyword">override</span></span>;</span><br><span class="line">  ~<span class="built_in">EhloState</span>() <span class="keyword">override</span> = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MailState</span> : <span class="keyword">public</span> State &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">MailState</span>();</span><br><span class="line">  <span class="function">std::string <span class="title">transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> <span class="keyword">override</span></span>;</span><br><span class="line">  ~<span class="built_in">MailState</span>() <span class="keyword">override</span> = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">RcptState</span> : <span class="keyword">public</span> State &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">RcptState</span>();</span><br><span class="line">  <span class="function">std::string <span class="title">transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> <span class="keyword">override</span></span>;</span><br><span class="line">  ~<span class="built_in">RcptState</span>() <span class="keyword">override</span> = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DataStartState</span> : <span class="keyword">public</span> State &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">DataStartState</span>();</span><br><span class="line">  <span class="function">std::string <span class="title">transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> <span class="keyword">override</span></span>;</span><br><span class="line">  ~<span class="built_in">DataStartState</span>() <span class="keyword">override</span> = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">DataDoneState</span> : <span class="keyword">public</span> State &#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">DataDoneState</span>();</span><br><span class="line">  <span class="function">std::string <span class="title">transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> <span class="keyword">override</span></span>;</span><br><span class="line">  ~<span class="built_in">DataDoneState</span>() <span class="keyword">override</span> = <span class="keyword">default</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们需要实现其方法，在现在这个阶段，我们当让其做空操作，或者返回默认值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.cpp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> add implementation for IdleState</span></span><br><span class="line">IdleState::<span class="built_in">IdleState</span>() &#123;&#125;</span><br><span class="line"><span class="function">std::string <span class="title">IdleState::transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> </span>&#123; <span class="keyword">return</span> &#123;&#125;; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> add implementation for EhloState</span></span><br><span class="line">EhloState::<span class="built_in">EhloState</span>() &#123;&#125;</span><br><span class="line"><span class="function">std::string <span class="title">EhloState::transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> </span>&#123; <span class="keyword">return</span> &#123;&#125;; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> add implementation for MailState</span></span><br><span class="line">MailState::<span class="built_in">MailState</span>() &#123;&#125;</span><br><span class="line"><span class="function">std::string <span class="title">MailState::transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> </span>&#123; <span class="keyword">return</span> &#123;&#125;; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> add implementation for RcptState</span></span><br><span class="line">RcptState::<span class="built_in">RcptState</span>() &#123;&#125;</span><br><span class="line"><span class="function">std::string <span class="title">RcptState::transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> </span>&#123; <span class="keyword">return</span> &#123;&#125;; &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> add implementation for DataStartState</span></span><br><span class="line">DataStartState::<span class="built_in">DataStartState</span>() &#123;&#125;</span><br><span class="line"><span class="function">std::string <span class="title">DataStartState::transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> add implementation for DataDoneState</span></span><br><span class="line">DataDoneState::<span class="built_in">DataDoneState</span>() &#123;&#125;</span><br><span class="line"><span class="function">std::string <span class="title">DataDoneState::transitive</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters, std::unique_ptr&lt;State&gt; *&amp;current)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>根据教程二中设计，我们可以知道当服务器端收到客户端的命令时，其会调用<code>transitive</code>方法进行状态的转换，一个思路是我们可以使用<code>make_unique</code>方法构造一个完整的新类来表述状态，但是这样不是很高效。为了提高效率，我们应该使用全局的生命周期的变量，因此我们可以构造一个新类<code>States</code>包含指向6个已经存在的类的指针，我们使用<code>unique_ptr</code>管理这些指针，从而避免内存的泄漏。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.hpp</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">States</span> &#123;</span><br><span class="line">  <span class="type">static</span> std::unique_ptr&lt;State&gt; idleState;</span><br><span class="line">  <span class="type">static</span> std::unique_ptr&lt;State&gt; ehloState;</span><br><span class="line">  <span class="type">static</span> std::unique_ptr&lt;State&gt; mailState;</span><br><span class="line">  <span class="type">static</span> std::unique_ptr&lt;State&gt; rcptState;</span><br><span class="line">  <span class="type">static</span> std::unique_ptr&lt;State&gt; dataStartState;</span><br><span class="line">  <span class="type">static</span> std::unique_ptr&lt;State&gt; dataDoneState;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.cpp</span></span><br><span class="line">std::unique_ptr&lt;State&gt; States::idleState = std::<span class="built_in">make_unique</span>&lt;IdleState&gt;();</span><br><span class="line">std::unique_ptr&lt;State&gt; States::ehloState = std::<span class="built_in">make_unique</span>&lt;EhloState&gt;();</span><br><span class="line">std::unique_ptr&lt;State&gt; States::mailState = std::<span class="built_in">make_unique</span>&lt;MailState&gt;();</span><br><span class="line">std::unique_ptr&lt;State&gt; States::rcptState = std::<span class="built_in">make_unique</span>&lt;RcptState&gt;();</span><br><span class="line">std::unique_ptr&lt;State&gt; States::dataStartState = std::<span class="built_in">make_unique</span>&lt;DataStartState&gt;();</span><br><span class="line">std::unique_ptr&lt;State&gt; States::dataDoneState = std::<span class="built_in">make_unique</span>&lt;DataDoneState&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>完成了这一步，我们就可以修改<code>State</code>类的<code>transitiveFromQuit</code>方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.cpp</span></span><br><span class="line"><span class="function">std::string <span class="title">State::transitiveFromQuit</span><span class="params">(std::unique_ptr&lt;State&gt; *&amp;current)</span> </span>&#123;</span><br><span class="line">  current = &amp;States::idleState;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;221&quot;</span> + codeToMessages[<span class="string">&quot;221&quot;</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此，我们完成了我们的状态机的雏形。同时你也可以通过执行命令<code>git checkout all-states</code>获得上面的代码。</p>
+<h2 id="IdleState"><a href="#IdleState" class="headerlink" title="IdleState"></a>IdleState</h2><p>当状态机一启动时，其应该位于<code>IdleState</code>状态，其能够接收4个命令：<code>RSET</code>，<code>NOOP</code>，<code>QUIT</code>以及<code>EHLO</code>命令。其中<code>NOOP</code>和<code>QUIT</code>已经统一处理了，我们并不需要关心。在后面的状态中，我们会忽略这两个命令。对于<code>RSET</code>命令来说，其在这个状态没有任何的作用（严格来说，不是没有作用，而是从<code>IdleState</code>转化为<code>IdleState</code>）。对于<code>EHLO</code>命令来说，其应该从<code>IdleState</code>状态转化为<code>EhloState</code>。在完成这个工作之前，我们首先使用ABNF范式定义<code>RSET</code>等命令的请求和响应，为了简单起见，本教程直接设置了一个静态的”127.0.0.1”。</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rset-request</span> <span class="operator">=</span> <span class="string">&quot;RSET&quot;</span> <span class="keyword">CRLF</span></span><br><span class="line"><span class="attribute">rset-ok-response</span> <span class="operator">=</span> <span class="string">&quot;250&quot;</span> <span class="keyword">SP</span> <span class="string">&quot;Requested mail action okay, completed&quot;</span> <span class="keyword">CRLF</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">noop-request</span> <span class="operator">=</span> <span class="string">&quot;NOOP&quot;</span> <span class="keyword">CRLF</span></span><br><span class="line"><span class="attribute">noop-ok-response</span> <span class="operator">=</span> <span class="string">&quot;250&quot;</span> <span class="keyword">SP</span> <span class="string">&quot;Requested mail action okay, completed&quot;</span> <span class="keyword">CRLF</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">quit-request</span> <span class="operator">=</span> <span class="string">&quot;QUIT&quot;</span> <span class="keyword">CRLF</span></span><br><span class="line"><span class="attribute">quit-ok-response</span> <span class="operator">=</span> <span class="string">&quot;221&quot;</span> <span class="keyword">SP</span> <span class="string">&quot;Service closing transmission channel&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">ehlo-request</span> <span class="operator">=</span> <span class="string">&quot;EHLO&quot;</span> <span class="keyword">SP</span> <span class="string">&quot;127.0.0.1&quot;</span> <span class="keyword">CRLF</span></span><br><span class="line"><span class="attribute">ehlo-ok-response</span> <span class="operator">=</span> <span class="string">&quot;250&quot;</span> <span class="keyword">SP</span> <span class="string">&quot;Requested mail action okay, completed&quot;</span> <span class="keyword">CRLF</span></span><br></pre></td></tr></table></figure>
+
+<p>因此，我们首先更新<code>State</code>基类中的<code>isCorrectParameters</code>方法。其操作很简单，对于<code>NOOP</code>，<code>QUIT</code>和<code>RSET</code>而言，这些命令都不需要任何的参数。而对于<code>EHLO</code>命令，我们直接严格按照ABNF定义即可。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::optional&lt;std::string&gt; <span class="title">State::isCorrectParameters</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters)</span> </span>&#123;</span><br><span class="line">  std::string &amp;command = parameters[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">if</span> (command == <span class="string">&quot;NOOP&quot;</span> || command == <span class="string">&quot;QUIT&quot;</span> || command == <span class="string">&quot;RSET&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (parameters.<span class="built_in">size</span>() != <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (parameters[<span class="number">0</span>] == <span class="string">&quot;EHLO&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (parameters.<span class="built_in">size</span>() != <span class="number">2</span> || parameters[<span class="number">1</span>] != <span class="string">&quot;127.0.0.1&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> std::<span class="literal">nullopt</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你可能觉得这个功能很简单，但是就我个人而言，我认为此处我们应该写一点单元测试保证这个函数的正确性。显然，用cpp写单元测试也是相当的繁琐。首先，你需要在<code>miniSMTPServer/context</code>目录下创建一个新的目录<code>tests</code>。然后在<code>tests</code>目录下添加如下的文件：</p>
+<ul>
+<li><code>CMakeLists.txt</code></li>
+<li><code>stateTest.cpp</code></li>
+</ul>
+<p>对于位于<code>miniSMTPServer/context/tests</code>目录下的<code>CMakeLists.txt</code>，添加如下的代码：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># miniSMTPServer/context/tests/CMakeLists.txt</span></span><br><span class="line"><span class="keyword">enable_testing</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(</span><br><span class="line">  stateTest</span><br><span class="line">  stateTest.cpp</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_include_directories</span>(stateTest PRIVATE ../)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(</span><br><span class="line">  stateTest</span><br><span class="line">  context</span><br><span class="line">  GTest::gtest_main</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(GoogleTest)</span><br><span class="line">gtest_discover_tests(stateTest)</span><br></pre></td></tr></table></figure>
+
+<p>然后修改位于<code>miniSMTPServer/context</code>目录下的<code>CMakeLists.txt</code>文件，添加如下的代码：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># miniSMTPServer/context/CMakeLists.txt</span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">add_subdirectory</span>(./tests)</span><br></pre></td></tr></table></figure>
+
+<p>然后我们就可以开始写单元测试了，我们目前的单元测试主要关心<code>State::isCorrectParameters</code>方法。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/tests/stateTest.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;state.hpp&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;gtest/gtest.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unordered_map&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> std::unordered_map&lt;std::string, std::string&gt; codeToMessages&#123;</span><br><span class="line">    &#123;<span class="string">&quot;220&quot;</span>, <span class="string">&quot;Service ready&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;221&quot;</span>, <span class="string">&quot;Service closing transmission channel&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;250&quot;</span>, <span class="string">&quot;Requested mail action okay, completed&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;354&quot;</span>, <span class="string">&quot;Start mail input end &lt;CRLF&gt;.&lt;CRLF&gt;&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;500&quot;</span>, <span class="string">&quot;Syntax error, command unrecognized&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;501&quot;</span>, <span class="string">&quot;Syntax error in parameters or arguments&quot;</span>&#125;,</span><br><span class="line">    &#123;<span class="string">&quot;503&quot;</span>, <span class="string">&quot;Bad sequence of commands&quot;</span>&#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">TEST</span>(State, isCorrectParametersNOOP) &#123;</span><br><span class="line">  std::vector&lt;std::vector&lt;std::string&gt;&gt; tests&#123;</span><br><span class="line">      &#123;<span class="string">&quot;NOOP&quot;</span>, <span class="string">&quot;param1&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;NOOP&quot;</span>, <span class="string">&quot;param1&quot;</span>, <span class="string">&quot;param2&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;NOOP&quot;</span>, <span class="string">&quot;12&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;NOOP&quot;</span>, <span class="string">&quot;3&quot;</span>&#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> state = std::<span class="built_in">make_unique</span>&lt;IdleState&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;&amp;test : tests) &#123;</span><br><span class="line">    <span class="keyword">auto</span> result = state-&gt;<span class="built_in">isCorrectParameters</span>(test);</span><br><span class="line">    <span class="built_in">ASSERT_TRUE</span>(result.<span class="built_in">has_value</span>());</span><br><span class="line">    <span class="built_in">ASSERT_EQ</span>(result.<span class="built_in">value</span>(), <span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  std::vector&lt;std::string&gt; successful&#123;<span class="string">&quot;NOOP&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">ASSERT_FALSE</span>(state-&gt;<span class="built_in">isCorrectParameters</span>(successful).<span class="built_in">has_value</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">TEST</span>(State, isCorrectParametersQUIT) &#123;</span><br><span class="line">  std::vector&lt;std::vector&lt;std::string&gt;&gt; tests&#123;</span><br><span class="line">      &#123;<span class="string">&quot;QUIT&quot;</span>, <span class="string">&quot;NOOP&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;QUIT&quot;</span>, <span class="string">&quot;NOOP&quot;</span>, <span class="string">&quot;EHLO&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;QUIT&quot;</span>, <span class="string">&quot;12&quot;</span>, <span class="string">&quot;13&quot;</span>, <span class="string">&quot;14&quot;</span>, <span class="string">&quot;15&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;QUIT&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;4&quot;</span>, <span class="string">&quot;11111&quot;</span>, <span class="string">&quot;22&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;QUIT&quot;</span>, <span class="string">&quot;MAIL&quot;</span>, <span class="string">&quot;RCPT&quot;</span>, <span class="string">&quot;11111&quot;</span>, <span class="string">&quot;22&quot;</span>&#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> state = std::<span class="built_in">make_unique</span>&lt;IdleState&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;&amp;test : tests) &#123;</span><br><span class="line">    <span class="keyword">auto</span> result = state-&gt;<span class="built_in">isCorrectParameters</span>(test);</span><br><span class="line">    <span class="built_in">ASSERT_TRUE</span>(result.<span class="built_in">has_value</span>());</span><br><span class="line">    <span class="built_in">ASSERT_EQ</span>(result.<span class="built_in">value</span>(), <span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  std::vector&lt;std::string&gt; successful&#123;<span class="string">&quot;QUIT&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">ASSERT_FALSE</span>(state-&gt;<span class="built_in">isCorrectParameters</span>(successful).<span class="built_in">has_value</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">TEST</span>(State, isCorrectParametersRSET) &#123;</span><br><span class="line">  std::vector&lt;std::vector&lt;std::string&gt;&gt; tests&#123;</span><br><span class="line">      &#123;<span class="string">&quot;RSET&quot;</span>, <span class="string">&quot;NOOP&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;RSET&quot;</span>, <span class="string">&quot;NOOP&quot;</span>, <span class="string">&quot;EHLO&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;RSET&quot;</span>, <span class="string">&quot;12&quot;</span>, <span class="string">&quot;13&quot;</span>, <span class="string">&quot;14&quot;</span>, <span class="string">&quot;15&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;RSET&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;4&quot;</span>, <span class="string">&quot;11111&quot;</span>, <span class="string">&quot;22&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;RSET&quot;</span>, <span class="string">&quot;MAIL&quot;</span>, <span class="string">&quot;RCPT&quot;</span>, <span class="string">&quot;11111&quot;</span>, <span class="string">&quot;22&quot;</span>&#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> state = std::<span class="built_in">make_unique</span>&lt;IdleState&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;&amp;test : tests) &#123;</span><br><span class="line">    <span class="keyword">auto</span> result = state-&gt;<span class="built_in">isCorrectParameters</span>(test);</span><br><span class="line">    <span class="built_in">ASSERT_TRUE</span>(result.<span class="built_in">has_value</span>());</span><br><span class="line">    <span class="built_in">ASSERT_EQ</span>(result.<span class="built_in">value</span>(), <span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  std::vector&lt;std::string&gt; successful&#123;<span class="string">&quot;RSET&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">ASSERT_FALSE</span>(state-&gt;<span class="built_in">isCorrectParameters</span>(successful).<span class="built_in">has_value</span>());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">TEST</span>(State, isCorrectParametersEHLO) &#123;</span><br><span class="line">  std::vector&lt;std::vector&lt;std::string&gt;&gt; tests&#123;</span><br><span class="line">      &#123;<span class="string">&quot;EHLO&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;127.0.0.2&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;127.0.1.1&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;NOOP&quot;</span>, <span class="string">&quot;EHLO&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;12&quot;</span>, <span class="string">&quot;13&quot;</span>, <span class="string">&quot;14&quot;</span>, <span class="string">&quot;15&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;3&quot;</span>, <span class="string">&quot;4&quot;</span>, <span class="string">&quot;11111&quot;</span>, <span class="string">&quot;22&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;MAIL&quot;</span>, <span class="string">&quot;RCPT&quot;</span>, <span class="string">&quot;11111&quot;</span>, <span class="string">&quot;22&quot;</span>&#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> state = std::<span class="built_in">make_unique</span>&lt;IdleState&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span> &amp;&amp;test : tests) &#123;</span><br><span class="line">    <span class="keyword">auto</span> result = state-&gt;<span class="built_in">isCorrectParameters</span>(test);</span><br><span class="line">    <span class="built_in">ASSERT_TRUE</span>(result.<span class="built_in">has_value</span>());</span><br><span class="line">    <span class="built_in">ASSERT_EQ</span>(result.<span class="built_in">value</span>(), <span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  std::vector&lt;std::string&gt; successful&#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;127.0.0.1&quot;</span>&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">ASSERT_FALSE</span>(state-&gt;<span class="built_in">isCorrectParameters</span>(successful).<span class="built_in">has_value</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码提供的单元测试十分简单。不需要进行讲解，从后面开始，我们会以测试驱动来撰写代码，也就是我们先写测试文件再写相应的功能，当我们的代码能够通过测试后也就证明我们的代码是正确的。</p>
+<p>现在我们要开始实现<code>IdleState</code>类中的方法。首先我们应该思考<code>IdleState</code>中允许存在什么命令，由上面的讲述可知，<code>IdleState</code>允许的命令与<code>State</code>中的<code>allowed</code>一致，所以对其构造函数我们可以不做任何的处理，那么关键的地方就在于<code>transitive</code>方法的实现。我们首先实现如下的单元测试的代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/tests/stateTest.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;utility&gt;</span></span></span><br><span class="line">...</span><br><span class="line"><span class="built_in">TEST</span>(State, IdleStateTransitive) &#123;</span><br><span class="line">  std::vector&lt;std::vector&lt;std::string&gt;&gt; tests&#123;</span><br><span class="line">      &#123;<span class="string">&quot;RSET&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;NOOP&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;QUIT&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;127.0.0.1&quot;</span>&#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  std::vector&lt;std::pair&lt;std::string, std::unique_ptr&lt;State&gt; *&gt;&gt; expects&#123;</span><br><span class="line">      &#123;<span class="string">&quot;250 &quot;</span> + codeToMessages[<span class="string">&quot;250&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;250 &quot;</span> + codeToMessages[<span class="string">&quot;250&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;221 &quot;</span> + codeToMessages[<span class="string">&quot;221&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;250 &quot;</span> + codeToMessages[<span class="string">&quot;250&quot;</span>], &amp;States::ehloState&#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; tests.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">    <span class="keyword">auto</span> state = std::<span class="built_in">make_unique</span>&lt;IdleState&gt;();</span><br><span class="line">    std::unique_ptr&lt;State&gt; *current = &amp;States::idleState;</span><br><span class="line">    std::string result = state-&gt;<span class="built_in">transitive</span>(tests[<span class="number">0</span>], current);</span><br><span class="line">    <span class="built_in">EXPECT_EQ</span>(result, expects[i].first);</span><br><span class="line">    <span class="built_in">EXPECT_EQ</span>(current, expects[i].second);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试的代码很简单，你可以编译然后使用<code>ctest --output-on-failure</code>可以发现很多错误，那么就让我们来更新<code>IdleState::transitive</code>方法，其更新的很简单，首先使用基类的方法<code>transitiveHelper</code>。然后只需要处理<code>EHLO</code>命令即可，因为<code>QUIT</code>和<code>NOOP</code>命令已经在<code>transitiveHelper</code>方法实现了，而<code>RSET</code>方法对于<code>idleState</code>没有任何作用。同时我也添加了许多其他测试。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/tests/stateTest.cpp</span></span><br><span class="line"><span class="built_in">TEST</span>(State, IdleStateTransitive) &#123;</span><br><span class="line">  std::vector&lt;std::vector&lt;std::string&gt;&gt; tests&#123;</span><br><span class="line">      &#123;<span class="string">&quot;RSET&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;NOOP&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;QUIT&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;127.0.0.1&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;RSTE&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;NOOQ&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;RSET&quot;</span>, <span class="string">&quot;NOOP&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;NOOP&quot;</span>, <span class="string">&quot;NOOP&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;QUIT&quot;</span>, <span class="string">&quot;QUIT&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;127.0.1.1&quot;</span>&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;DATA&quot;</span>&#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  std::vector&lt;std::pair&lt;std::string, std::unique_ptr&lt;State&gt; *&gt;&gt; expects&#123;</span><br><span class="line">      &#123;<span class="string">&quot;250 &quot;</span> + codeToMessages[<span class="string">&quot;250&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;250 &quot;</span> + codeToMessages[<span class="string">&quot;250&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;221 &quot;</span> + codeToMessages[<span class="string">&quot;221&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;250 &quot;</span> + codeToMessages[<span class="string">&quot;250&quot;</span>], &amp;States::ehloState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;500 &quot;</span> + codeToMessages[<span class="string">&quot;500&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;500 &quot;</span> + codeToMessages[<span class="string">&quot;500&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">      &#123;<span class="string">&quot;503 &quot;</span> + codeToMessages[<span class="string">&quot;503&quot;</span>], &amp;States::idleState&#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; tests.<span class="built_in">size</span>(); ++i) &#123;</span><br><span class="line">    <span class="keyword">auto</span> state = std::<span class="built_in">make_unique</span>&lt;IdleState&gt;();</span><br><span class="line">    std::unique_ptr&lt;State&gt; *current = &amp;States::idleState;</span><br><span class="line">    std::string result = state-&gt;<span class="built_in">transitive</span>(tests[i], current);</span><br><span class="line">    <span class="built_in">EXPECT_EQ</span>(result, expects[i].first);</span><br><span class="line">    <span class="built_in">EXPECT_EQ</span>(current, expects[i].second);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再完成了测试代码的编写后，我们开始修改<code>IdleState::transitive</code>方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.cpp</span></span><br><span class="line"><span class="function">std::optional&lt;std::string&gt; <span class="title">State::isCorrectParameters</span><span class="params">(std::vector&lt;std::string&gt; &amp;parameters)</span> </span>&#123;</span><br><span class="line">  std::string &amp;command = parameters[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">if</span> (command == <span class="string">&quot;NOOP&quot;</span> || command == <span class="string">&quot;QUIT&quot;</span> || command == <span class="string">&quot;RSET&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (parameters.<span class="built_in">size</span>() != <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (parameters[<span class="number">0</span>] == <span class="string">&quot;EHLO&quot;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (parameters.<span class="built_in">size</span>() != <span class="number">2</span> || parameters[<span class="number">1</span>] != <span class="string">&quot;127.0.0.1&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&quot;501 &quot;</span> + codeToMessages[<span class="string">&quot;501&quot;</span>];</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> std::<span class="literal">nullopt</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们编译代码运行测试:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> build &amp;&amp; make -j12 &amp;&amp; ctest --output-on-failure</span><br></pre></td></tr></table></figure>
+
+<p>其结果如下：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">80% tests passed, 1 tests failed out of 5</span><br><span class="line"></span><br><span class="line">Total Test time (real) =   0.01 sec</span><br><span class="line"></span><br><span class="line">The following tests FAILED:</span><br><span class="line">          5 - State.IdleStateTransitive (Failed)</span><br><span class="line">Errors while running CTest</span><br></pre></td></tr></table></figure>
+
+<p>产生这样的结果并不是我们代码的问题，而是由于<code>commands</code>变量的定义在教程二中没有完全定义，因此修改其定义如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// miniSMTPServer/context/state.cpp</span></span><br><span class="line"><span class="type">static</span> std::unordered_set&lt;std::string&gt; commands&#123;<span class="string">&quot;EHLO&quot;</span>, <span class="string">&quot;MAIL&quot;</span>, <span class="string">&quot;RCPT&quot;</span>, <span class="string">&quot;RSET&quot;</span>, <span class="string">&quot;NOOP&quot;</span>, <span class="string">&quot;QUIT&quot;</span>, <span class="string">&quot;DATA&quot;</span>, <span class="string">&quot;.&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们重新编译代码运行测试:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> build &amp;&amp; make -j12 &amp;&amp; ctest --output-on-failure</span><br></pre></td></tr></table></figure>
+
+<p>你会发现我们能够通过所有的测试。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>本节我们主要完善了我们的状态机并实现了第一个状态<code>IdleState</code>的操作，并通过测试驱动的方式写出了我们的代码。在后续的教程中我们将继续完善其他的状态操作。如果你产生了任何的问题，你可以运行如下的命令：</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout idle-state</span><br></pre></td></tr></table></figure>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89/">https://luolibrary.com/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%B8%89%EF%BC%89/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>
+      
+      <a href="/tags/%E5%AD%A6%E4%B9%A0/">学习</a>
+      
+      <a href="/tags/%E6%95%99%E7%A8%8B/">教程</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E5%9B%9B%EF%BC%89/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">手把手教你写一个简单的SMTP服务器（四）</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2023/03/14/%E6%89%8B%E6%8A%8A%E6%89%8B%E6%95%99%E4%BD%A0%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84SMTP%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88%E4%BA%8C%EF%BC%89/">  
+        <span class="next-text nav-default">手把手教你写一个简单的SMTP服务器（二）</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:shejialuo@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://twitter.com/luo_hope" class="iconfont icon-twitter" title="twitter"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/jialuo-she-913873289/" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/shejialuo" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2020 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">shejialuo</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>

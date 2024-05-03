@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Website mata -->
+<meta charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<!-- Disable transformation -->
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+<!-- Website description -->
+
+<meta name="description" content="ZStack OSAL分析" />
+
+
+<!-- Website keywords -->
+
+<meta name="keywords" content="嵌入式, 洛的藏书阁" />
+
+
+
+
+<!-- Website rss -->
+
+<link rel="alternate" href="/atom.xml" title="洛的藏书阁" type="application/atom+xml">
+
+
+<!-- Website favicon -->
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico?v=3.0.0" />
+
+
+<!-- Canonical, good for google search engine -->
+<link rel="canonical" href="https://luolibrary.com/2021/03/06/ZStack-OSAL分析/" />
+
+<!-- Fancybox styling -->
+
+<link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+<!-- MathJax (LaTeX) support -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });  
+  </script>
+<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+<!-- Theme styling -->
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=3.0.0" />
+
+<!-- Analytics and push -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7M238H24L4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
+
+  gtag('config', 'G-7M238H24L4');
+</script>
+
+  
+
+
+
+<!-- LeanCloud Counter -->
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
+</script>
+  
+  <title>ZStack OSAL分析 - 洛的藏书阁</title>
+
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div class="scrollPercentage"></div>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">洛的藏书阁</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+    <a href="/">
+      <li class="mobile-menu-item">
+        
+        
+        Home              </li>
+    </a>
+    
+    <a href="/archives/">
+      <li class="mobile-menu-item">
+        
+        
+        Archives              </li>
+    </a>
+    
+    <a href="/tags/">
+      <li class="mobile-menu-item">
+        
+        
+        Tags              </li>
+    </a>
+    
+    <a href="/categories/">
+      <li class="mobile-menu-item">
+        
+        
+        Categories              </li>
+    </a>
+    
+    <a href="/about/">
+      <li class="mobile-menu-item">
+        
+        
+        About              </li>
+    </a>
+    
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+      <div class="logo-wrapper">  
+  <a href="/." class="logo">洛的藏书阁</a>  
+</div>  
+  
+<nav class="site-navbar">  
+    
+    <ul id="menu" class="menu">  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/">  
+              
+              
+              Home  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/archives/">  
+              
+              
+              Archives  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/tags/">  
+              
+              
+              Tags  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/categories/">  
+              
+              
+              Categories  
+              
+          </a>  
+        </li>  
+        
+        <li class="menu-item">  
+          <a class="menu-item-link" href="/about/">  
+              
+              
+              About  
+              
+          </a>  
+        </li>  
+        
+    </ul>  
+    
+</nav>  
+
+    </header>
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      ZStack OSAL分析
+      
+    </h1>
+
+    <div class="post-meta">
+      <span class="post-time">
+        2021-03-06
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/%E6%8A%80%E6%9C%AF/">技术</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
+  
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-OSAL%E7%9A%84%E6%80%9D%E6%83%B3%E8%B5%B7%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">1. OSAL的思想起源</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%97%A9%E6%9C%9FWSN%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 早期WSN的架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-OSAL%E7%9A%84%E6%8F%90%E5%87%BA"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 OSAL的提出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%B0%8F%E7%BB%93"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 小结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-TI-OSAL"><span class="toc-number">1.4.</span> <span class="toc-text">2. TI OSAL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-Zigbee%E6%80%BB%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="toc-number">1.5.</span> <span class="toc-text">2.1 Zigbee总体架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-OSAL%E6%A6%82%E8%BF%B0"><span class="toc-number">1.6.</span> <span class="toc-text">2.2 OSAL概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%B0%8F%E7%BB%93"><span class="toc-number">1.7.</span> <span class="toc-text">2.3 小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%B6%88%E6%81%AF-Messages"><span class="toc-number">2.</span> <span class="toc-text">3. 消息 (Messages)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%B6%88%E6%81%AF%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.1.</span> <span class="toc-text">3.1 消息数据结构的实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E6%B6%88%E6%81%AF%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-number">2.2.</span> <span class="toc-text">3.2 消息的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E6%B6%88%E6%81%AF%E7%9A%84%E9%87%8A%E6%94%BE"><span class="toc-number">2.3.</span> <span class="toc-text">3.3 消息的释放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="toc-number">2.4.</span> <span class="toc-text">3.4 消息队列</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%8E%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%93%8D%E4%BD%9C%E6%9C%89%E5%85%B3%E7%9A%84%E5%AE%8F%E5%8F%98%E9%87%8F"><span class="toc-number">2.4.1.</span> <span class="toc-text">与消息队列操作有关的宏变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E9%98%9F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.4.2.</span> <span class="toc-text">进队的实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BA%E9%98%9F%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.4.3.</span> <span class="toc-text">出队的实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E6%B6%88%E6%81%AF%E7%9A%84%E4%BC%A0%E9%80%92"><span class="toc-number">2.5.</span> <span class="toc-text">3.5 消息的传递</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-%E5%B0%8F%E7%BB%93"><span class="toc-number">2.6.</span> <span class="toc-text">3.6 小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BB%BB%E5%8A%A1-Tasks-%E4%B8%8E%E4%BA%8B%E4%BB%B6-Events"><span class="toc-number">3.</span> <span class="toc-text">4. 任务 (Tasks) 与事件 (Events)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.1.</span> <span class="toc-text">4.1 循环机制的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tasksEvents"><span class="toc-number">3.1.1.</span> <span class="toc-text">tasksEvents[]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#tasksArr"><span class="toc-number">3.1.2.</span> <span class="toc-text">tasksArr[]</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E4%BB%BB%E5%8A%A1%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.2.</span> <span class="toc-text">4.2 任务的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E4%BA%8B%E4%BB%B6%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-number">3.3.</span> <span class="toc-text">4.3 事件的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E4%BB%BB%E5%8A%A1%E4%B8%8E%E4%BA%8B%E4%BB%B6%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">3.4.</span> <span class="toc-text">4.4 任务与事件的关系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E6%9C%BA%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">5. 消息传递机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%B6%88%E6%81%AF%E7%9A%84%E5%8F%91%E9%80%81%E4%B8%8E%E6%8E%A5%E6%94%B6"><span class="toc-number">4.1.</span> <span class="toc-text">5.1 消息的发送与接收</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">5.2 任务处理函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E5%B0%8F%E7%BB%93"><span class="toc-number">4.3.</span> <span class="toc-text">5.3 小结</span></a></li></ol></li></ol>
+    </div>
+  </div>
+  
+
+  <div class="post-content">
+    
+    <h2 id="1-OSAL的思想起源"><a href="#1-OSAL的思想起源" class="headerlink" title="1. OSAL的思想起源"></a>1. OSAL的思想起源</h2><p>本部分拟通过研究相关文献总结出OSAL (Operating System Abstraction Layer) 的产生原因以及思想起源。</p>
+<h3 id="1-1-早期WSN的架构"><a href="#1-1-早期WSN的架构" class="headerlink" title="1.1 早期WSN的架构"></a>1.1 早期WSN的架构</h3><p>在早期WSN的软件架构中，开发环境是极其轻量的 (Lightweight)，开发者直接操控硬件进行开发：</p>
+<pre class="mermaid">graph BT
+  A("硬件(Hardware)") -->  B("应用端 (Application)")
+  B --> A</pre>
+
+<p>在这种软件架构下，存在以下四种限制：</p>
+<ul>
+<li><strong>与硬件依赖 (Hardware dependent)的应用端程序</strong><br>开发者直接面向硬件底层，应用端程序的代码与低级硬件细节相耦合。例如，操纵硬件寄存器来进行网络控制。在这种情况下，当硬件提供的接口发生了变化将会影响开发者专注于应用端程序的开发，强迫开发者深入硬件细节。</li>
+<li><strong>没有分离开的独立进程 (Independent process)</strong><br>在这种架构下，只存在一个进程。这样就迫使开发者组合不同应用程序代码，这样就导致组合出来的程序在<strong>数据请求</strong>、<strong>数据处理</strong>、<strong>时间同步</strong>会相互关联，使得程序可读性变差，难以调试。</li>
+<li><strong>无法对时间进行控制</strong><br>由于在一个程序里组合了不同的应用代码，使得对于时间进行精确的掌控变得尤为困难。只要改变了一部分涉及到延迟的代码，整个系统的时间将会发生变化。</li>
+<li><strong>无处理器分配机制</strong><br>程序始终顺序执行不同的应用代码，处理器无法获得任何优先权。</li>
+</ul>
+<p>随着发展，WSN的架构在硬件上为开发者提供了一些十分重要的抽象：</p>
+<pre class="mermaid">graph TB
+  A("应用端(Application)")--> B("操作系统API")
+  B --> A
+  B --> E
+  B --> F
+
+  D("基本函数层(Basic function)")
+  C("硬件(Hardware)")
+  D --> C
+  E("中断服务程序 (ISR) ")
+  F("硬件表示层 (HPL)")
+  E-->D
+  F-->D
+  style B fill:#f96</pre>
+
+<ul>
+<li><p><strong>基本函数 (Basic function) 层</strong><br>是一个功能十分简单的层，提供以下基础功能：</p>
+<ul>
+<li>对寄存器进行读、写功能</li>
+<li>产生硬件中断，将中断信息传递给上层</li>
+</ul>
+</li>
+<li><p><strong>中断服务程序 (Interrupt Service Routines ISR) 层</strong><br>用于处理中断，并且能够对信号量 (semaphore) 进行管理，对硬件进行基本的处理。</p>
+</li>
+<li><p><strong>硬件表示层 (HPL)</strong><br>提供一个完整的接口用于硬件和应用之间的交互。</p>
+</li>
+</ul>
+<p>我们下面介绍操作系统的使用，WSN社区广泛使用了一系列操作系统 (OS, Operating System)，尽管这些不同的操作系统几乎都提供具有相同功能的服务，但是它们使用了不同的应用编程接口 (API, Application Programming Interface)，从而使可移植性 (Portability) 变得更加困难，对于不同平台，提供的API 不相同，导致代码的兼容性较差。</p>
+<h3 id="1-2-OSAL的提出"><a href="#1-2-OSAL的提出" class="headerlink" title="1.2 OSAL的提出"></a>1.2 OSAL的提出</h3><p>通过上述分析可知，对于不同的硬件平台以及操作系统提供的不同API 都会导致软件的可移植性变差。因此，人们提出了一个新的想法：<strong>在操作系统API与应用端之间的交互上，再提供一层抽象</strong>，这个抽象就是OSAL：</p>
+<pre class="mermaid">graph BT
+  A("应用端(Application)")--> C("OSAL(操作系统抽象层)")
+  C --> A
+  C -.->B("操作系统API")
+  B -.->C
+  style C fill:#f96</pre>
+
+<p>OSAL为应用端提供了对操作系统API的一个抽象，就是为了解决不同操作系统提供功能相同的服务但却不具备相同API的问题。这样当软件代码要移植到不同的操作系统时，仅仅只需要重新定义OSAL的相关功能，但并不改变OSAL为用户提供的接口，也就是OSAL API。</p>
+<h3 id="1-3-小结"><a href="#1-3-小结" class="headerlink" title="1.3 小结"></a>1.3 小结</h3><p>通过上述分析可知，我们可以得出以下结论：</p>
+<ul>
+<li>OSAL 的产生的根本目的是为了提高<strong>代码的可移植性</strong></li>
+<li>OSAL 在严格意义上并不是操作系统，只是对于不同操作系统的API 进行了<strong>一层抽象</strong>，统一了用户接口</li>
+</ul>
+<h3 id="2-TI-OSAL"><a href="#2-TI-OSAL" class="headerlink" title="2. TI OSAL"></a>2. TI OSAL</h3><p>本部分拟对TI公司的 Z-Stack 中的OSAL 进行一个大致的介绍。首先通过查阅TI公司相关手册，给出TI公司文档中对于OSAL API的一些解释：</p>
+<blockquote>
+<p>The purpose of this document is to define the OS Abstraction Layer (OSAL) API. This API allows the software components if a TI stack product, such as Z-Stack, RemoTI, and BLE, to be written independently of the specifics of the operating system, kernel of tasking environment.</p>
+</blockquote>
+<p>通过上述引用可知，TI 公司设计OSAL API的目的也是在于开发者使用不同的协议栈面对的接口是一致的。实际上Z-Stack 协议栈并不具备实际的操作系统，但是TI 公司有三个协议栈均提供的是相同的OSAL API。可见TI 公司也是通过抽象的方式统一了提供给开发者的接口。</p>
+<p>所以严格来讲，Zigbee 使用TI 公司的Z-Stack，而Z-Stack 中的OSAL 提供的仅仅是一层抽象，并不是严格意义上的操作系统。下面，从不同的角度通过对Z-Stack 的OSAL 进行一个系统化以及模块化的大致分析。</p>
+<h3 id="2-1-Zigbee总体架构"><a href="#2-1-Zigbee总体架构" class="headerlink" title="2.1 Zigbee总体架构"></a>2.1 Zigbee总体架构</h3><p>首先，根据查阅相关资料，绘出Zigbee的总体架构如下图所示：</p>
+<pre class="mermaid">graph TB
+  A(Z-Stack)
+  B(Application)
+  A --> C(OSAL APIS)
+  B --> C
+  C--> D(OSAL)
+  E(HAL)
+  F(ISR)
+  D --> E
+  D --> F
+  E --> G(Hardware)
+  F --> G(Hardware)
+  style C fill:#f96</pre>
+
+<p>从图中我们可以认为，OSAL 就是Zigbee的一个“操作系统”给开发者提供了一些接口也就是OSAL API ，在下面的部分我们会对OASL 进行一个整体分析。</p>
+<h3 id="2-2-OSAL概述"><a href="#2-2-OSAL概述" class="headerlink" title="2.2 OSAL概述"></a>2.2 OSAL概述</h3><p>OSAL 提供了如下的功能：</p>
+<ul>
+<li><strong>任务注册、初始化以及开始 (Task registration, initialization, starting)</strong></li>
+<li><strong>任务之间的消息交换 (Message exchange between tasks)</strong></li>
+<li><strong>任务同步 (Task synchronization)</strong></li>
+<li><strong>中断处理 (Interrupt handling)</strong></li>
+<li><strong>定时器 (Timers)</strong></li>
+<li><strong>内存分配 (Memory allocation)</strong></li>
+</ul>
+<p>下面对OSAL 中的一些基本概念进行阐述。</p>
+<p>首先给出任务 (Tasks)、事件 (Events) 与 消息 (Messages)之间的关系：</p>
+<pre class="mermaid">graph LR
+  A(用于触发任务运行)
+
+  B(完整的代码块或一个线程)
+  A --> B
+  C(用于触发任务运行)
+  D(完整的代码块或一个线程)
+  C --> D
+  E(用于任务之间的信息交流)
+  E --- B
+  E --- D</pre>
+
+<p>接下来，我们对这三个基本概念进行阐述。</p>
+<p>任务具有如下的性质 (property)：</p>
+<ul>
+<li>任务是由初始化段 (initialization section)和运行段 (run-time section)组成的</li>
+<li>一旦任务开始执行，任务将会<strong>运行到结束 (run to completion)</strong></li>
+<li>事件使任务执行运行段代码</li>
+</ul>
+<p>事件是整个架构中的最底层的实现。</p>
+<p>消息定义为**内部任务的通信 (Inter-Task Communication)**：</p>
+<pre class="mermaid">graph LR
+A[任务1] --> B["消息：我已经完成了"]
+B --> C[任务2]
+style B fill:#f96</pre>
+
+<ul>
+<li>消息是由OSAL 管理的</li>
+<li>用于触发任务之间的通信以及内部命令传递</li>
+</ul>
+<p>任务之间的调度遵循两个原则：</p>
+<ul>
+<li>任务将会运行到结束 (run to completion)</li>
+<li><strong>任务服务的无限循环 (Round-robin task servicing loop)</strong></li>
+</ul>
+<p>标准C语言中 <code>malloc()</code> 和 <code>free()</code> 内存操作并不知晓具体的硬件细节，因此OSAL提供了具有相同功能但是扩展了的函数以方便开发者管理堆上的动态内存。</p>
+<ul>
+<li><code>osal_mem_alloc()</code>：动态分配一个缓存区，返回指向该缓存区的指针。</li>
+<li><code>osal_mem_free()</code>：释放动态分配的缓存区。</li>
+</ul>
+<p>定时器 (Timer) 使得开发者能够轻易地对<strong>内部任务 (Internal tasks)<strong>和</strong>外部任务 (External or application level)<strong>进行时间上的操作，从而解决了在第一部分讲述的缺点：</strong>无法对时间进行控制</strong>。</p>
+<p>时钟 (Clock) 提供了追踪设备日期和时间的功能，从而在一定程度上使得开发者能够对时间进行一个更好的管理。</p>
+<h3 id="2-3-小结"><a href="#2-3-小结" class="headerlink" title="2.3 小结"></a>2.3 小结</h3><p>通过上述对OSAL 的一些基本功能介绍，我们大致地了解了OSAL 的一个基本架构，可以看出OSAL 的提出解决了我们在第一部分提出的相应的问题：对时间、任务管理以及软件与硬件分离问题。</p>
+<p>下面我们将通过对Z-Stack 中具体代码的分析，加深对OSAL 的理解。</p>
+<h2 id="3-消息-Messages"><a href="#3-消息-Messages" class="headerlink" title="3. 消息 (Messages)"></a>3. 消息 (Messages)</h2><p>本部分，我们深入探讨**消息 (Messages)**。我们将研究OSAL 中与消息部分相对应的源代码，通过对源代码的研究一步一步揭示消息在OSAL中的重要作用及其实现机制。</p>
+<h3 id="3-1-消息数据结构的实现"><a href="#3-1-消息数据结构的实现" class="headerlink" title="3.1 消息数据结构的实现"></a>3.1 消息数据结构的实现</h3><p>一个消息的基本数据结构定义在文件 <code>OSAL.h</code> 中，如下所示：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> sturct &#123;</span><br><span class="line">    <span class="type">void</span> *next;    <span class="comment">// 用于链表的基本实现</span></span><br><span class="line">    uint16 len;    <span class="comment">// 元数据 (meta data)：消息的长度</span></span><br><span class="line">    uint8 dest_id; <span class="comment">// 元数据 (meta data)：消息的目的地</span></span><br><span class="line">&#125; <span class="type">osal_msg_hdr_t</span>;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>uint16</code> 和 <code>uint8</code>的定义在 <code>hal_types.h</code> 文件中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">char</span>   uint8;  <span class="comment">// 1个字节</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="type">short</span>  uint16; <span class="comment">// 2个字节</span></span><br></pre></td></tr></table></figure>
+
+<p>若读者接触过数据结构，可以发现这是一个链表中的结点。</p>
+<p>消息的数据结构只保存了一些**元数据 (meta data)**：消息的长度 <code>len</code> 以及目的地 <code>dest_id</code> 并没有保存消息的内容。在消息这一部分内容中，我们并不会深入消息的内容是怎么产生的，我们的关注点在于消息数据结构及算法的实现。</p>
+<p>下面，我们开始分析与消息相关的算法操作。</p>
+<h3 id="3-2-消息的创建"><a href="#3-2-消息的创建" class="headerlink" title="3.2 消息的创建"></a>3.2 消息的创建</h3><p>消息的创建是通过 <code>osal_msg_allocate()</code> 实现的，定义在 <code>OSAL.c</code> 文件中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">uint8 * <span class="title function_">osal_msg_allocate</span><span class="params">(uint16 len)</span> &#123;</span><br><span class="line">    <span class="type">osal_msg_hdr_t</span> *hdr; <span class="comment">// 定义了一个结构体指针。</span></span><br><span class="line">    <span class="keyword">if</span>( len == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> ( <span class="literal">NULL</span> ); <span class="comment">// 若长度为0，则返回空指针。</span></span><br><span class="line">    <span class="comment">// 利用osal_mem_alloc() 动态分配内存。</span></span><br><span class="line">    hdr = (<span class="type">osal_msg_hdr_t</span> *)osal_mem_alloc((<span class="type">short</span>)(len + <span class="keyword">sizeof</span>( <span class="type">osal_msg_hdr_t</span> )));</span><br><span class="line">    <span class="keyword">if</span> (hdr) &#123; <span class="comment">// 如果动态分配内存成功</span></span><br><span class="line">        hdr -&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">        hdr -&gt;len = len;</span><br><span class="line">        hdr -&gt;dest_id = TASK_NO_TASK;</span><br><span class="line">        <span class="keyword">return</span> ((uint8 *) (hdr + <span class="number">1</span>));</span><br><span class="line">    &#125;<span class="comment">// 进行相应的赋值操作并返回指针。</span></span><br><span class="line">    <span class="keyword">else</span> <span class="comment">// 如果动态分配内存失败</span></span><br><span class="line">        <span class="keyword">return</span> ( <span class="literal">NULL</span> ); <span class="comment">// 返回空指针</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由上述代码可知，消息的创建过程与传统的链表结点的创建过程是比较类似的，但是有一些特别的地方如下：</p>
+<ul>
+<li>定义一个 <code>osal_msg_hdr_t</code> 结构体指针，为其动态分配内存。分配的动态内存大小为 <code>len+sizeof(osal_msg_hdr_t)</code>。</li>
+<li>返回的指针为 <code>(uint8 *) (hdr +1)</code>。</li>
+</ul>
+<p>可见，消息包含了两个部分：</p>
+<ul>
+<li><strong>元数据</strong>：<code>sizeof(osal_msg_hdr_t)</code> 部分</li>
+<li><strong>内容</strong>：<code>len</code> 部分</li>
+</ul>
+<p>上述的表述可以用下图表示：</p>
+<p><img src="https://s2.loli.net/2022/11/08/YwW8qlZML6pXhra.png" alt="消息示意图"></p>
+<p>我们可以看出，消息的创建对消息的元数据部分进行了处理，并提供了一个缓存区用于保存消息的内容，在与消息相关的API中并不会进行对消息实际内容的处理，<strong>因此调用创建消息的API会返回一个指向缓存区的指针，用于保存消息的内容</strong>。在此，我们得出了一个重要结论：从数据结构的角度来看，<strong>消息是一个指针，指向的是缓存区，也就是消息的内容，在其前有一个元数据区，队列是通过元数据区的指针相连接的</strong>。</p>
+<h3 id="3-3-消息的释放"><a href="#3-3-消息的释放" class="headerlink" title="3.3 消息的释放"></a>3.3 消息的释放</h3><p>由于消息是通过动态内存分配的方式，故必须有对应的函数用于释放内存，消息的释放是通过 <code>osal_msg_deallocate()</code> 函数实现的，定义在<code>OSAL.c</code> 文件中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">uint8 <span class="title function_">osal_msg_deallocate</span><span class="params">(uint8 *msg_ptr)</span> &#123;</span><br><span class="line">    uint8 *x;</span><br><span class="line">    <span class="keyword">if</span>(msg_prt == <span class="literal">NULL</span>) <span class="comment">// 如果消息指向空指针</span></span><br><span class="line">        <span class="keyword">return</span> (INVALID_MSG_POINTER); <span class="comment">//指针不合法</span></span><br><span class="line">    <span class="keyword">if</span>(OSAL_MSG_ID( msg_ptr )!= TASK_NO_TASK) &#123;</span><br><span class="line">         <span class="keyword">return</span> (MSG_BUFFER_NOT_AVAIL ); <span class="comment">// 不能释放进入队列的消息</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 只释放内容区，也就是buffer区。</span></span><br><span class="line">    x = (uint8 *)((uint8 *)msg_ptr - <span class="keyword">sizeof</span>( <span class="type">osal_msg_hdr_t</span> ));</span><br><span class="line">    osal_mem_free( (<span class="type">void</span> *)x );</span><br><span class="line">    <span class="keyword">return</span> ( SUCCESS);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过代码我们可以得到如下的结论：</p>
+<ul>
+<li><strong>不能释放已经进入队列的消息</strong>，因为进入了队列的消息是要进行处理的。（原因将会在后面描述）</li>
+<li>释放的内存仅仅释放消息的内容，不会释放消息的元数据。</li>
+</ul>
+<h3 id="3-4-消息队列"><a href="#3-4-消息队列" class="headerlink" title="3.4 消息队列"></a>3.4 消息队列</h3><p>通过上述的分析，我们已经介绍了消息的数据结构、消息的创建及释放。下面，我们介绍消息队列的实现。在数据结构中，队列的实现需要两个特殊的指针，<strong>队首指针 (front pointer)<strong>和</strong>队尾指针 (rear pointer)<strong>。在OSAL中，只采用了</strong>队首指针</strong>。</p>
+<p>队首指针定义在 <code>OSAL.c</code> 中，是一个全局变量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">osal_msg_q_t</span> osal_qHead;</span><br></pre></td></tr></table></figure>
+
+<p>在初始化的过程中，会被设置为 <code>NULL</code>。</p>
+<h4 id="与消息队列操作有关的宏变量"><a href="#与消息队列操作有关的宏变量" class="headerlink" title="与消息队列操作有关的宏变量"></a>与消息队列操作有关的宏变量</h4><p>在 <code>OSAL.h</code> 中定义了一些与消息队列操作有关的宏变量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指向下一个消息结点</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OSAL_MSG_NEXT(msg_ptr)    ((osal_msg_hdr_t *) (msg_ptr) - 1)-&gt;next</span></span><br><span class="line"><span class="comment">// 得出消息的元数据：长度</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OSAL_MSG_LEN(msg_ptr)     ((osal_msg_hdr_t *) (msg_ptr) - 1)-&gt;len</span></span><br><span class="line"><span class="comment">// 得出消息的元数据：目的地</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OSAL_MSG_ID(msg_ptr)      ((osal_msg_hdr_t *) (msg_ptr) - 1)-&gt;dest_id</span></span><br><span class="line"><span class="comment">// 取得消息队列的队首指针的值，即位于队首的消息</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OSAL_MSG_Q_HEAD(q_ptr)    (*(q_ptr))</span></span><br><span class="line"><span class="comment">// 将队首指针进行初始化</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OSAL_MSG_Q_INIT(q_ptr)     *(q_ptr) = NULL</span></span><br><span class="line"><span class="comment">// 判断队列是否为空</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> OSAL_MSG_Q_EMPTY(q_ptr)   (*(q_ptr) == NULL)</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以看出OSAL 对开发者屏蔽了一些细节，所有对于消息结点的操作，均会对指针进行减1操作。所以实际上OSAL消息队列操作的是元数据区，对于开发者而言，开发者总是在控制消息的内容。上述的观点可用下图表示：</p>
+<p><img src="https://s2.loli.net/2022/11/08/ysi3Sgr1cOQe8uE.png" alt="消息队列数据结构的实现"></p>
+<h4 id="进队的实现"><a href="#进队的实现" class="headerlink" title="进队的实现"></a>进队的实现</h4><p>进队的操作是由函数 <code>osal_msg_enqueue()</code> 实现的，定义在 <code>OSAL.c</code> 文件中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">osal_msg_enqueue</span><span class="params">(<span class="type">osal_msg_q_t</span> *q_ptr, <span class="type">void</span> *msg_ptr)</span> &#123;</span><br><span class="line">    <span class="type">void</span> *<span class="built_in">list</span>;</span><br><span class="line">    halIntState_t intState;</span><br><span class="line">    HAL_ENTER_CRITICAL_SECTION(intState); <span class="comment">// 进入临界区，关中断，实现同步与互斥。</span></span><br><span class="line">    OSAL_MSG_NEXT( msg_ptr ) = <span class="literal">NULL</span>; <span class="comment">// 消息的元数据指向NULL。</span></span><br><span class="line">    <span class="keyword">if</span> (*q_ptr == <span class="literal">NULL</span>) &#123; <span class="comment">// 当队列空的时候，直接入队，并将对首指针指向消息</span></span><br><span class="line">        *q_ptr = msg_ptr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 遍历，找到队尾指针。</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">list</span> = *q_ptr; OSAL_MSG_NEXT( <span class="built_in">list</span> ) != <span class="literal">NULL</span>; <span class="built_in">list</span> = OSAL_MSG_NEXT( <span class="built_in">list</span> ));</span><br><span class="line">        <span class="comment">// 将消息插入队尾。</span></span><br><span class="line">        OSAL_MSG_NEXT( <span class="built_in">list</span> ) = msg_ptr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 开启中断，退出临界区。</span></span><br><span class="line">    HAL_EXIT_CRITICAL_SECTION(intState);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由上述代码可知，进队的实现是比较基本的算法实现，此处我们并不深入讲述 <code>HAL_ENTER_CRITICAL_SECTION(intState)</code>以及 <code>HAL_EXIT_CRITICAL_SETCION(intState)</code>，我们将在后面专门阐述OSAL 同步与互斥的实现。</p>
+<h4 id="出队的实现"><a href="#出队的实现" class="headerlink" title="出队的实现"></a>出队的实现</h4><p>出队的操作是由函数 <code>osal_msg_dequeue()</code> 函数实现的，定义在 <code>OSAL.c</code> 中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">osal_msg_dequeue</span><span class="params">(<span class="type">osal_msg_q_t</span> *q_ptr)</span> &#123;</span><br><span class="line">  <span class="type">void</span> *msg_ptr = <span class="literal">NULL</span>;</span><br><span class="line">  halIntState_t intState;</span><br><span class="line">    HAL_ENTER_CRITICAL_SECTION(intState); <span class="comment">// 进入临界区，关中断。</span></span><br><span class="line">    <span class="keyword">if</span> ( *q_ptr != <span class="literal">NULL</span> ) &#123; <span class="comment">// 队列不为空</span></span><br><span class="line">        msg_ptr = *q_ptr; <span class="comment">// 指向队首结点。</span></span><br><span class="line">        *q_ptr = OSAL_MSG_NEXT( msg_ptr ); <span class="comment">// 队首指针指向其下一个结点。</span></span><br><span class="line">        OSAL_MSG_NEXT( msg_ptr ) = <span class="literal">NULL</span>; <span class="comment">// 删除其指向的结点。</span></span><br><span class="line">        OSAL_MSG_ID( msg_ptr ) = TASK_NO_TASK; <span class="comment">// 置其不在队列中</span></span><br><span class="line">    &#125;</span><br><span class="line">    HAL_EXIT_CRITICAL_SECTION(intState); <span class="comment">//退出临界区，开中断。</span></span><br><span class="line">    <span class="keyword">return</span> msg_ptr;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-消息的传递"><a href="#3-5-消息的传递" class="headerlink" title="3.5 消息的传递"></a>3.5 消息的传递</h3><p>我们已经讲述了消息队列的数据结构实现和其对应的某些操作，下面我们介绍消息的传递的实现，在这里我们并不会给出具体的代码实现，更不会结合事件和任务进行分析，我们只给出这两个重要的API，并在后面专门阐述这两个API的代码实现。</p>
+<ul>
+<li>消息的发送：<code>osal_msg_send()</code></li>
+<li>消息的接收：<code>osal_msg_receive()</code></li>
+</ul>
+<h3 id="3-6-小结"><a href="#3-6-小结" class="headerlink" title="3.6 小结"></a>3.6 小结</h3><p>在这一节中，我们介绍了消息的数据结构，以及消息的数据结构的实现。我们在这一节并没有深入讨论消息的传递，原因是读者对于任务和事件的概念并没有一个深刻的理解，在讲述了任务和事件的概念后，我们会深入消息的传递。</p>
+<h2 id="4-任务-Tasks-与事件-Events"><a href="#4-任务-Tasks-与事件-Events" class="headerlink" title="4. 任务 (Tasks) 与事件 (Events)"></a>4. 任务 (Tasks) 与事件 (Events)</h2><p>这一节中，我们深入OSAL 中的**任务 (Tasks) 和事件 (Events)**。在讲述任务之前，我们先介绍循环机制的实现。</p>
+<h3 id="4-1-循环机制的实现"><a href="#4-1-循环机制的实现" class="headerlink" title="4.1 循环机制的实现"></a>4.1 循环机制的实现</h3><p>在 <code>Zmain.c</code> 文件中，<code>main()</code> 函数出现了一个OSAL提供的API：<code>osal_start_system()</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span> <span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">      其他初始化操作</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    osal_start_system(); <span class="comment">// 永不返回</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>TI 公司给出的官方文档解释如下：</p>
+<blockquote>
+<p>This function is the main loop function of the task system, repeatedly calling osal_run_system(), from an infinite loop. This function never returns.</p>
+</blockquote>
+<p>从官方文档可以看出，OSAL 是一个**死循环 (Forever loop)**机制，下面对相关代码进行研究：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">osal_start_system</span><span class="params">( <span class="type">void</span> )</span> &#123;</span><br><span class="line">    <span class="keyword">for</span> (; ;) <span class="comment">// 死循环&#123;</span></span><br><span class="line">        unit8 idx = <span class="number">0</span>;</span><br><span class="line">      <span class="comment">// 其他操作</span></span><br><span class="line">      <span class="keyword">do</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>( tasksEvents[idx]) <span class="keyword">break</span>; <span class="comment">// 如果某个任务有事件发生</span></span><br><span class="line">        &#125;<span class="keyword">while</span>(++idx &lt; tasksCnt);</span><br><span class="line">      <span class="keyword">if</span> (idx &lt; tasksCnt) &#123;</span><br><span class="line">          uint16 events; <span class="comment">// 定义一个事件作为临时变量</span></span><br><span class="line">          HAL_ENTER_CRITICAL_SECTION(intState); <span class="comment">// 进入临界区，关中断</span></span><br><span class="line">          events = tasksEvents[idx]; <span class="comment">// 读事件</span></span><br><span class="line">          tasksEvents[idx] = <span class="number">0</span>; <span class="comment">// 置为0</span></span><br><span class="line">          HAL_EXIT_CRITICAL_SECTION(intState); <span class="comment">// 退出临界区，开中断</span></span><br><span class="line">          events = (tasksArr[idx])( idx, events ); <span class="comment">// 执行事件处理函数</span></span><br><span class="line">          HAL_ENTER_CRITICAL_SECTION(intState); <span class="comment">// 进入临界区，关中断</span></span><br><span class="line">          tasksEvents[idx] |= events; <span class="comment">// 加入没有处理的事件</span></span><br><span class="line">          HAL_EXIT_CRITICAL_SECTION(intState);<span class="comment">// 退出临界区，开中断</span></span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从上述的代码可以看出，当程序一旦进入了  <code>osal_start_system()</code>, 将会产生以下的操作过程：</p>
+<ul>
+<li>idx 从 <code>0~tasksCnt</code> 进行扫描，发现 <code>tasksEvents[idx]</code> 的值不为0，停止扫描</li>
+<li>然后读取 <code>tasksEvents[idx]</code> 的值，并执行 <code>events = (tasksArr[idx])( idx, events )</code></li>
+<li>最后再执行一步操作：<code>tasksEvents[idx] |= events</code></li>
+</ul>
+<h4 id="tasksEvents"><a href="#tasksEvents" class="headerlink" title="tasksEvents[]"></a>tasksEvents[]</h4><p><code>tasksEvents</code> 定义在文件 <code>OSAL_GenericApp.c</code> 中，是一个全局变量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uint16 *tasksEvents; <span class="comment">// 定义了一个指向2个字节的指针</span></span><br></pre></td></tr></table></figure>
+
+<p>其初始化定义在该文件中的 <code>osalInitTasks</code> 函数中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasksEvents = (uint16 *)osal_mem_alloc( <span class="keyword">sizeof</span>( uint16 ) * tasksCnt); <span class="comment">// 动态分配内存</span></span><br></pre></td></tr></table></figure>
+
+<p>从这里，我们可以看出 <code>tasksEvents</code> 是一个动态分配的数组，在 <code>osal_start_system()</code> 中对其索引值不断进行扫描，若发现对应的值不为零，停止扫描，然后去做相应的处理。在上述的函数中，出现了 <code>tasksCnt</code> 这个变量，其定义如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> uint8 tasksCnt = <span class="keyword">sizeof</span>( tasksArr ) / <span class="keyword">sizeof</span>( tasksArr[<span class="number">0</span>] );</span><br></pre></td></tr></table></figure>
+
+<p>从这个代码可以看出，<code>tasksEvents[]</code> 的长度是由 <code>tasksArr</code> 这个变量决定的，下面我们研究 <code>tasksArr</code>。</p>
+<h4 id="tasksArr"><a href="#tasksArr" class="headerlink" title="tasksArr[]"></a>tasksArr[]</h4><p><code>tasksArr</code> 定义在文件 <code>OSAL_GenericApp.c</code> 中，是一个全局变量：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> pTaskEventHandlerFn tasksArr[] = &#123;</span><br><span class="line">  macEventLoop,</span><br><span class="line">  nwk_event_loop,</span><br><span class="line">  Hal_ProcessEvent,</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> defined( MT_TASK )</span></span><br><span class="line">  MT_ProcessEvent,</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">  APS_event_loop,</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> defined ( ZIGBEE_FRAGMENTATION )</span></span><br><span class="line">  APSF_ProcessEvent,</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">  ZDApp_event_loop,</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> defined ( ZIGBEE_FREQ_AGILITY ) || defined ( ZIGBEE_PANID_CONFLICT )</span></span><br><span class="line">  ZDNwkMgr_event_loop,</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">  GenericApp_ProcessEvent</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>pTaskEventHandlerFn</code> 定义在 <code>OSAL_Tasks.h</code> 中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="title function_">short</span><span class="params">(*pTaskEventHandlerFn)</span></span><br><span class="line">    <span class="params">( <span class="type">unsigned</span> <span class="type">char</span> task_id, <span class="type">unsigned</span> <span class="type">short</span> event )</span>;</span><br></pre></td></tr></table></figure>
+
+<p>可见 <code>taksArr</code> 保存的数据类型为<strong>函数指针，即指向函数的指针</strong>。我们可以看出，当确定了 <code>idx</code> 的值以后，读取 <code>tasksArr[idx]</code> 的值，然后执行相应的函数。</p>
+<h3 id="4-2-任务的概念"><a href="#4-2-任务的概念" class="headerlink" title="4.2 任务的概念"></a>4.2 任务的概念</h3><p>任务到底是什么？在OSAL中，任务是一个抽象的概念，是OSAL 最顶层的抽象。我们通过代码对任务的概念一步步进行探究：</p>
+<p>任务是由**初始化段 (initialization section)<strong>和</strong>运行段 (run-time section)**组成的。所以任务在运行之前必然先进行初始化，初始化的工作是在 <code>OSAL_GenericApp.c</code> 中定义的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">osalInitTasks</span><span class="params">( <span class="type">void</span> )</span> &#123;</span><br><span class="line">    uint8 taskID = <span class="number">0</span>;</span><br><span class="line">    tasksEvents = (uint16 *)osal_mem_alloc( <span class="keyword">sizeof</span>( uint16 ) * tasksCnt);</span><br><span class="line">    osal_memset( tasksEvents, <span class="number">0</span>, (<span class="keyword">sizeof</span>( uint16 ) * tasksCnt));</span><br><span class="line">    macTaskInit( taskID++ );</span><br><span class="line">    nwk_init( taskID++ );</span><br><span class="line">    Hal_Init( taskID++ );</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> defined( MT_TASK )</span></span><br><span class="line">    MT_TaskInit( taskID++ );</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    APS_Init( taskID++ );</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> defined ( ZIGBEE_FRAGMENTATION )</span></span><br><span class="line">    APSF_Init( taskID++ );</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    ZDApp_Init( taskID++ );</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> defined ( ZIGBEE_FREQ_AGILITY ) || defined ( ZIGBEE_PANID_CONFLICT )</span></span><br><span class="line">    ZDNwkMgr_Init( taskID++ );</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    GenericApp_Init( taskID );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从任务的初始化代码中，我们可以看到，每一个任务有一个与其对应的初始化函数，传入了一个 <code>taskID</code>。由此可知，OSAL 可以拥有很多个不同的任务，任务通过 <code>taskID</code> 进行标识，这一部分是与 <code>idx</code> 索引值相对应的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(tasksEvents[idx]) <span class="keyword">break</span>;</span><br><span class="line">&#125;<span class="keyword">while</span>(++idx &lt; tasksCnt);</span><br></pre></td></tr></table></figure>
+
+<p>所以，这一段代码的意义我们就可以进行解释：遍历不同任务的 <code>taskEvents</code> 的值，如果 <code>taskEvents</code> 的值不为零则停止遍历。在前面，我们已经讲述了 <code>tasksEvents</code> 的数据类型，但是并没有讲述其意义。下面我们引入事件的概念。</p>
+<h3 id="4-3-事件的概念"><a href="#4-3-事件的概念" class="headerlink" title="4.3 事件的概念"></a>4.3 事件的概念</h3><p>事件的概念：<strong>一个需要通过任务来完成的动作</strong>。通俗地说，事件<strong>驱动着任务</strong>。一个事件必须具有标识的功能，OSAL 定义了<code>event_flag</code> 是由2个字节也就是16位组成的，每一位代表了一个事件，1代表有事件产生，0代表没有事件产生，如图2 所示：</p>
+<p><img src="https://s2.loli.net/2022/11/08/mTubU3aPdewWNVQ.png" alt="事件的 event_flag"></p>
+<p>事件从代码的角度上，实现尤其简单。下面，我们再次分析  <code>tasksEvents[]</code> 和 <code>tasksArr[]</code>，更深入理解任务和事件。</p>
+<h3 id="4-4-任务与事件的关系"><a href="#4-4-任务与事件的关系" class="headerlink" title="4.4 任务与事件的关系"></a>4.4 任务与事件的关系</h3><p>我们先分析 <code>taskEvents[idx]</code>，其中 <code>idx</code> 对应的是任务号，而 <code>tasksEvents[idx]</code> 的值是多少呢？在4.1 节部分我们给出了如下所示的代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasksEvents = (uint16 *)osal_mem_alloc( <span class="keyword">sizeof</span>( uint16 ) * tasksCnt); <span class="comment">// 动态分配内存</span></span><br></pre></td></tr></table></figure>
+
+<p>显然，通过代码可知 <code>taskEvents[idx]</code> 可知其保存的大小为2个字节，正好与事件的 <code>event_flag</code> 相对应。这样我们可以给 <code>tasksEvents[]</code> 数组下定义：<strong>任务事件数组</strong>，用于保存某个任务的事件信息。</p>
+<p>我们再分析 <code>tasksArr[]</code> 数组，我们通过上述的分析，<code>tasksArr[]</code> 数组保存的内容是函数指针，其类型为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">unsigned</span> <span class="title function_">short</span><span class="params">(*pTaskEventHandlerFn)</span></span><br><span class="line">    <span class="params">( <span class="type">unsigned</span> <span class="type">char</span> task_id, <span class="type">unsigned</span> <span class="type">short</span> event )</span>;</span><br></pre></td></tr></table></figure>
+
+<p>因此，我们可以给  <code>tasksArr[]</code> 数组下定义：<strong>任务处理数组</strong>，当发现任务事件数组不为空的时候，证明有事件产生，于是转向任务处理数组，调用函数，并传递两个参数：</p>
+<ul>
+<li><code>tasks_id</code>：任务标识号</li>
+<li><code>event</code>: 事件的 <code>event_flag</code></li>
+</ul>
+<p>总结如下图所示：</p>
+<p><img src="https://s2.loli.net/2022/11/08/ANiM2c1rCEXqVsY.png" alt="OSAL事件驱动机制"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">UINT16 <span class="title function_">GenericApp_ProcessEvent</span><span class="params">( byte x, UINT16 events )</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> ( events &amp; SYS_EVENT_MSG ) &#123;</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (events &amp; GENERICAPP_SEND_MSG_EVT ) &#123;</span><br><span class="line">        <span class="comment">// do something</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>显然，在这个函数中，通过传入的 <code>events</code> 事件分别与已经定义好的宏变量进行<strong>按位与</strong>就可以判断是哪个事件，从而处理该事件。在这里，我们只给出了宏观的一个实现，并没有讲述代码的具体实现。但是通过上述的分析，我们已经明确了<strong>事件驱动任务</strong>。但是，我们仍然有一个十分重要的问题没有处理：</p>
+<ul>
+<li>为何事件的值即  <code>tasksEvents[idx]</code> 会发生改变？也就是说事件是如何被捕获的。</li>
+</ul>
+<h2 id="5-消息传递机制"><a href="#5-消息传递机制" class="headerlink" title="5. 消息传递机制"></a>5. 消息传递机制</h2><p>这一部分，我们将综合任务、事件和消息，进行一个完整过程的阐述。</p>
+<h3 id="5-1-消息的发送与接收"><a href="#5-1-消息的发送与接收" class="headerlink" title="5.1 消息的发送与接收"></a>5.1 消息的发送与接收</h3><p>消息的发送是通过定义 <code>OSAL.c</code> 文件中的 <code>osal_msg_send()</code> 函数定义的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">uint8 <span class="title function_">osal_msg_send</span><span class="params">( uint8 destination_task, uint8 *msg_ptr )</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (msg_ptr == <span class="literal">NULL</span>) <span class="comment">// 指针为空返回错误信息</span></span><br><span class="line">        <span class="keyword">return</span> (INVALID_MSG_POINTER);</span><br><span class="line">     <span class="comment">// 如果要发送的任务号大于系统定义的最大任务号</span></span><br><span class="line">    <span class="keyword">if</span> (destination_task &gt;= tasksCnt) &#123;</span><br><span class="line">        osal_msg_deallocate( msg_ptr );</span><br><span class="line">        <span class="keyword">return</span> ( INVALID_TASK );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 检查元数据，是否为错误的消息</span></span><br><span class="line">    <span class="keyword">if</span> ( OSAL_MSG_NEXT( msg_ptr ) != <span class="literal">NULL</span> ||</span><br><span class="line">       OSAL_MSG_ID( msg_ptr ) != TASK_NO_TASK ) &#123;</span><br><span class="line">        osal_msg_deallocate( msg_ptr );</span><br><span class="line">        <span class="keyword">return</span> ( INVALID_MSG_POINTER );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 设置其元数据的目的地址</span></span><br><span class="line">    OSAL_MSG_ID( msg_ptr ) = destination_task;</span><br><span class="line">    <span class="comment">// 将该消息进队</span></span><br><span class="line">    osal_msg_enqueue( &amp;osal_qHead, msg_ptr );</span><br><span class="line">    <span class="comment">// 告知任务有消息需要处理</span></span><br><span class="line">    osal_set_event( destination_task, SYS_EVENT_MSG );</span><br><span class="line">    <span class="keyword">return</span> (SUCCESS)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这一过程可用下图表示：</p>
+<pre class="mermaid">graph LR
+  A("做一系列的检查") --> B(设置消息元数据目的地址)
+  B --> C(将消息进队)
+  C --> D(告知任务有消息需要处理)
+  style D fill:#f96</pre>
+
+<p>注意函数 <code>osal_set_event()</code> 的使用，这是一个十分关键的函数，我们首先分析其源代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">uint8 <span class="title function_">osal_set_event</span><span class="params">( uint8 task_id, uint16 event_flag )</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (task_id &lt; tasksCnt) &#123;</span><br><span class="line">        halIntState_t   intState;</span><br><span class="line">        HAL_ENTER_CRITICAL_SECTION(intState); <span class="comment">// 关中断</span></span><br><span class="line">        tasksEvents[task_id] |= event_flag;</span><br><span class="line">        HAL_EXIT_CRITICAL_SECTION(intState);<span class="comment">// 开中断</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (INVALID_TASK);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个函数有两个参数，一个是 <code>task_id</code>，另一个是 <code>event_flag</code>，执行了一个特别重要的操作：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasksEvents[task_id] |= event_flag; <span class="comment">// 按位或并赋值</span></span><br></pre></td></tr></table></figure>
+
+<p>这样就通过了这个函数，改变了 <code>tasksEvents[idx]</code> 的值，从而在下一次扫描的时候，处理该事件。<strong>按位或</strong>的目的在于不能够影响其他已经存在的未经处理的事件。</p>
+<p>其次，在消息发送的函数中第二个参数的值为 <code>SYS_EVENT_MSG</code>。其值为 <code>0x8000</code>。从这一点，我们必须认识到<strong>消息</strong>是<strong>系统层次的事件</strong>，也就是说，<strong>消息是只能够存在在系统事件中的，这是消息发送这个函数所规定的。</strong></p>
+<p>消息的接收是通过定义 <code>OSAL.c</code> 文件中的 <code>osal_msg_receive()</code> 函数定义的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">uint8 *<span class="title function_">osal_msg_receive</span><span class="params">( uint8 task_id )</span> &#123;</span><br><span class="line">    <span class="type">osal_msg_hdr_t</span> *listHdr; <span class="comment">// 定义一个消息结构体指针</span></span><br><span class="line">    <span class="type">osal_msg_hdr_t</span> *prevHdr = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="type">osal_msg_hdr_t</span> *foundHdr = <span class="literal">NULL</span>;</span><br><span class="line">    halIntState_t   intState;</span><br><span class="line">    HAL_ENTER_CRITICAL_SECTION(intState); <span class="comment">// 进入临界区，关中断。</span></span><br><span class="line">    listHdr = osal_qHead; <span class="comment">// 指向队首指针</span></span><br><span class="line">    <span class="comment">// 遍历队列</span></span><br><span class="line">    <span class="keyword">while</span> ( listHdr != <span class="literal">NULL</span> ) &#123;</span><br><span class="line">        <span class="comment">// 如果某个消息的目的地是 task_id</span></span><br><span class="line">        <span class="keyword">if</span> ((listHdr - <span class="number">1</span>)-&gt;dest_id == task_id) &#123;</span><br><span class="line">            <span class="comment">// 第一次找到</span></span><br><span class="line">            <span class="keyword">if</span> ( foundHdr == <span class="literal">NULL</span> ) &#123;</span><br><span class="line">                 foundHdr = listHdr;</span><br><span class="line">             &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (foundHdr == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="comment">// 保存找到的消息之前的消息</span></span><br><span class="line">            <span class="comment">// 方便进行删除操作</span></span><br><span class="line">            prevHdr = listHdr;</span><br><span class="line">        &#125;</span><br><span class="line">        listHdr = OSAL_MSG_NEXT( listHdr ); <span class="comment">// 遍历</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 不为空，证明为遍历完，也就是存在多个消息</span></span><br><span class="line">    <span class="keyword">if</span> ( listHdr != <span class="literal">NULL</span> ) &#123;</span><br><span class="line">        <span class="comment">// 告知任务还有消息在等待处理</span></span><br><span class="line">        osal_set_event( task_id, SYS_EVENT_MSG );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        osal_clear_event( task_id, SYS_EVENT_MSG );</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 找到了消息</span></span><br><span class="line">    <span class="keyword">if</span> (foundHdr != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="comment">// 提取出这个消息</span></span><br><span class="line">        osal_msg_extract( &amp;osal_qHead, foundHdr, prevHdr );</span><br><span class="line">    &#125;</span><br><span class="line">    HAL_EXIT_CRITICAL_SECTION(intState);<span class="comment">// 退出临界区，开中断。</span></span><br><span class="line">    <span class="keyword">return</span> ( (uint8*) foundHdr ); <span class="comment">// 返回消息</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>消息的接收过程可以用下图表示：</p>
+<pre class="mermaid">graph TB
+  A[listHdr != NULL] -->|Yes| B
+  B[判断有无存在要发送给该任务的消息] -->|yes| C[是否第一次找到]
+  C -->|yes| D["foundHdr = listHdr"]
+  B -->|No| E[" prevHdr = listHdr"]
+  E --> F["listHdr = OSAL_MSG_NEXT( listHdr )"]
+  F --> A
+  D --> F
+  A -->|No| G[listHdr != NULL]
+  C -->|No| G
+  G -->|Yes| H["osal_set_event( task_id, SYS_EVENT_MSG )"]
+  G -->|No| I["清除消息"]
+  H --> 提取消息</pre>
+
+<p>通过上述的过程，我们已经可以总结出事件是如何捕获的了，事件的捕获是通过函数 <code>osal_set_event()</code> 实现的。</p>
+<h3 id="5-2-任务处理函数"><a href="#5-2-任务处理函数" class="headerlink" title="5.2 任务处理函数"></a>5.2 任务处理函数</h3><p>在第4节中，我们仅仅简单地讲述了任务处理函数，下面我们通过一个具体的例子进行说明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">UINT16 <span class="title function_">GenericApp_ProcessEvent</span><span class="params">( byte x, UINT16 events )</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> ( events &amp; SYS_EVENT_MSG ) &#123;</span><br><span class="line">        MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( GenericApp_TaskID );</span><br><span class="line">        <span class="keyword">while</span> (MSGpkt) &#123;</span><br><span class="line">            <span class="keyword">switch</span>(MSGpkt) &#123;</span><br><span class="line">                    <span class="keyword">case</span> ZDO_CB_MSG:</span><br><span class="line">                      GenericApp_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                    <span class="keyword">case</span> ZDO_CB_MSG:</span><br><span class="line">                      GenericApp_ProcessZDOMsgs( (zdoIncomingMsg_t *)MSGpkt );</span><br><span class="line">                      <span class="keyword">break</span>;</span><br><span class="line">                  <span class="keyword">default</span>: <span class="keyword">break</span>;</span><br><span class="line">              &#125;</span><br><span class="line">            osal_msg_deallocate( (uint8 *)MSGpkt ); <span class="comment">// 释放消息</span></span><br><span class="line">            <span class="comment">// 处理该事件的下一个消息</span></span><br><span class="line">            MSGpkt = (afIncomingMSGPacket_t *)osal_msg_receive( GenericApp_TaskID );</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (events ^ SYS_EVENT_MSG) <span class="comment">// 返回未处理的事件</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们从上面的代码可以看出，首先进入了任务处理函数，会去优先处理系统事件，再次强调，<strong>消息只能在系统时间中处理，这是OSAL 规定好了的</strong>。首先利用 <code>osal_msg_receive()</code> 函数从消息队列中获得有关该层任务的消息，然后根据发送的消息提供的信息，作出相应的操作，然后释放该消息并去处理下一个消息。</p>
+<h3 id="5-3-小结"><a href="#5-3-小结" class="headerlink" title="5.3 小结"></a>5.3 小结</h3><p>至此，我们已经基本讲清了事件驱动机制的一个实现过程，希望对读者了解这个机制有所帮助。</p>
+
+    
+  </div>
+
+  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2021/03/06/ZStack-OSAL%E5%88%86%E6%9E%90/">https://luolibrary.com/2021/03/06/ZStack-OSAL%E5%88%86%E6%9E%90/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
+      
+      <a href="/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F/">嵌入式</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      <a class="prev" href="/2021/03/06/%E3%80%8A%E6%88%91%E7%9A%84%E9%9D%92%E6%98%A5%E6%81%8B%E7%88%B1%E7%89%A9%E8%AF%AD%E6%9E%9C%E7%84%B6%E6%9C%89%E9%97%AE%E9%A2%98%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">  
+        <i class="iconfont icon-left"></i>  
+        <span class="prev-text nav-default">《我的青春恋爱物语果然有问题》读书笔记</span>  
+        <span class="prev-text nav-mobile">Prev</span>  
+      </a>  
+      
+      
+      <a class="next" href="/2021/02/23/Narcissu-1-2/">  
+        <span class="next-text nav-default">Narcissu 1 & 2</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
+      
+  </nav>  
+  
+
+  </footer>
+  
+
+</article>
+        </div>
+          
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
+
+      </div>
+    </main>
+    <footer id="footer" class="footer">
+      <!-- Social Links -->
+
+<div class="social-links">
+  
+  
+  
+  
+  <a href="mailto:shejialuo@gmail.com" class="iconfont icon-email" title="email"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://twitter.com/luo_hope" class="iconfont icon-twitter" title="twitter"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://www.linkedin.com/in/jialuo-she-913873289/" class="iconfont icon-linkedin" title="linkedin"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <a target="_blank" rel="noopener" href="https://github.com/shejialuo" class="iconfont icon-github" title="github"></a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+  
+</div>
+
+
+
+<div class="copyright">
+
+  <span class="copyright-year">
+    <span>
+      
+      &copy;
+      
+      2020 - 2024      
+    </span>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+
+    <span class="author">shejialuo</span>
+  </span>
+
+</div>
+    </footer>
+    <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
+  </div>
+    
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
+
+  
+
+
+
+
+
+
+
+<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+
+
+
+<script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+<!-- mermaid -->
+
+  <script src='https://unpkg.com/mermaid@9.2.0/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+
+  <script type="text/javascript" src="/js/src/even.js?v=3.0.0"></script>
+</body>
+
+</html>
