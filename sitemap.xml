@@ -2,18 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://luolibrary.com/2024/05/12/Use-Mutt-in-ArchLinux/</loc>
+    <loc>https://luolibrary.com/2024/05/03/GSoC-2024-Implement-consistency-check-for-refs/</loc>
     
-    <lastmod>2024-05-12</lastmod>
+    <lastmod>2024-05-27</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://luolibrary.com/2024/05/03/GSoC-2024-Implement-consistency-check-for-refs/</loc>
+    <loc>https://luolibrary.com/2024/05/27/GSoC-Community-Bonding-Period/</loc>
     
-    <lastmod>2024-05-03</lastmod>
+    <lastmod>2024-05-27</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://luolibrary.com/2024/05/12/Use-Mutt-in-ArchLinux/</loc>
+    
+    <lastmod>2024-05-12</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -499,7 +508,7 @@
 
   <url>
     <loc>https://luolibrary.com/</loc>
-    <lastmod>2024-05-12</lastmod>
+    <lastmod>2024-05-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
