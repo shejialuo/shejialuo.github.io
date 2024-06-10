@@ -18,10 +18,12 @@
 
 <!-- Website description -->
 
-<meta name="description" content="秋意深，四下之人正何为？" />
+<meta name="description" content="GSoC Week 2" />
 
 
 <!-- Website keywords -->
+
+<meta name="keywords" content="GSoC, 洛的藏书阁" />
 
 
 
@@ -37,7 +39,7 @@
 
 
 <!-- Canonical, good for google search engine -->
-<link rel="canonical" href="https://luolibrary.com/archives/2023/06/" />
+<link rel="canonical" href="https://luolibrary.com/2024/06/10/GSoC-Week-2/" />
 
 <!-- Fancybox styling -->
 
@@ -83,7 +85,7 @@
   window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
 </script>
   
-  <title>Archives - 2023/6 · 洛的藏书阁</title>
+  <title>GSoC Week 2 - 洛的藏书阁</title>
 
 <meta name="generator" content="Hexo 7.2.0"></head>
 
@@ -203,93 +205,123 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      GSoC Week 2
+      
+    </h1>
 
-<section id="archive" class="archive">
+    <div class="post-meta">
+      <span class="post-time">
+        2024-06-10
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/GSoC-2024/">GSoC 2024</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
   
-  
-  <div class="archive-title">
-    <span class="archive-post-counter">
-      52 Posts In Total
-    </span>
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-Have-Done"><span class="toc-number">1.</span> <span class="toc-text">What I Have Done</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Understand-Fsck-Message"><span class="toc-number">1.1.</span> <span class="toc-text">Understand Fsck Message</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Implement-the-Code"><span class="toc-number">1.2.</span> <span class="toc-text">Implement the Code</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Next-Plan"><span class="toc-number">2.</span> <span class="toc-text">Next Plan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenges"><span class="toc-number">3.</span> <span class="toc-text">Challenges</span></a></li></ol>
+    </div>
   </div>
   
-  
 
-  
-  
-  
-  
-  
-  
-  <div class="collection-title">
-    <h2 class="archive-year">
-      <a href="/archives/2023" class="archive-year">2023</a>
-    </h2>
+  <div class="post-content">
+    
+    <h2 id="What-I-Have-Done"><a href="#What-I-Have-Done" class="headerlink" title="What I Have Done"></a>What I Have Done</h2><p>This is the second week of writing code. I spend most of my time reading the <code>git-fsck(1)</code> source code and enhance my first-version patch.</p>
+<h3 id="Understand-Fsck-Message"><a href="#Understand-Fsck-Message" class="headerlink" title="Understand Fsck Message"></a>Understand Fsck Message</h3><p>As Junior has commented:</p>
+<blockquote>
+<p>How well does this interact with the fsck error levels (aka fsck_msg_type), by the way?  It should be made to work well if the current design does not.</p>
+</blockquote>
+<p>So the first thing I do in this week is to understand “fsck message”. It takes me a lot of time here.</p>
+<h3 id="Implement-the-Code"><a href="#Implement-the-Code" class="headerlink" title="Implement the Code"></a>Implement the Code</h3><p>After understand how fsck messages works, I continue to start coding. I mainly do the following things like this <a target="_blank" rel="noopener" href="https://github.com/shejialuo/git/pull/2">PR</a> shows:</p>
+<ul>
+<li>add refs check interfaces to interface with fsck error levels.</li>
+<li>set up ref consistency check infrastructure.</li>
+<li>add verify subcommand for builtin <code>git-refs</code>.</li>
+<li>add git-refs verify child process for <code>git-fsck(1)</code>.</li>
+<li>add unified interface for refs scanning for files backend.</li>
+<li>add ref name check for files backend.</li>
+<li>add ref content check for files backend.</li>
+</ul>
+<p>However, due to the <code>git-refs</code> has not been merged into the <code>next</code>. I’ll send the patches to the mailing list until everything is OK.</p>
+<h2 id="Next-Plan"><a href="#Next-Plan" class="headerlink" title="Next Plan"></a>Next Plan</h2><p>I need to understand the <code>git-worktree</code>. The current implementation totally ignores worktree.</p>
+<h2 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h2><p>This week, I have encountered numerous challenges. The most difficult part for me has been designing the code.</p>
+<p>In the process of integrating the fsck message into the reference consistency check, I encounter numerous design issues. Should I add two new fields directly to <code>fsck_options</code>, or should I create a new structure and reuse existing functions through polymorphism? I ponder this for a long time and ultimately choose the latter to ensure semantic clarity.</p>
+<p>Additionally, I need to name the new fsck messages, which also takes considerable thought. Since I have to implement a new feature myself, coding is not the most complex part; rather, it is the design. How to design it in a way that makes both the semantics and the code clearer takes up a significant amount of my time.</p>
+
+    
   </div>
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      06-08
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2023/06/08/CS149-Assignment4-Big-Graph-Processing-in-OpenMP/" class="archive-post-link">
-        CS149-Assignment4 Big Graph Processing in OpenMP
-      </a>
-    </span>
-  </div>
-  
-  
-  
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      06-07
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2023/06/07/CS149-Assignment3-A-Simple-CUDA-Renderer/" class="archive-post-link">
-        CS149-Assignment3 A Simple CUDA Renderer
-      </a>
-    </span>
-  </div>
-  
-  
-  
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      06-07
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2023/06/07/%E3%80%8A%E7%A7%BD%E7%BF%BC%E7%9A%84%E5%B0%A4%E6%96%AF%E8%92%82%E5%A8%85%E3%80%8B%E2%80%94%E2%80%94%E8%8D%92%E8%AF%9E%E8%BF%98%E6%98%AF%E5%AD%98%E5%9C%A8%EF%BC%9F/" class="archive-post-link">
-        《秽翼的尤斯蒂娅》——荒诞还是存在？
-      </a>
-    </span>
-  </div>
-  
-</section>
 
   
-  <nav class="pagination">  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2024/06/10/GSoC-Week-2/">https://luolibrary.com/2024/06/10/GSoC-Week-2/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
       
+      <a href="/tags/GSoC/">GSoC</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      
+      <a class="next" href="/2024/06/02/GSoC-Week-1/">  
+        <span class="next-text nav-default">GSoC Week 1</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
       
   </nav>  
   
 
+  </footer>
+  
+
+</article>
         </div>
           
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
 
       </div>
     </main>
@@ -383,6 +415,27 @@
     <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
   </div>
     
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
 
   
 
