@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>GSoC Week 3</title>
+      <link href="/2024/06/17/GSoC-Week-3/"/>
+      <url>/2024/06/17/GSoC-Week-3/</url>
+      
+        <content type="html"><![CDATA[<h2 id="What-I-Have-Done"><a href="#What-I-Have-Done" class="headerlink" title="What I Have Done"></a>What I Have Done</h2><p>This week, I focus on handling the reviews from my mentors and Junio. My mentors have put some comments on the <a href="https://github.com/shejialuo/git/pull/2">PR</a> before I send the patch to the mailing list.</p><h3 id="Reviews-From-Junio"><a href="#Reviews-From-Junio" class="headerlink" title="Reviews From Junio"></a>Reviews From Junio</h3><p>There are many important reviews from Junio. And we have discussed some issues:</p><ol><li>The dangling symref should not be reported by <code>git-fsck(1)</code>. There is a common situation where people would use dangling symref to create the pointee ref. Like Junio said:  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git symbolic-ref refs/heads/maint refs/heads/maint-2.46</span><br><span class="line">git branch maint v2.46.0</span><br></pre></td></tr></table></figure></li><li>We should change <code>fsck_files_symref</code> to <code>fsck_symref_target</code>. Because we are checking the target not the symref.</li><li>The use of <code>unsigned int *trailing</code> is not proper which will lose a lot of information for the caller.</li><li>The current implementation should check the symbolic link “escape” situation.</li><li>Some error information will cause misleading.</li></ol><h3 id="The-Problems-I-Found"><a href="#The-Problems-I-Found" class="headerlink" title="The Problems I Found"></a>The Problems I Found</h3><p>However, I have still found some problems in the current implementation:</p><ol><li>When checking symref target, the <code>referent</code> buf could be end with <code>&#39;\n&#39;</code>. If we simply pass the <code>referent</code> to <code>check_refname_format</code> function, we will get incorrect behavior.</li><li>The current implementation totally ignores the absolute symbolic link situation.</li><li>The current tests lack testing for symbolic links.I wanna make sure that the symbolic link check will work especially in Windows. I am a little worry about the compatibility.</li></ol><h2 id="Next-Plan"><a href="#Next-Plan" class="headerlink" title="Next Plan"></a>Next Plan</h2><p>So in order to enhance this patch, I will do the following things:</p><ol><li>Change the defined fsck messages and drop the <code>danglingSymref</code>.</li><li>Enhance the checks for symbolic link and add the corresponding tests.</li></ol><h2 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h2><p>This week, I spent most of my time addressing reviews. The biggest challenge I encountered was how to reasonably explain my intentions and design ideas when facing others’ reviews. Additionally, understanding the principles and motivations behind the reviews was also challenging. Rather than calling it a challenge, I would say it was a very interesting experience.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> GSoC 2024 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> GSoC </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>GSoC Week 2</title>
       <link href="/2024/06/10/GSoC-Week-2/"/>
       <url>/2024/06/10/GSoC-Week-2/</url>
