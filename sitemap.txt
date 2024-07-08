@@ -1,8 +1,9 @@
+https://luolibrary.com/2024/05/03/GSoC-2024-Implement-consistency-check-for-refs/
+https://luolibrary.com/2024/07/08/GSoC-Week-6/
 https://luolibrary.com/2024/06/30/GSoC-Week-4-5/
 https://luolibrary.com/2024/06/17/GSoC-Week-3/
 https://luolibrary.com/2024/06/02/GSoC-Week-1/
 https://luolibrary.com/2024/06/10/GSoC-Week-2/
-https://luolibrary.com/2024/05/03/GSoC-2024-Implement-consistency-check-for-refs/
 https://luolibrary.com/2024/05/27/GSoC-Community-Bonding-Period/
 https://luolibrary.com/2024/05/12/Use-Mutt-in-ArchLinux/
 https://luolibrary.com/2021/04/22/Zotero%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/

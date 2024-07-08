@@ -18,10 +18,12 @@
 
 <!-- Website description -->
 
-<meta name="description" content="秋意深，四下之人正何为？" />
+<meta name="description" content="GSoC Week 6" />
 
 
 <!-- Website keywords -->
+
+<meta name="keywords" content="GSoC, 洛的藏书阁" />
 
 
 
@@ -37,7 +39,7 @@
 
 
 <!-- Canonical, good for google search engine -->
-<link rel="canonical" href="https://luolibrary.com/page/5/" />
+<link rel="canonical" href="https://luolibrary.com/2024/07/08/GSoC-Week-6/" />
 
 <!-- Fancybox styling -->
 
@@ -83,7 +85,7 @@
   window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
 </script>
   
-  <title>洛的藏书阁</title>
+  <title>GSoC Week 6 - 洛的藏书阁</title>
 
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -203,233 +205,117 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          <section id="posts" class="posts">
-  
-  
-  
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      GSoC Week 6
+      
+    </h1>
 
-<section id="archive" class="archive">
-  
+    <div class="post-meta">
+      <span class="post-time">
+        2024-07-08
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/GSoC-2024/">GSoC 2024</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
 
   
-  
-  
-  
-  
-  
-  <div class="collection-title">
-    <h2 class="archive-year">
-      <a href="/archives/2022" class="archive-year">2022</a>
-    </h2>
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-Have-Done"><span class="toc-number">1.</span> <span class="toc-text">What I Have Done</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Next-Plan"><span class="toc-number">2.</span> <span class="toc-text">Next Plan</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Challenges"><span class="toc-number">3.</span> <span class="toc-text">Challenges</span></a></li></ol>
+    </div>
   </div>
   
-  
 
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      11-07
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2022/11/07/Telegram%E4%BB%A3%E6%94%B6QQ%E5%92%8C%E5%BE%AE%E4%BF%A1%E6%B6%88%E6%81%AF/" class="archive-post-link">
-        Telegram代收QQ和微信消息
-      </a>
-    </span>
-  </div>
-  
-  
-  
-  
-  
+  <div class="post-content">
+    
+    <h2 id="What-I-Have-Done"><a href="#What-I-Have-Done" class="headerlink" title="What I Have Done"></a>What I Have Done</h2><p>In this week, I mainly focus on solving the reviews.</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://lore.kernel.org/git/ZoLHtmOKTfxMSxvw@ArchLinux/">Patch v6</a>: In this version, I decide to reduce the complexity. However, I still misunderstood what Junio said, I still explicitly extracts two options <code>fsck_refs_options</code> and <code>fsck_objects_options</code> here. In my view, I suppose we could make the code more clean. However, Junio has commented as the following:<blockquote>
+<p>Just like premature optimization is bad, premature factoring and over-modularization is bad.</p>
+</blockquote>
+</li>
+<li><a target="_blank" rel="noopener" href="https://lore.kernel.org/git/ZoVX6sn2C9VIeZ38@ArchLinux/">Patch v7</a>: In this version, I just add a new ref-related field <code>verbose_refs</code> into the <code>fsck_options</code> without any over-modularization.</li>
+<li><a target="_blank" rel="noopener" href="https://lore.kernel.org/git/ZovqY4vQnQBAs7PH@ArchLinux/">Patch v8</a>: Some commit messages in Patch v7 are not clear which makes the reviewer confused. Enhance the commit messages in this version.</li>
+</ul>
+<h2 id="Next-Plan"><a href="#Next-Plan" class="headerlink" title="Next Plan"></a>Next Plan</h2><p>I guess this series should be OK. After setting up the infrastructure. I decide to add packed-refs consistency checks with the following steps:</p>
+<ol>
+<li>Get a list of checks that packed-refs should checks, discussing with my mentors and the community.</li>
+<li>Implement the code.</li>
+</ol>
+<h2 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h2><p>Since becoming a full-time employee, time has become a bit tight. I will manage my time more efficiently.</p>
 
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      11-07
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2022/11/07/Windows-Terminal%E9%85%8D%E7%BD%AE%E7%BE%8E%E5%8C%96%E8%BF%87%E7%A8%8B/" class="archive-post-link">
-        Windows Terminal配置美化过程
-      </a>
-    </span>
+    
   </div>
-  
-  
-  
-  
-  
-  <div class="collection-title">
-    <h2 class="archive-year">
-      <a href="/archives/2021" class="archive-year">2021</a>
-    </h2>
-  </div>
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      08-28
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2021/08/28/%E5%A4%A7%E5%AD%A6%E5%9B%9B%E5%B9%B4%E2%80%94%E2%80%94%E4%BB%8E%E5%8C%96%E5%AD%A6%E5%88%B0%E9%80%9A%E4%BF%A1%E5%86%8D%E5%88%B0%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="archive-post-link">
-        大学四年——从化学到通信再到计算机
-      </a>
-    </span>
-  </div>
-  
-  
-  
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      04-22
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2021/04/22/Zotero%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/" class="archive-post-link">
-        Zotero安装及使用教程
-      </a>
-    </span>
-  </div>
-  
-  
-  
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      03-15
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2021/03/15/%E3%80%8A%E4%BA%BA%E6%80%A7%E7%9A%84%E6%9E%B7%E9%94%81%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="archive-post-link">
-        《人性的枷锁》读书笔记
-      </a>
-    </span>
-  </div>
-  
-  
-  
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      03-07
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2021/03/07/%E6%82%A0%E4%B9%85%E4%B9%8B%E7%BF%BC/" class="archive-post-link">
-        悠久之翼
-      </a>
-    </span>
-  </div>
-  
-  
-  
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      03-06
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2021/03/06/Chaos-Child/" class="archive-post-link">
-        Chaos;Child
-      </a>
-    </span>
-  </div>
-  
-  
-  
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      03-06
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2021/03/06/%E3%80%8A%E6%88%91%E7%9A%84%E9%9D%92%E6%98%A5%E6%81%8B%E7%88%B1%E7%89%A9%E8%AF%AD%E6%9E%9C%E7%84%B6%E6%9C%89%E9%97%AE%E9%A2%98%E3%80%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" class="archive-post-link">
-        《我的青春恋爱物语果然有问题》读书笔记
-      </a>
-    </span>
-  </div>
-  
-  
-  
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      03-06
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2021/03/06/ZStack-OSAL%E5%88%86%E6%9E%90/" class="archive-post-link">
-        ZStack OSAL分析
-      </a>
-    </span>
-  </div>
-  
-  
-  
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      02-23
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2021/02/23/Narcissu-1-2/" class="archive-post-link">
-        Narcissu 1 &amp; 2
-      </a>
-    </span>
-  </div>
-  
-</section>
 
   
-  <nav class="pagination">  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2024/07/08/GSoC-Week-6/">https://luolibrary.com/2024/07/08/GSoC-Week-6/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
       
-      <a class="prev" href="/page/4/">  
-        <i class="iconfont icon-left"></i>  
-        <span class="prev-text">Prev</span>  
-      </a>  
+      <a href="/tags/GSoC/">GSoC</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
       
       
-      <a class="next" href="/page/6/">  
-        <span class="next-text">Next</span>  
+      <a class="next" href="/2024/06/30/GSoC-Week-4-5/">  
+        <span class="next-text nav-default">GSoC Week 4-5</span>  
+        <span class="prev-text nav-mobile">Next</span>  
         <i class="iconfont icon-right"></i>  
       </a>  
       
   </nav>  
   
 
+  </footer>
   
-</section>
+
+</article>
         </div>
           
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
 
       </div>
     </main>
@@ -523,6 +409,27 @@
     <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
   </div>
     
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
 
   
 
