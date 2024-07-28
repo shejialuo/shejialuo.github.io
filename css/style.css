@@ -538,9 +538,6 @@ h6 {
   position: relative;
   overflow: hidden;
 }
-.header .site-navbar .menu .menu-item + .menu-item {
-  margin-left: 10px;
-}
 .header .site-navbar .menu .menu-item:before {
   content: "";
   position: absolute;
@@ -557,6 +554,9 @@ h6 {
 .header .site-navbar .menu .menu-item.active:before, .header .site-navbar .menu .menu-item:active:before, .header .site-navbar .menu .menu-item:focus:before, .header .site-navbar .menu .menu-item:hover:before {
   right: 0;
   left: 0;
+}
+.header .site-navbar .menu .menu-item + .menu-item {
+  margin-left: 10px;
 }
 .header .site-navbar .menu .menu-item-link {
   font-size: 18px;

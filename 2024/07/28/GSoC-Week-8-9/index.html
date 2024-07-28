@@ -18,10 +18,12 @@
 
 <!-- Website description -->
 
-<meta name="description" content="秋意深，四下之人正何为？" />
+<meta name="description" content="GSoC Week 8-9" />
 
 
 <!-- Website keywords -->
+
+<meta name="keywords" content="GSoC, 洛的藏书阁" />
 
 
 
@@ -37,7 +39,7 @@
 
 
 <!-- Canonical, good for google search engine -->
-<link rel="canonical" href="https://luolibrary.com/archives/2024/01/" />
+<link rel="canonical" href="https://luolibrary.com/2024/07/28/GSoC-Week-8-9/" />
 
 <!-- Fancybox styling -->
 
@@ -83,7 +85,7 @@
   window.config = {"leancloud":{"app_id":null,"app_key":null,"server_url":null,"cdn":null},"toc":true,"fancybox":true,"latex":true};
 </script>
   
-  <title>Archives - 2024/1 · 洛的藏书阁</title>
+  <title>GSoC Week 8-9 - 洛的藏书阁</title>
 
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -203,57 +205,112 @@
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
-          
+          <article class="post">
+  <header class="post-header">
+    <h1 class="post-title">
+      
+      GSoC Week 8-9
+      
+    </h1>
 
-<section id="archive" class="archive">
+    <div class="post-meta">
+      <span class="post-time">
+        2024-07-28
+      </span>
+      
+      
+      <span class="post-category">
+        
+        <a href="/categories/GSoC-2024/">GSoC 2024</a>
+        
+      </span>
+      
+      
+    </div>
+  </header>
+
   
-  
-  <div class="archive-title">
-    <span class="archive-post-counter">
-      57 Posts In Total
-    </span>
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">Contents</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-Have-Done"><span class="toc-number">1.</span> <span class="toc-text">What I Have Done</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Next-Plan"><span class="toc-number">2.</span> <span class="toc-text">Next Plan</span></a></li></ol>
+    </div>
   </div>
   
-  
 
-  
-  
-  
-  
-  
-  
-  <div class="collection-title">
-    <h2 class="archive-year">
-      <a href="/archives/2024" class="archive-year">2024</a>
-    </h2>
+  <div class="post-content">
+    
+    <h2 id="What-I-Have-Done"><a href="#What-I-Have-Done" class="headerlink" title="What I Have Done"></a>What I Have Done</h2><p>In these two weeks, I mainly focus on solving the reviews. After I have sent the <a target="_blank" rel="noopener" href="https://lore.kernel.org/git/ZpPEdmUN1Z5tqbK3@ArchLinux/">Patch v11</a> to the mailing list. Karthik suggests that instead of using <code>ref_checkee</code> and <code>sub_ref_checkee</code>, we may use the following data structure to provide more extensibility here.</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">fsck_refs_info</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> *refname;</span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">            ...</span><br><span class="line">        &#125; reftable;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">            ...</span><br><span class="line">        &#125; files;</span><br><span class="line">       &#125; u;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>So in <a target="_blank" rel="noopener" href="https://lore.kernel.org/git/ZpuCg1GL1YE_sJBP@ArchLinux/">patch v12</a>, I implement the above data structure.</p>
+<p>However, Patrick has a different opinion about this. Patrick thinks this is too complicated. We should make thing simple here. Instead of using a union to represent the options, why we not just use a flat structure here. So I just use the following data structure:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">fsck_refs_info</span> &#123;</span></span><br><span class="line">    <span class="type">const</span> <span class="type">char</span> *path;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>It’s simple and we reserve the extensibility here. The code is under review in the <a target="_blank" rel="noopener" href="https://github.com/shejialuo/git/pull/11">github</a>. I have already solve the review from Karthik. However, due to the reason that Patrick has just come back to Office. I am waiting for the reviews from Patrick. When everything is OK, I will send the Patch v13 to the mailing list.</p>
+<p>What a long journey!</p>
+<h2 id="Next-Plan"><a href="#Next-Plan" class="headerlink" title="Next Plan"></a>Next Plan</h2><p>Continue to handle the reviews.</p>
+
+    
   </div>
-  
-  
-
-  <div class="archive-post">
-    <span class="archive-post-time">
-      
-      01-31
-      
-    </span>
-    <span class="archive-post-title">
-      <a href="/2024/01/31/2023%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" class="archive-post-link">
-        2023年终总结
-      </a>
-    </span>
-  </div>
-  
-</section>
 
   
-  <nav class="pagination">  
+  <!-- Post Copyright -->
+
+<div class="post-copyright">
+  <p class="copyright-item">
+    <span>Author: </span>
+    <a href="https://luolibrary.com">shejialuo</a>
+  </p>
+  <p class="copyright-item">
+    <span>Link: </span>
+    <a href="https://luolibrary.com/2024/07/28/GSoC-Week-8-9/">https://luolibrary.com/2024/07/28/GSoC-Week-8-9/</a>
+  </p>
+  <p class="copyright-item">
+    <span>License: </span>
+    
+    <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+  </p>
+</div>
+
+    
+
+  
+
+  
+  <footer class="post-footer">
+    
+    <div class="post-tags">
       
+      <a href="/tags/GSoC/">GSoC</a>
+      
+    </div>
+    
+      
+  <nav class="post-nav">  
+      
+      
+      <a class="next" href="/2024/07/16/GSoC-Week-7/">  
+        <span class="next-text nav-default">GSoC Week 7</span>  
+        <span class="prev-text nav-mobile">Next</span>  
+        <i class="iconfont icon-right"></i>  
+      </a>  
       
   </nav>  
   
 
+  </footer>
+  
+
+</article>
         </div>
           
+  <div class="comments" id="comments">  
+      
+      <div id="utterances-container"></div>  
+      
+  </div>  
+  
 
       </div>
     </main>
@@ -347,6 +404,27 @@
     <div class="back-to-top" id="back-to-top"> <i class="iconfont icon-up"></i> </div>
   </div>
     
+    
+    
+    
+    
+  
+<script>
+  var container = document.getElementById('utterances-container');
+  var script = document.createElement('script');
+  script.src = 'https://utteranc.es/client.js';
+  script.setAttribute('repo', 'shejialuo/shejialuo.github.io');
+  script.setAttribute('issue-term', 'pathname');
+  script.setAttribute('theme', 'github-light');
+  script.setAttribute('label', 'Comment');
+  script.crossorigin = 'anonymous';
+  script.async = true;
+
+  container.appendChild(script);
+</script>
+  
+    
+  
 
   
 
