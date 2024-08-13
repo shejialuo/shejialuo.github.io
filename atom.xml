@@ -6,7 +6,7 @@
   <link href="https://luolibrary.com/atom.xml" rel="self"/>
   
   <link href="https://luolibrary.com/"/>
-  <updated>2024-08-04T12:26:27.367Z</updated>
+  <updated>2024-08-13T13:41:42.024Z</updated>
   <id>https://luolibrary.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GSoC Week 10-11</title>
+    <link href="https://luolibrary.com/2024/08/13/GSoC-Week-10-11/"/>
+    <id>https://luolibrary.com/2024/08/13/GSoC-Week-10-11/</id>
+    <published>2024-08-13T13:41:26.000Z</published>
+    <updated>2024-08-13T13:41:42.024Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="What-I-Have-Done"><a href="#What-I-Have-Done" class="headerlink" title="What I Have Done"></a>What I Have Done</h2><p>In these two weeks, I continue to solve the reviews. After I have sent the <a href="https://lore.kernel.org/git/ZqeXrPROpEg_pRS2@ArchLinux/">Patch v13</a>. Patrick gives an opinion here, we want to reuse the <code>fsck_vreport</code> function here. We want to make it generic but we design the callback not generic. And Patrick gives a wonderful idea here:</p><blockquote><p>A better design would likely be to make <code>error_func()</code> receive a <code>void*</code> pointer such that <code>error_func()</code> and then have the respective subsystems provide a function that knows to format the message while receiving either a <code>struct fsck_object_report *</code> or a <code>struct fsck_ref_report *</code>.</p></blockquote><p>However, Patrick thinks we may put unnecessary effort here to make things complicated again. But after discussion, I think we should use the below design for the following reasons:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="title function_">int</span> <span class="params">(*fsck_error)</span><span class="params">(<span class="keyword">struct</span> fsck_options *o,</span></span><br><span class="line"><span class="params">                          <span class="type">void</span> *info,</span></span><br><span class="line"><span class="params">                          <span class="keyword">enum</span> fsck_msg_type msg_type, <span class="keyword">enum</span> fsck_msg_id msg_id,</span></span><br><span class="line"><span class="params">                          <span class="type">const</span> <span class="type">char</span> *message)</span>;</span><br></pre></td></tr></table></figure><ol><li>We only expose one interface called <code>fsck_reportf</code> which will make the code clear. Actually, there is no different between reporting refs and reporting objects.</li><li>We provide more extensibility here, because we will never change <code>fsck_reportf</code> and <code>fsck_error</code> prototype when we want to add more info for either refs or objects.</li></ol><p>And Patrick advices me that I should drop the last patch “[PATCH v13 10&#x2F;10] fsck: add ref content check for files backend”, because we should speed up the review process due to the ddl of GSoC.</p><p>And Junio gives two advices:</p><ol><li>The prototype of <code>files_fsck_refs_fn</code> should adapt to the Patrick’s new change.</li><li>Unless the most common use of an array is to pass it around as a collection of items and operate on the collection, it is a better practice to name an array with a singular noun.  Name the array as <code>fsck_refs_fn[]</code> not <code>fsck_refs_fns[]</code>.</li></ol><p>I solve these problems in <a href="https://lore.kernel.org/git/ZqulmWVBaeyP4blf@ArchLinux/">Patch v14</a>:</p><ol><li>By following the advice from Patrick, we should make the callback function be generic by adding only one <code>void *fsck_report</code> parameter. Thus the commit sequence will be much more clearer. And it wll be much easier for reviewers to review. And I have split the commit into more commits in this version.</li><li>Enhance the commit messages to provide more context about why we should do this.</li><li>Patrick advices that we should initialize the <code>fsck_options</code> member when parsing the options. However, because the original <code>strict</code> and <code>verbose</code> field are defined as the bit field, we cannot take the address of them. So I simply remove the bit field.</li><li>As Patrick said, “.lock” should not be reported as error. At current, ignore files ending with “.lock”.</li><li>Add a fsck msg type called “badRefFiletype” which indicates that a ref has a bad file type when scanning the directory.</li><li>Junio advices instead of using <code>fsck_refs_fns</code>, we should use the singular version <code>fsck_refs_fn</code>, fix this.</li><li>Drop the last patch because in this series, we mainly focus on the infra, I will add a series later to add ref content check.</li></ol><p>And I only do some minor changes in <a href="https://lore.kernel.org/git/ZrEBKjzbyxtMdCCx@ArchLinux/">Patch v15</a> and <a href="https://lore.kernel.org/git/ZrSqMmD-quQ18a9F@ArchLinux.localdomain/">Patch v16</a>.</p><p>The code is merged into <a href="https://github.com/git/git/commit/3bde10da94b1424849233d19eeeab475c7a57152">next</a>. What a long journey.</p><h2 id="Next-Plan"><a href="#Next-Plan" class="headerlink" title="Next Plan"></a>Next Plan</h2><p>My GSoC is going to end. But my contribution to Git will bot end. I will implement ref content check. And I will concentrate on writing the final report.</p>]]></content>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;What-I-Have-Done&quot;&gt;&lt;a href=&quot;#What-I-Have-Done&quot; class=&quot;headerlink&quot; title=&quot;What I Have Done&quot;&gt;&lt;/a&gt;What I Have Done&lt;/h2&gt;&lt;p&gt;In these two</summary>
+        
+      
+    
+    
+    
+    <category term="GSoC 2024" scheme="https://luolibrary.com/categories/GSoC-2024/"/>
+    
+    
+    <category term="GSoC" scheme="https://luolibrary.com/tags/GSoC/"/>
+    
+  </entry>
   
   <entry>
     <title>MIT6.824: MapReduce</title>
@@ -526,36 +553,6 @@
         
         
     <summary type="html">&lt;h2 id=&quot;物理缓存的基本操作&quot;&gt;&lt;a href=&quot;#物理缓存的基本操作&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="缓存与内存专栏" scheme="https://luolibrary.com/categories/%E7%BC%93%E5%AD%98%E4%B8%8E%E5%86%85%E5%AD%98%E4%B8%93%E6%A0%8F/"/>
-    
-    
-    <category term="技术" scheme="https://luolibrary.com/tags/%E6%8A%80%E6%9C%AF/"/>
-    
-    <category term="学习" scheme="https://luolibrary.com/tags/%E5%AD%A6%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>带有键值的虚拟缓存</title>
-    <link href="https://luolibrary.com/2023/08/17/%E5%B8%A6%E6%9C%89%E9%94%AE%E5%80%BC%E7%9A%84%E8%99%9A%E6%8B%9F%E7%BC%93%E5%AD%98/"/>
-    <id>https://luolibrary.com/2023/08/17/%E5%B8%A6%E6%9C%89%E9%94%AE%E5%80%BC%E7%9A%84%E8%99%9A%E6%8B%9F%E7%BC%93%E5%AD%98/</id>
-    <published>2023-08-17T12:52:15.000Z</published>
-    <updated>2024-04-29T13:08:10.662Z</updated>
-    
-    <content type="html"><![CDATA[<p>虚拟缓存存在一个很大的问题，由于每一个进程都拥有独立的地址空间。当上下文切换后，必须对缓存进行刷新。一个很简单的想法就是把pid和虚拟地址结合起来作为索引进行缓存查找，从而减少刷新缓存的次数。</p><h2 id="带有键值的虚拟缓存的基本操作"><a href="#带有键值的虚拟缓存的基本操作" class="headerlink" title="带有键值的虚拟缓存的基本操作"></a>带有键值的虚拟缓存的基本操作</h2><p>首先是硬件结构的变化，由于需要支持键值，每个cache line的tag都会增加一个进程键值用于区分不同的进程。同时我们需要一个新的寄存器来保存这个进程键值，如下图所示：</p><p><img src="https://s2.loli.net/2023/08/17/DMP4FEZoe96C5XQ.png" alt="带有键值的虚拟缓存"></p><p>带有键值的虚拟缓存除了其加了一个新的键值以外其本质与虚拟缓存的操作没有差别。其仍然通过虚拟地址进行索引，然而由于有额外的键值信息可以判断当前缓存是否属于当前进程。一个美好的愿望是硬件为系统中的每一个进程都生成一个独一无二的标识符，这样我们就不会产生歧义和别名。愿望始终是愿望，硬件能够提供的标识符往往数目很少，有些硬件仅仅支持8个标识符。所以会有某些进程共享同一个标识符，我们仍然会面临虚拟缓存的歧义和别名问题。</p><h2 id="操作系统与带有键值的虚拟缓存的交互"><a href="#操作系统与带有键值的虚拟缓存的交互" class="headerlink" title="操作系统与带有键值的虚拟缓存的交互"></a>操作系统与带有键值的虚拟缓存的交互</h2><h3 id="上下文切换"><a href="#上下文切换" class="headerlink" title="上下文切换"></a>上下文切换</h3><p>当键值充足时，我们可以为每一个在系统中运行的进程分配一个独一无二的键，这样上下文切换的时候，对于<em>write-through</em>而言，我们都不需要刷新缓存，仅仅只需要改变寄存器中的进程键值即可。</p><p>当键值不够使用时，操作系统需要重新分配键值。一个常见的思路是换入和换出，我们仍然需要将某个键值换出，然后把所有有关于该键值的缓存进行刷新。对于<em>write-through</em>而言，我们做的操作会比较简单，我们直接可以直接把cache line的valid位置为0。对于<em>write-back</em>而言，我们还需要写入内存。实际上，你会发现，这样也带来了另外的复杂度，操作系统应该换出哪个键呢？</p><p>对于采取<em>write-back</em>的写策略，还有一个更加严重的问题。当我们对进程A进行了上下文切换后，其cache line的值可能已经被改变了，然而很有可能另一个进程B会刷新这个cache line，但是对于进程B而言，操作系统并没有进程A的页表信息，操作系统无法知道该写入哪个具体的物理内存。因此，大多数采取带有键值的虚拟缓存会采用<em>write-through</em>策略。</p><p>有些硬件提供了额外的机制，既然目前已经有键值信息，就可以把键值信息和页表信息组成一个映射，这样对于上述情况，就能够找到物理地址，从而写入数据。然而，却极大地增加了硬件负担。</p><h3 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h3><p>对于虚拟缓存而言，两个进程之间共享内存会因为上下文切换时自动对缓存进行刷新的机制避免别名问题，然而带有键值的虚拟内存会更加的复杂。</p><p>对于直接映射缓存而言，我们假设两个进程的相同的虚拟地址指向相同的物理地址。同时假设操作系统给进程$A$分配的键值为1，给进程$B$分配的键值为2。我们可以明确地知道由于虚拟地址相同，其找到的cache set必然相同，由于每个cache set只有一个cache line。如下图所示，当进程A切换到进程B时，进程B访问该虚拟地址，由于键值不同，会导致cache miss，然后读取<strong>相同的物理内存</strong>到cache中。然而，物理内存没有发生任何的改变。</p><p><img src="https://s2.loli.net/2023/08/17/iyScjte1s5PT3rD.png" alt="共享内存-直接映射虚拟缓存"></p><p>然而，大多数情况这两个进程的虚拟地址是不相同的，这样就和虚拟缓存的情况一样了，会产生别名的情况。当我们需要使用共享内存时，cache在一定程度上就失效了。</p><h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><p>MMU的一个重要作用就是将虚拟地址转化为物理地址。MMU内部提供了自动将虚拟地址转化为物理地址的机制，操作系统通过构建虚拟地址到物理地址的映射，对于每个进程操作系统都会构建页表的基地址将其放到某个特定的寄存器中。</p><h3 id="MMU与操作系统的交互"><a href="#MMU与操作系统的交互" class="headerlink" title="MMU与操作系统的交互"></a>MMU与操作系统的交互</h3><p>Sv39 RISC-V只使用虚拟地址的低39位作为索引来翻译物理地址。如下图所示，其使用了三层页表结构来将虚拟地址翻译为物理地址。其转化的过程相当简单，首先通过页表的基地址找到其L2的偏移量，然后读取其值找到二级页表的基地址找到其L1的偏移量，然后这样循环地进行找到物理地址加上虚拟地址中的偏移量即可。</p><p><img src="https://s2.loli.net/2022/06/06/pFzaiEU7LS2ZdAX.png" alt="RISC-V address translation details"></p><p>对于操作系统，只需要将页表的基地址放入<code>satp</code>寄存器中即可。硬件会自动完成虚拟地址到物理地址的转换。</p><h3 id="TLB"><a href="#TLB" class="headerlink" title="TLB"></a>TLB</h3><p>从上述的过程可以得知，既然硬件需要完成虚拟地址到物理地址，我们已经讲述过的虚拟缓存是不是完美符合这个需求的。现有的MMU都有一小块虚拟缓存，即TLB。TLB保存的缓存信息即为虚拟地址对应的物理地址以及页属性。由于不同进程的页表不同，其虚拟地址对应的物理地址也必然不同：</p><ul><li>对于虚拟缓存来说，每次进行上下文切换都需要将对应的cache line valid位置0。</li><li>对于带有键值的虚拟缓存来说，由于其键值存在，不需要每次上下文切换刷新TLB，当键值不够分配时，才需要将对应的cache line valid位置0。</li></ul><p>TLB是最适合使用虚拟缓存的，这是因为TLB是一个只读缓存且没有共享内存机制。</p><h2 id="基于物理标签的虚拟缓存"><a href="#基于物理标签的虚拟缓存" class="headerlink" title="基于物理标签的虚拟缓存"></a>基于物理标签的虚拟缓存</h2><p>虚拟缓存最重要的一个问题在于虚拟地址与物理地址的映射问题，虚拟地址是操作系统与硬件结合起来给进程提供的抽象，其映射关系会随着上下文切换发生改变，从而造成了别名和歧义问题。于是就提出了另一种类型的虚拟缓存，我们仍然使用虚拟缓存对cache se定位，同时找寻block offset。但是缓存中的tag使用物理地址。然而，这样我们不得不增加新的负担，也就是我们必须用通过MMU将虚拟地址转化为物理地址。</p><h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul><li>UNIX Systems for Modern Architectures Chapter 4</li><li>UNIX Systems for Modern Architectures Chapter 5</li><li><a href="https://zhuanlan.zhihu.com/p/107096130">Cache 组织方式</a></li><li><a href="https://zhuanlan.zhihu.com/p/108425561">TLB原理</a></li></ul>]]></content>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;虚拟缓存存在一个很大的问题，由于每一个进程都拥有独立的地址空间。当上下文切换后，必须对缓存进行刷新。一个很简单的想法就是把pid和虚拟地址结合起来作为索引进行缓存查找，从而减少刷新缓存的次数。&lt;/p&gt;
-&lt;h2 id=&quot;带有键值的虚拟缓存的基本操作&quot;&gt;&lt;a</summary>
         
       
     

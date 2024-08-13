@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>GSoC Week 10-11</title>
+      <link href="/2024/08/13/GSoC-Week-10-11/"/>
+      <url>/2024/08/13/GSoC-Week-10-11/</url>
+      
+        <content type="html"><![CDATA[<h2 id="What-I-Have-Done"><a href="#What-I-Have-Done" class="headerlink" title="What I Have Done"></a>What I Have Done</h2><p>In these two weeks, I continue to solve the reviews. After I have sent the <a href="https://lore.kernel.org/git/ZqeXrPROpEg_pRS2@ArchLinux/">Patch v13</a>. Patrick gives an opinion here, we want to reuse the <code>fsck_vreport</code> function here. We want to make it generic but we design the callback not generic. And Patrick gives a wonderful idea here:</p><blockquote><p>A better design would likely be to make <code>error_func()</code> receive a <code>void*</code> pointer such that <code>error_func()</code> and then have the respective subsystems provide a function that knows to format the message while receiving either a <code>struct fsck_object_report *</code> or a <code>struct fsck_ref_report *</code>.</p></blockquote><p>However, Patrick thinks we may put unnecessary effort here to make things complicated again. But after discussion, I think we should use the below design for the following reasons:</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="title function_">int</span> <span class="params">(*fsck_error)</span><span class="params">(<span class="keyword">struct</span> fsck_options *o,</span></span><br><span class="line"><span class="params">                          <span class="type">void</span> *info,</span></span><br><span class="line"><span class="params">                          <span class="keyword">enum</span> fsck_msg_type msg_type, <span class="keyword">enum</span> fsck_msg_id msg_id,</span></span><br><span class="line"><span class="params">                          <span class="type">const</span> <span class="type">char</span> *message)</span>;</span><br></pre></td></tr></table></figure><ol><li>We only expose one interface called <code>fsck_reportf</code> which will make the code clear. Actually, there is no different between reporting refs and reporting objects.</li><li>We provide more extensibility here, because we will never change <code>fsck_reportf</code> and <code>fsck_error</code> prototype when we want to add more info for either refs or objects.</li></ol><p>And Patrick advices me that I should drop the last patch “[PATCH v13 10&#x2F;10] fsck: add ref content check for files backend”, because we should speed up the review process due to the ddl of GSoC.</p><p>And Junio gives two advices:</p><ol><li>The prototype of <code>files_fsck_refs_fn</code> should adapt to the Patrick’s new change.</li><li>Unless the most common use of an array is to pass it around as a collection of items and operate on the collection, it is a better practice to name an array with a singular noun.  Name the array as <code>fsck_refs_fn[]</code> not <code>fsck_refs_fns[]</code>.</li></ol><p>I solve these problems in <a href="https://lore.kernel.org/git/ZqulmWVBaeyP4blf@ArchLinux/">Patch v14</a>:</p><ol><li>By following the advice from Patrick, we should make the callback function be generic by adding only one <code>void *fsck_report</code> parameter. Thus the commit sequence will be much more clearer. And it wll be much easier for reviewers to review. And I have split the commit into more commits in this version.</li><li>Enhance the commit messages to provide more context about why we should do this.</li><li>Patrick advices that we should initialize the <code>fsck_options</code> member when parsing the options. However, because the original <code>strict</code> and <code>verbose</code> field are defined as the bit field, we cannot take the address of them. So I simply remove the bit field.</li><li>As Patrick said, “.lock” should not be reported as error. At current, ignore files ending with “.lock”.</li><li>Add a fsck msg type called “badRefFiletype” which indicates that a ref has a bad file type when scanning the directory.</li><li>Junio advices instead of using <code>fsck_refs_fns</code>, we should use the singular version <code>fsck_refs_fn</code>, fix this.</li><li>Drop the last patch because in this series, we mainly focus on the infra, I will add a series later to add ref content check.</li></ol><p>And I only do some minor changes in <a href="https://lore.kernel.org/git/ZrEBKjzbyxtMdCCx@ArchLinux/">Patch v15</a> and <a href="https://lore.kernel.org/git/ZrSqMmD-quQ18a9F@ArchLinux.localdomain/">Patch v16</a>.</p><p>The code is merged into <a href="https://github.com/git/git/commit/3bde10da94b1424849233d19eeeab475c7a57152">next</a>. What a long journey.</p><h2 id="Next-Plan"><a href="#Next-Plan" class="headerlink" title="Next Plan"></a>Next Plan</h2><p>My GSoC is going to end. But my contribution to Git will bot end. I will implement ref content check. And I will concentrate on writing the final report.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> GSoC 2024 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> GSoC </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>MIT6.824: MapReduce</title>
       <link href="/2024/08/04/MIT6-824-MapReduce/"/>
       <url>/2024/08/04/MIT6-824-MapReduce/</url>
