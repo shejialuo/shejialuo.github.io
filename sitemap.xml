@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://luolibrary.com/2024/05/03/GSoC-2024-Implement-consistency-check-for-refs/</loc>
+    
+    <lastmod>2024-08-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://luolibrary.com/2024/08/25/GSoC-Final-Report/</loc>
     
     <lastmod>2024-08-25</lastmod>
@@ -68,15 +77,6 @@
     <loc>https://luolibrary.com/2024/07/08/GSoC-Week-6/</loc>
     
     <lastmod>2024-07-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://luolibrary.com/2024/05/03/GSoC-2024-Implement-consistency-check-for-refs/</loc>
-    
-    <lastmod>2024-07-08</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
