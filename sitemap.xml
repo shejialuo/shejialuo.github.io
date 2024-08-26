@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://luolibrary.com/2024/08/27/%E6%98%9F%E4%B9%8B%E7%BB%88%E9%80%94/</loc>
+    
+    <lastmod>2024-08-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://luolibrary.com/2024/05/03/GSoC-2024-Implement-consistency-check-for-refs/</loc>
     
     <lastmod>2024-08-25</lastmod>
@@ -598,7 +607,7 @@
 
   <url>
     <loc>https://luolibrary.com/</loc>
-    <lastmod>2024-08-25</lastmod>
+    <lastmod>2024-08-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
