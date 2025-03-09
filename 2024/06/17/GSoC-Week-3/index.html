@@ -243,7 +243,10 @@
     <h2 id="What-I-Have-Done"><a href="#What-I-Have-Done" class="headerlink" title="What I Have Done"></a>What I Have Done</h2><p>This week, I focus on handling the reviews from my mentors and Junio. My mentors have put some comments on the <a target="_blank" rel="noopener" href="https://github.com/shejialuo/git/pull/2">PR</a> before I send the patch to the mailing list.</p>
 <h3 id="Reviews-From-Junio"><a href="#Reviews-From-Junio" class="headerlink" title="Reviews From Junio"></a>Reviews From Junio</h3><p>There are many important reviews from Junio. And we have discussed some issues:</p>
 <ol>
-<li>The dangling symref should not be reported by <code>git-fsck(1)</code>. There is a common situation where people would use dangling symref to create the pointee ref. Like Junio said:  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git symbolic-ref refs/heads/maint refs/heads/maint-2.46</span><br><span class="line">git branch maint v2.46.0</span><br></pre></td></tr></table></figure></li>
+<li>The dangling symref should not be reported by <code>git-fsck(1)</code>. There is a common situation where people would use dangling symref to create the pointee ref. Like Junio said:</li>
+</ol>
+  <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git symbolic-ref refs/heads/maint refs/heads/maint-2.46</span><br><span class="line">git branch maint v2.46.0</span><br></pre></td></tr></table></figure>
+<ol start="2">
 <li>We should change <code>fsck_files_symref</code> to <code>fsck_symref_target</code>. Because we are checking the target not the symref.</li>
 <li>The use of <code>unsigned int *trailing</code> is not proper which will lose a lot of information for the caller.</li>
 <li>The current implementation should check the symbolic link “escape” situation.</li>
@@ -406,7 +409,7 @@
       
       &copy;
       
-      2020 - 2024      
+      2020 - 2025      
     </span>
 
     <span class="heart">
