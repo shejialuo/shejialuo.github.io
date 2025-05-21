@@ -13,8 +13,6 @@
       
       <categories>
           
-          <category> category_name </category>
-          
           <category> 读书笔记 </category>
           
       </categories>
@@ -23,8 +21,6 @@
         <tags>
             
             <tag> 小说 </tag>
-            
-            <tag> tag_name </tag>
             
         </tags>
       
