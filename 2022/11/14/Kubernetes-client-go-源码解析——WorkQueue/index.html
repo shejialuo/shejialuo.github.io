@@ -87,7 +87,7 @@
   
   <title>Kubernetes client-go 源码解析——WorkQueue - 洛的藏书阁</title>
 
-<meta name="generator" content="Hexo 7.3.0"></head>
+<meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div class="scrollPercentage"></div>
@@ -262,8 +262,8 @@
 
 <p>一些重要字段的含义如下：</p>
 <ul>
-<li><code>queue</code>：包含按照顺序需要处理的事件。类型<code>t</code>只是一个别名<code>type t interface&#123;&#125;</code>。其本质的目的在于用于保证元素的有序。</li>
-<li><code>dirty</code>：包含所有需要处理的事件，按照这个定义所有在<code>queue</code>的事件必然在<code>dirty</code>中。类型<code>set</code>也是一个别名 <code>type set map[t]empty</code>，<code>empty</code>也是一个别名，<code>type empty struct&#123;&#125;</code>。既保证了去重，还能保证在处理一个元素之前哪怕其被添加了多次，但也只会被处理一次。</li>
+<li><code>queue</code>：包含按照顺序需要处理的事件。类型<code>t</code>只是一个别名<code>type t interface{}</code>。其本质的目的在于用于保证元素的有序。</li>
+<li><code>dirty</code>：包含所有需要处理的事件，按照这个定义所有在<code>queue</code>的事件必然在<code>dirty</code>中。类型<code>set</code>也是一个别名 <code>type set map[t]empty</code>，<code>empty</code>也是一个别名，<code>type empty struct{}</code>。既保证了去重，还能保证在处理一个元素之前哪怕其被添加了多次，但也只会被处理一次。</li>
 <li><code>processing</code>：包含正在处理的事件。<code>dirty</code>也可能包含某些<code>processing</code>中的事件。</li>
 <li><code>cond</code>：条件变量。</li>
 <li><code>shuttingDown</code>：是否关闭队列。</li>
