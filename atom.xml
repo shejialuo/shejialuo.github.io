@@ -10,7 +10,24 @@
   <rights>All rights reserved 2026, shejialuo</rights>
   <subtitle>秋意深，四下之人正何为？</subtitle>
   <title>洛的藏书阁</title>
-  <updated>2026-03-15T11:03:40.156Z</updated>
+  <updated>2026-03-22T13:54:23.297Z</updated>
+  <entry>
+    <author>
+      <name>shejialuo</name>
+    </author>
+    <category term="游戏笔记" scheme="https://luolibrary.com/categories/%E6%B8%B8%E6%88%8F%E7%AC%94%E8%AE%B0/"/>
+    <content>
+      <![CDATA[<p>第一次玩Firewatch这款游戏应该是2020年的时候了，我还依稀记得当时是我的发小强烈给我推荐这个游戏。当时玩的心境我已经记不太清了，我只知道那个时候我一直在打单机游戏了，为的就是去逃避自己的内心。最让我感慨的是2026年的我，几乎不记得这部游戏的任何剧情了。我似乎那个时候也在逃离，就如同游戏里面的男主亨利一样。</p><p>我认为这是一部逃离的故事。作品中的三个主要角色（男主亨利，女主黛利拉以及前看火人奈德）都是逃避了自己内心中的重要事物。森林就如同一层屏障一般将人的社会关系隔离了。这个游戏最有意思的地方就在于，三位主要角色都没有见过面却在这暧昧的夏天构建了交集。亨利和黛利拉通过无线电进行交流，亨利和奈德靠字条和痕迹，黛利拉和奈德则几乎只剩过去的记忆。最令我感慨的是看到男主在夕阳西下的时候，简单地吃着三明治。我居然在想，男主是幸福的吗？即便我在屏幕的另一侧看见那美好的景色，我居然也想去沉溺于其中。我那想逃离一切的心，在悸动。</p><p>夏天终究会过去，三个主要角色最终都不得不走出妄想，无论他们愿意还是不愿意。然而，我的夏天还在循环吗？</p>]]>
+    </content>
+    <id>https://luolibrary.com/2026/03/22/%E3%80%8AFirewatch%E3%80%8B%E6%B8%B8%E6%88%8F%E7%AC%94%E8%AE%B0/</id>
+    <link href="https://luolibrary.com/2026/03/22/%E3%80%8AFirewatch%E3%80%8B%E6%B8%B8%E6%88%8F%E7%AC%94%E8%AE%B0/"/>
+    <published>2026-03-22T13:54:02.000Z</published>
+    <summary>
+      <![CDATA[<p>第一次玩Firewatch这款游戏应该是2020年的时候了，我还依稀记得当时是我的发小强烈给我推荐这个游戏。当时玩的心境我已经记不太清了，我只知道那个时候我一直在打单机游戏了，为的就是去逃避自己的内心。最让我感慨的是2026年的我，几乎不记得这部游戏的任何剧情了。我似乎那个]]>
+    </summary>
+    <title>《Firewatch》游戏笔记</title>
+    <updated>2026-03-22T13:54:23.297Z</updated>
+  </entry>
   <entry>
     <author>
       <name>shejialuo</name>
@@ -354,23 +371,5 @@
     </summary>
     <title>Use Mutt in ArchLinux</title>
     <updated>2025-03-30T08:04:43.970Z</updated>
-  </entry>
-  <entry>
-    <author>
-      <name>shejialuo</name>
-    </author>
-    <category term="GSoC 2024" scheme="https://luolibrary.com/categories/GSoC-2024/"/>
-    <category term="GSoC" scheme="https://luolibrary.com/tags/GSoC/"/>
-    <content>
-      <![CDATA[<p>I am fortunate to participate in <a href="https://summerofcode.withgoogle.com/programs/2024/projects/ukm4PTEF">GSoC 2024</a> contributing to <a href="https://git-scm.com/">Git</a>. This opportunity not only allows me to engage with one of the most influential open-source projects but also enables me to work under the guidance of experienced developers in the field.</p><p>I would like to extend my deepest gratitude to my two mentors, <a href="https://github.com/pks-t">Patrick</a> and <a href="https://github.com/KarthikNayak">Karthik</a>, who are both esteemed developers at <a href="https://about.gitlab.com/">GitLab</a>. Their expertise and guidance are invaluable, and I am incredibly fortunate to have the opportunity to learn from such experienced professionals in the field.</p><p>The primary purpose of this page is to serve as an archive for my weekly reports throughout the GSoC journey. These reports will detail my progress, challenges encountered, solutions devised, and learnings acquired each week. The intention behind maintaining this archive is twofold:</p><ol><li><strong>Transparency</strong>: To keep a transparent record of my contributions and progress throughout the project. This will allow my mentors, peers, and anyone interested in the project to track its development and my growth as a developer.</li><li><strong>Reflection</strong>: To serve as a reflective journal for myself. Documenting my journey will help me analyze my approaches, celebrate milestones, and learn from the challenges I face.</li></ol><p>You may access all related pages by visiting the <a href="https://luolibrary.com/categories/GSoC-2024/">GSoC 2024 category</a>.</p><h2 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h2><ol><li><a href="https://luolibrary.com/2024/05/27/GSoC-Community-Bonding-Period/">Community Bonding Period</a></li><li><a href="https://luolibrary.com/2024/06/02/GSoC-Week-1/">GSoC Week 1</a></li><li><a href="https://luolibrary.com/2024/06/10/GSoC-Week-2/">GSoC Week 2</a></li><li><a href="https://luolibrary.com/2024/06/17/GSoC-Week-3/">GSoC Week 3</a></li><li><a href="https://luolibrary.com/2024/06/30/GSoC-Week-4-5/">GSoC Week 4-5</a></li><li><a href="https://luolibrary.com/2024/07/08/GSoC-Week-6/">GSoC Week 6</a></li><li><a href="https://luolibrary.com/2024/07/16/GSoC-Week-7/">GSoC Week 7</a></li><li><a href="https://luolibrary.com/2024/07/28/GSoC-Week-8-9/">GSoC Week 8-9</a></li><li><a href="https://luolibrary.com/2024/08/13/GSoC-Week-10-11/">GSoC Week 10-11</a></li><li><a href="https://luolibrary.com/2024/08/25/GSoC-Final-Report/">GSoC Final Report</a></li></ol>]]>
-    </content>
-    <id>https://luolibrary.com/2024/05/03/GSoC-2024-Implement-consistency-check-for-refs/</id>
-    <link href="https://luolibrary.com/2024/05/03/GSoC-2024-Implement-consistency-check-for-refs/"/>
-    <published>2024-05-03T09:02:53.000Z</published>
-    <summary>
-      <![CDATA[<p>I am fortunate to participate in <a href="https://summerofcode.withgoogle.com/programs/2024/projects/ukm4PTEF">GSoC 2024</a>]]>
-    </summary>
-    <title>GSoC 2024 - Implement consistency check for refs</title>
-    <updated>2024-08-25T14:46:05.037Z</updated>
   </entry>
 </feed>
